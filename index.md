@@ -3,8 +3,9 @@ layout: default
 title: @dbut2
 ---
 
-```sh
+<pre>
 $ python3 sherlock dbut2
+
 [*] Checking username dbut2 on:
 [+] About.me: <a href="https://about.me/dbut2" target="_blank">https://about.me/dbut2</a>
 [+] BitBucket: <a href="https://bitbucket.org/dbut2/" target="_blank">https://bitbucket.org/dbut2/</a>
@@ -29,4 +30,4 @@ $ python3 sherlock dbut2
 [+] geocaching: <a href="https://www.geocaching.com/p/default.aspx?u=dbut2" target="_blank">https://www.geocaching.com/p/default.aspx?u=dbut2</a>
 [+] last.fm: <a href="https://last.fm/user/dbut2" target="_blank">https://last.fm/user/dbut2</a>
 [+] npm: <a href="https://www.npmjs.com/~dbut2" target="_blank">https://www.npmjs.com/~dbut2</a>
-```
+</pre>
