@@ -7,11 +7,9 @@ title: @dbut2
 $ python3 sherlock dbut2
 
 [*] Checking username dbut2 on:
-[+] About.me: <a href="https://about.me/dbut2" target="_blank">https://about.me/dbut2</a>
 [+] BitBucket: <a href="https://bitbucket.org/dbut2/" target="_blank">https://bitbucket.org/dbut2/</a>
 [+] Codecademy: <a href="https://www.codecademy.com/profiles/dbut2" target="_blank">https://www.codecademy.com/profiles/dbut2</a>
 [+] Docker Hub: <a href="https://hub.docker.com/u/dbut2/" target="_blank">https://hub.docker.com/u/dbut2/</a>
-[+] Duolingo: <a href="https://www.duolingo.com/profile/dbut2" target="_blank">https://www.duolingo.com/profile/dbut2</a>
 [+] Facebook: <a href="https://www.facebook.com/dbut2" target="_blank">https://www.facebook.com/dbut2</a>
 [+] GitHub: <a href="https://www.github.com/dbut2" target="_blank">https://www.github.com/dbut2</a>
 [+] GitLab: <a href="https://gitlab.com/dbut2" target="_blank">https://gitlab.com/dbut2</a>
