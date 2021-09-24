@@ -10,7 +10,7 @@ $ python3 sherlock dbut2
 [+] Facebook: <a href="https://www.facebook.com/dbut2" target="_blank">https://www.facebook.com/dbut2</a>
 [+] GitHub: <a href="https://www.github.com/dbut2" target="_blank">https://www.github.com/dbut2</a>
 [+] HackerRank: <a href="https://hackerrank.com/dbut2" target="_blank">https://hackerrank.com/dbut2</a>
-[+] Instagram: <a href="https://instagram.com/dbtu2" target="_blank">https://instagram.com/dbut2</a>
+[+] Instagram: <a href="https://instagram.com/dbut2" target="_blank">https://instagram.com/dbut2</a>
 [+] Last.fm: <a href="https://last.fm/user/dbut2" target="_blank">https://last.fm/user/dbut2</a>
 [+] LeetCode: <a href="https://leetcode.com/dbut2" target="_blank">https://leetcode.com/dbut2</a>
 [+] Steam: <a href="https://steamcommunity.com/id/dbut2" target="_blank">https://steamcommunity.com/id/dbut2</a>
