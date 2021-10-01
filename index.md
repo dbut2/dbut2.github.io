@@ -16,13 +16,3 @@ $ python3 sherlock dbut2
 [+] Strava: <a href="https://www.strava.com/athletes/dbut2" target="_blank">https://www.strava.com/athletes/dbut2</a>
 [+] Telegram: <a href="https://t.me/dbut2" target="_blank">https://t.me/dbut2</a>
 </pre>
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7VTXW92WE1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-7VTXW92WE1');
-</script>
