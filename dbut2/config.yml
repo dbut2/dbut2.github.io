@@ -1,0 +1,4 @@
+baseURL: https://dylanbutler.net
+languageCode: en-us
+theme: "PaperMod"
+title: My New Hugo Site
