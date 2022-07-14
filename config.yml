@@ -2,20 +2,22 @@ baseURL: https://dylanbutler.net
 languageCode: en-us
 theme: "PaperMod"
 title: "@dbut2"
+sectionPagesMenu: "main"
 params:
+    defaultTheme: auto
+    disableThemeToggle: false
+
+    showReadingTime: true
+
+    showCodeCopyButtons: true
+
     profileMode:
         enabled: true
-        title: "Dylan Butler" # optional default will be site title
+        title: "Dylan Butler"
         subtitle: "software engineer | melbourne"
-        imageUrl: "gopher.png" # optional
-#        imageTitle: "<title of image as alt>" # optional
+        imageUrl: "gopher.png"
         imageWidth: 120 # custom size
         imageHeight: 120 # custom size
-        buttons:
-#          - name: Archive
-#            url: "/archive"
-#          - name: Github
-#            url: "https://github.com/"
     socialIcons: # optional
       - name: "github"
         url: "https://github.com/dbut2"
@@ -23,5 +25,3 @@ params:
         url: "https://linkedin.com/in/dylan-butler"
       - name: "instagram"
         url: "https://instagram.com/dbut2"
-#      - name: "strava"
-#        url: "https://strava.com/athletes/dbut2"
