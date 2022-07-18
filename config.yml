@@ -28,4 +28,4 @@ params:
       - name: "strava"
         url: "https://strava.com/athletes/dbut2"
       - name: "lastfm"
-        url: "https://last.fm/dbut2"
+        url: "https://last.fm/user/dbut2"
