@@ -1,8 +1,8 @@
 ---
-Japtitle: Shortener
+title: ショートナー
 date: 2018-02-17
 ---
 
-URL shortener written in Go
+Goで書かれたURL短縮ツール
 
 [GitHub](https://github.com/dbut2/shortener)
