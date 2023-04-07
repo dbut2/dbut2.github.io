@@ -6,9 +6,6 @@ sectionPagesMenu: "main"
 params:
     defaultTheme: auto
     disableThemeToggle: false
-
-    showReadingTime: true
-
     showCodeCopyButtons: true
 
     profileMode:
