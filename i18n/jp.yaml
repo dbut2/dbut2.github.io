@@ -7,12 +7,12 @@
 - id: read_time
   translation:
     one : "1分"
-    other: "{{.Count}}分"
+    other: "{{ .Count }}分"
 
 - id: words
   translation:
-    one : "単語"
-    other: "{{.Count}}単語"
+    one : "語"
+    other: "{{ .Count }}語"
 
 - id: toc
   translation: "目次"

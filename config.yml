@@ -18,10 +18,14 @@ languages:
       main:
         - name: プロジェクト
           url: /projects
+        - name: 写真
+          url: /photography
 menu:
   main:
     - name: Projects
       url: /projects
+    - name: Photography
+      url: /photography
 params:
   defaultTheme: auto
   disableThemeToggle: false
