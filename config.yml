@@ -46,5 +46,3 @@ params:
       url: "https://instagram.com/dbut2"
     - name: "strava"
       url: "https://strava.com/athletes/dbut2"
-    - name: "lastfm"
-      url: "https://last.fm/user/dbut2"
