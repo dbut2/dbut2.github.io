@@ -42,7 +42,5 @@ params:
       url: "https://github.com/dbut2"
     - name: "linkedin"
       url: "https://linkedin.com/in/dbut2"
-    - name: "instagram"
-      url: "https://instagram.com/dbut2"
     - name: "strava"
       url: "https://strava.com/athletes/dbut2"
