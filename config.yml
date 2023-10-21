@@ -11,7 +11,7 @@ languages:
       enabled: true
       title: "ディランバトラー"
       subtitle: "ソフトウェアエンジニア｜メルボルン"
-      imageUrl: "profile.jpg"
+      imageUrl: "https://cdn.dylanbutler.dev/home/static/profile.jpg"
       imageWidth: 120 # custom size
       imageHeight: 120 # custom size
     menu:
@@ -34,7 +34,7 @@ params:
     enabled: true
     title: "Dylan Butler"
     subtitle: "software engineer | melbourne"
-    imageUrl: "profile.jpg"
+    imageUrl: "https://cdn.dylanbutler.dev/home/static/profile.jpg"
     imageWidth: 120 # custom size
     imageHeight: 120 # custom size
   socialIcons: # optional
