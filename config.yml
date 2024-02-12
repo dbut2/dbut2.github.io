@@ -4,36 +4,34 @@ theme: "PaperMod"
 title: "@dbut2"
 languages:
   en:
-    languageAltTitle: "English"
-  jp:
-    languageAltTitle: "Japanese"
-    profileMode:
-      enabled: true
-      title: "ディランバトラー"
-      subtitle: "ソフトウェアエンジニア｜メルボルン"
-      imageUrl: "https://static.dylanbutler.dev/profile.jpg"
-      imageWidth: 120 # custom size
-      imageHeight: 120 # custom size
-    menu:
-      main:
-        - name: プロジェクト
-          url: /projects
-        - name: 写真
-          url: /photography
+    weight: 1
+    params:
+     languageAltTitle: "English"
   mk:
-    languageAltTitle: "Macedonian"
-    profileMode:
-      enabled: true
-      title: "Дилан Бутлер"
-      subtitle: "Софтверски инженер｜Мелбурн"
-      imageUrl: "https://static.dylanbutler.dev/profile.jpg"
-      imageWidth: 120 # custom size
-      imageHeight: 120 # custom size
+    weight: 2
+    params:
+      languageAltTitle: "Македонски"
+      profileMode:
+        title: "Дилан Батлер"
+        subtitle: "Софтверски инженер｜Мелбурн"
     menu:
       main:
         - name: Проекти
           url: /projects
         - name: Фотографија
+          url: /photography
+  jp:
+    weight: 3
+    params:
+      languageAltTitle: "日本語"
+      profileMode:
+        title: "ディランバトラー"
+        subtitle: "ソフトウェアエンジニア｜メルボルン"
+    menu:
+      main:
+        - name: プロジェクト
+          url: /projects
+        - name: 写真
           url: /photography
 menu:
   main:
