@@ -20,6 +20,21 @@ languages:
           url: /projects
         - name: 写真
           url: /photography
+  mk:
+    languageAltTitle: "Macedonian"
+    profileMode:
+      enabled: true
+      title: "Дилан Бутлер"
+      subtitle: "Софтверски инженер｜Мелбурн"
+      imageUrl: "https://static.dylanbutler.dev/profile.jpg"
+      imageWidth: 120 # custom size
+      imageHeight: 120 # custom size
+    menu:
+      main:
+        - name: Проекти
+          url: /projects
+        - name: Фотографија
+          url: /photography
 menu:
   main:
     - name: Projects
