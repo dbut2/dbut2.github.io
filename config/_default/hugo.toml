@@ -1,0 +1,21 @@
+# timeout
+timeout = "1200s"
+# your website url
+baseURL = 'https://www.example.com/'
+# website title
+title = '@dbut2'
+# don't touch this
+disableKinds = ["section", "taxonomy", "term", "home"]
+# robots.txt
+enableRobotsTXT = true
+# available options
+# * en (powered by Geist)
+# * de (powered by Geist)
+# * es (powered by Geist)
+# * fr (powered by Geist)
+# * it (powered by Geist)
+# * zh-sg zh-cn (powered by Noto Sans SC)
+# * zh-hk zh-tw zh-mo (powered by Noto Sans TC)
+# * ja (powered by Noto Sans JP)
+# * ko (powered by Noto Sans KR)
+defaultContentLanguage = 'en'

@@ -1,3 +1,3 @@
-[submodule "themes/PaperMod"] 
-  path = themes/PaperMod
-  url = git@github.com:adityatelange/hugo-PaperMod.git
+[submodule "themes/bridget"]
+	path = themes/bridget
+	url = ssh://git@github.com/Sped0n/bridget
