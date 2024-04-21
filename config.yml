@@ -57,3 +57,6 @@ params:
       url: "https://linkedin.com/in/dbut2"
     - name: "strava"
       url: "https://strava.com/athletes/dbut2"
+services:
+  googleAnalytics:
+    id: G-JGY0G4ZPX3
