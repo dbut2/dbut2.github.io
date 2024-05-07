@@ -1,0 +1,14 @@
+services:
+  io:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - web
+    labels:
+      - "traefik.http.routers.io.rule=Host(`but.la`)"
+      - "traefik.docker.network=web"
+
+networks:
+  web:
+    external: true
