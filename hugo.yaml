@@ -1,0 +1,68 @@
+baseURL: https://dylanbutler.dev
+languageCode: en-us
+title: "Dylan Butler"
+theme: "github.com/imfing/hextra"
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+enableInlineShortcodes: true
+
+params:
+  theme:
+    default: dark
+    displayToggle: false
+
+  navbar:
+    displayTitle: true
+    displayLogo: false
+    width: wide
+
+  search:
+    enable: true
+    type: flexsearch
+
+  editURL:
+    enable: true
+    base: "https://github.com/dbut2/dbut2.github.io/edit/main/content"
+
+  blog:
+    list:
+      displayTags: true
+      sortBy: date
+      sortOrder: desc
+
+  highlight:
+    copy:
+      enable: true
+      display: hover
+
+  footer:
+    enable: false
+
+menu:
+  main:
+    - identifier: blog
+      name: "Blog"
+      pageRef: "/blog"
+      weight: 1
+    - identifier: about
+      name: "Projects"
+      pageRef: "/projects"
+      weight: 2
+    - name: Search
+      weight: 3
+      params:
+        type: search
+    - name: GitHub
+      weight: 4
+      url: "https://github.com/dbut2"
+      params:
+        icon: github
+
+module:
+  imports:
+    - path: github.com/imfing/hextra
