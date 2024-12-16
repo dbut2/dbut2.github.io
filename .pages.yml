@@ -1,0 +1,29 @@
+media: static/images
+content:
+  - name: posts
+    label: Posts
+    type: collection
+    path: 'content/blog'
+    view:
+      fields: [ title, draft, date ]
+    fields:
+      - name: draft
+        type: boolean
+        default: true
+      - name: date
+        type: date
+      - name: title
+        type: string
+      - name: body
+        type: rich-text
+  - name: config
+    label: Hugo config
+    path: hugo.yaml
+    type: file
+    fields:
+      - name: baseURL
+        type: string
+      - name: theme
+        type: string
+      - name: title
+        type: string
