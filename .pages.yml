@@ -16,6 +16,38 @@ content:
         type: string
       - name: body
         type: rich-text
+  - name: projects
+    label: Projects
+    type: collection
+    path: 'content/projects'
+    view:
+      fields: [ title, draft, date ]
+    fields:
+      - name: draft
+        type: boolean
+        default: true
+      - name: date
+        type: date
+      - name: title
+        type: string
+      - name: body
+        type: rich-text
+  - name: photography
+    label: Photography
+    type: collection
+    path: 'content/photography'
+    view:
+      fields: [ title, draft, date ]
+    fields:
+      - name: draft
+        type: boolean
+        default: true
+      - name: date
+        type: date
+      - name: title
+        type: string
+      - name: body
+        type: rich-text
   - name: config
     label: Hugo config
     path: hugo.yaml
