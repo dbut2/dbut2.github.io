@@ -20,11 +20,6 @@ content:
         type: string
       - name: image
         type: image
-        options:
-          output: test123/images/uploads
-          input: test456/images/uploads
-          path: static/images
-          categories: [image]
       - name: body
         type: rich-text
   - name: projects
