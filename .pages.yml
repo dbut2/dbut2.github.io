@@ -1,4 +1,8 @@
-media: static/images
+media:
+  input: static/images/uploads
+  output: images/uploads
+  path: static/images
+  categories: [image]
 content:
   - name: posts
     label: Posts
