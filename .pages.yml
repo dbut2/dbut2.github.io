@@ -1,6 +1,6 @@
 media:
   input: static/images
-  output: images/uploads
+  output: images
   path: static/images
   categories: [image]
 content:
