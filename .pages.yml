@@ -19,7 +19,7 @@ content:
         options:
           input: static/images/uploads
           output: images/uploads
-          path: images
+          path: static/images
           categories: [image]
       - name: body
         type: rich-text
