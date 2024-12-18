@@ -15,6 +15,7 @@ content:
       - name: title
         type: string
       - name: image
+        type: image
         options:
           path: static/images
           categories: [image]
