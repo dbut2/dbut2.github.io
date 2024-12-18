@@ -1,5 +1,5 @@
 media:
-  input: static/images/uploads
+  input: static/images
   output: images/uploads
   path: static/images
   categories: [image]
