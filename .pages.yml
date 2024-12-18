@@ -17,7 +17,7 @@ content:
       - name: image
         type: image
         options:
-          input: static/images/uploads
+          input: images/uploads
           output: images/uploads
           path: static/images
           categories: [image]
