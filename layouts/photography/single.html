@@ -1,0 +1,15 @@
+{{ define "main" }}
+<article>
+    <header class="mb-8">
+        <h1 class="text-4xl font-bold mb-2">{{ .Title }}</h1>
+        <p class="text-gray-600">
+            {{ .Date.Format "January 2, 2006" }}
+        </p>
+    </header>
+    <div class="prose max-w-none mb-8">
+        {{ .Content }}
+    </div>
+    {{ .Render "lightbox-gallery" }}
+</article>
+{{ end }}
+

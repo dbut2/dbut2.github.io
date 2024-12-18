@@ -1,0 +1,19 @@
+{{ define "main" }}
+<div class="flex items-center justify-center min-h-[calc(100vh-theme(spacing.16)-theme(spacing.20))]">
+        <div class="max-w-3xl mx-auto text-center">
+            <img src="{{ .Site.Params.headshot }}" alt="{{ .Site.Title }}" class="w-48 h-48 rounded-full mx-auto mb-4">
+            <h1 class="text-4xl font-bold mb-2">{{ .Site.Title }}</h1>
+            <p class="text-xl text-gray-600 mb-6">{{ .Site.Params.bio }}</p>
+            <div class="flex justify-center space-x-4">
+                {{ range .Site.Params.socialLinks }}
+                <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-500">
+                    <span class="sr-only">{{ .name }}</span>
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        {{ .icon | safeHTML }}
+                    </svg>
+                </a>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+    {{ end }}
