@@ -1,7 +1,7 @@
 media:
-  input: static/images
-  output: /images
-  path: static/images
+  input: static/media
+  output: /media
+  path: static/media
   categories: [image]
 content:
   - name: posts
