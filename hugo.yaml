@@ -7,10 +7,10 @@ params:
     subtitle: software engineer | melbourne
     imageUrl: /media/images/profile.jpg
   socialIcons:
-    - name: github
-      url: https://github.com/dbut2
     - name: linkedin
       url: https://linkedin.com/in/dbut2
+    - name: github
+      url: https://github.com/dbut2
     - name: strava
       url: https://strava.com/athletes/dbut2
     - name: lastfm
