@@ -17,6 +17,8 @@ content:
         type: date
       - name: title
         type: string
+      - name: cover.image
+        type: image
       - name: body
         type: rich-text
   - name: projects
