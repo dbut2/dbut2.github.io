@@ -17,8 +17,11 @@ content:
         type: date
       - name: title
         type: string
-      - name: cover.image
-        type: image
+      - name: cover
+        type: object
+        fields:
+          - name: image
+            type: image
       - name: body
         type: rich-text
   - name: projects
@@ -64,3 +67,15 @@ content:
         type: string
       - name: title
         type: string
+      - name: params
+        type: object
+        fields:
+          - name: profileMode
+            type: object
+            fields:
+              - name: title
+                type: string
+              - name: subtitle
+                type: string
+              - name: imageUrl
+                type: image
