@@ -79,3 +79,12 @@ content:
                 type: string
               - name: imageUrl
                 type: image
+          - name: socialIcons
+            type: object
+            list: true
+            fields:
+              - name: name
+                type: string
+              - name: url
+                type: string
+            
