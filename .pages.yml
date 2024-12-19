@@ -67,18 +67,41 @@ content:
         type: string
       - name: title
         type: string
+      - name: menu
+        type: object
+        fields:
+          - name: main
+            type: object
+            list: true
+            fields:
+              - name: name
+                type: string
+              - name: url
+                type: string
       - name: params
         type: object
         fields:
+          - name: defaultTheme
+            type: string
+          - name: disableThemeToggle
+            type: boolean
+          - name: showCodeCopyButtons
+            type: boolean
           - name: profileMode
             type: object
             fields:
+              - name: enabled
+                type: boolean
               - name: title
                 type: string
               - name: subtitle
                 type: string
               - name: imageUrl
                 type: image
+              - name: imageWidth
+                type: number
+              - name: imageHeight
+                type: number
           - name: socialIcons
             type: object
             list: true
@@ -87,4 +110,5 @@ content:
                 type: string
               - name: url
                 type: string
-            
+      - name: disableHugoGeneratorInject
+        type: boolean
