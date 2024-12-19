@@ -1,11 +1,25 @@
 baseURL: https://dev.dbut2-github-io.pages.dev/
 theme: github.com/adityatelange/hugo-PaperMod
 title: "@dbut2"
+menu:
+  main:
+    - name: Blog
+      url: /blog
+    - name: Projects
+      url: /projects
+    - name: Photography
+      url: /photography
 params:
+  defaultTheme: auto
+  disableThemeToggle: false
+  showCodeCopyButtons: true
   profileMode:
+    enabled: true
     title: Dylan Butler
     subtitle: software engineer | melbourne
     imageUrl: /media/images/profile.jpg
+    imageWidth: 120
+    imageHeight: 120
   socialIcons:
     - name: linkedin
       url: https://linkedin.com/in/dbut2
@@ -15,3 +29,4 @@ params:
       url: https://strava.com/athletes/dbut2
     - name: lastfm
       url: https://www.last.fm/user/dbut2
+disableHugoGeneratorInject: false
