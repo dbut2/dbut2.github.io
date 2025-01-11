@@ -1,7 +1,7 @@
 ---
-draft: false
-date: 2024-09-26
 title: Adding GPUs to Docker Swarm and Running GPU-Enabled Services
+date: 2024-09-26
+draft: false
 ---
 ## Introduction
 
