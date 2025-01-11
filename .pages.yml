@@ -10,16 +10,16 @@ content:
     view:
       fields: [ title, draft, date ]
     fields:
+      - name: title
+        label: Title
+        type: string
+      - name: date
+        label: Date
+        type: date
       - name: draft
         label: Draft
         type: boolean
         default: false
-      - name: date
-        label: Date
-        type: date
-      - name: title
-        label: Title
-        type: string
       - name: cover
         label: Cover Image
         type: object
