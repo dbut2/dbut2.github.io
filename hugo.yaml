@@ -29,4 +29,5 @@ params:
       url: https://strava.com/athletes/dbut2
     - name: lastfm
       url: https://www.last.fm/user/dbut2
+  hideFooter: true
 disableHugoGeneratorInject: false
