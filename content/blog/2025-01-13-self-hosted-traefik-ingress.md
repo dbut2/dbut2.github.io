@@ -11,7 +11,7 @@ Exiting the tunnel, cloudflare has been setup to direct all traffic to `traefik:
 
 Based on rules defined on each service, traefik will the route the traffic to each of those [service.](http://service.services)
 
-```
+```yaml
 services:
   tunnel:
     image: cloudflare/cloudflared
@@ -47,7 +47,7 @@ networks:
 
 An example config for a service that routes traffic bound for [example.com.services](http://example.com.services):
 
-```
+```yaml
 services:
   ...
   hello-world:
