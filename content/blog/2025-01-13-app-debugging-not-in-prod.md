@@ -26,11 +26,23 @@ func (e _Emulator) step() {
 }
 ```
 
-Using build tags we can add this functionality. Adding a build tag named build, we can seperate out just the CPU step call into 2 files, 1 in emu\_prod.go, and 1 in emu\_debug.go, with build constraints //go:build !debug for prod, and //go:build debug for debug.We now how 2 more emu files.//go:build !debugpackage gbatype Emulator struct {  
-\_Motherboard  
-}func (e _Emulator) stepCPU() {  
-e.CPU.Step()  
-}  
+Using build tags we can add this functionality. Adding a build tag named build, we can seperate out just the CPU step call into 2 files, 1 in emu\_prod.go, and 1 in emu\_debug.go, with build constraints //go:build !debug for prod, and //go:build debug for debug.
+
+We now how 2 more emu files.
+
+```go
+//go:build !debug
+package gba
+
+type Emulator struct {
+    _ Motherboard
+}
+func (e Emulator) stepCPU() {
+    e.CPU.Step()
+}
+```
+
+_  
 emu\_prod.go//go:build debugpackage gbaimport (  
 "_[_github.com/dbut2/sapphire/debugger/hooks"  
 )type_](http://github.com/dbut2/sapphire/debugger/hooks%22%EF%BF%BC\)type) \_Emulator struct {\_Motherboard Hooks hooks.HookService\[EmuHook, _Emulator\]  
