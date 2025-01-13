@@ -2,8 +2,9 @@
 title: Self-hosted traffic ingress
 date: 2024-05-13
 draft: false
+tags:
+  - self-hosted
 ---
-
 A quick snippet of my docker compose config for managing traffic ingress into my self-hosted setup.
 
 Cloudflare Zero Trust tunnel is being used to manage forwarding traffic from the public internet to my machine as I didn’t want to expose my network directly.
