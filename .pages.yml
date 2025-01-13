@@ -1,7 +1,7 @@
 media:
-  input: static/media
-  output: /media
-  path: static/media
+  input: static
+  output: /
+  path: static
 content:
   - name: posts
     label: Posts
