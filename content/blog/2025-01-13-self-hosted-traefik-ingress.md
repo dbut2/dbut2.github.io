@@ -28,8 +28,6 @@ services:
     image: traefik
     command:
       - "--entrypoints.web.address=:80"
-      - "--entrypoints.traefik.address=:8080"
-      - "--api.dashboard=true"
       - "--providers.docker=true"
       - "--providers.docker.network=web"
     volumes:
