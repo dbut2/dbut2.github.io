@@ -1,5 +1,5 @@
 ---
-title: Japain in film
+title: Japan in film
 date: 2023-08-14
 draft: false
 ---
