@@ -47,6 +47,10 @@ networks:
 
 An example config for a service that routes traffic bound for [example.com.services](http://example.com.services):
 
+```go
+package main
+```
+
 ```yaml
 services:
   ...
