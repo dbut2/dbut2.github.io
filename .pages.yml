@@ -1,6 +1,6 @@
 media:
   input: static
-  output: 
+  output: ""
   path: static
 content:
   - name: posts
