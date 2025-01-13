@@ -9,7 +9,7 @@ Cloudflare Zero Trust tunnel is being used to manage forwarding traffic from the
 
 Exiting the tunnel, cloudflare has been setup to direct all traffic to `traefik:80` which is exposed on the ingress network.
 
-Based on rules defined on each service, traefik will the route the traffic to each of those [service:](http://service.services)
+Based on rules defined on each service, traefik will the route the traffic to each of those services:
 
 ```yaml
 services:
@@ -43,7 +43,7 @@ networks:
     driver: bridge
 ```
 
-An example config for a service that routes traffic bound for [example.com:](http://example.com.services)
+An example config for a service that routes traffic bound for example.com:
 
 ```yaml
 services:
