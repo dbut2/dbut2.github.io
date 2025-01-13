@@ -1,6 +1,7 @@
 ---
 title: Fetch
 date: 2022-12-14
+draft: false
 ---
 
 Advent of Code puzzle and input fetcher and opener

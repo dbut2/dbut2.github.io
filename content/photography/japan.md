@@ -1,6 +1,7 @@
 ---
 title: Japan in film
 date: 2023-08-14
+draft: false
 ---
 
 ![](/images/japan/IMG_7124.JPG)

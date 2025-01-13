@@ -1,4 +1,7 @@
-media: static/images
+media:
+  input: static
+  output: ""
+  path: static
 content:
   - name: posts
     label: Posts
@@ -7,14 +10,29 @@ content:
     view:
       fields: [ title, draft, date ]
     fields:
-      - name: draft
-        type: boolean
-        default: true
-      - name: date
-        type: date
       - name: title
+        label: Title
         type: string
+      - name: date
+        label: Date
+        type: date
+      - name: draft
+        label: Draft
+        type: boolean
+        default: false
+      - name: tags
+        label: Tags
+        list: true
+        type: string
+      - name: cover
+        label: Cover Image
+        type: object
+        fields:
+          - name: image
+            label: Image
+            type: image
       - name: body
+        label: Body
         type: rich-text
   - name: projects
     label: Projects
@@ -23,13 +41,16 @@ content:
     view:
       fields: [ title, draft, date ]
     fields:
-      - name: draft
-        type: boolean
-        default: true
-      - name: date
-        type: date
       - name: title
+        label: Title
         type: string
+      - name: date
+        label: Date
+        type: date
+      - name: draft
+        label: Draft
+        type: boolean
+        default: false
       - name: body
         type: rich-text
   - name: photography
@@ -39,13 +60,16 @@ content:
     view:
       fields: [ title, draft, date ]
     fields:
-      - name: draft
-        type: boolean
-        default: true
-      - name: date
-        type: date
       - name: title
+        label: Title
         type: string
+      - name: date
+        label: Date
+        type: date
+      - name: draft
+        label: Draft
+        type: boolean
+        default: false
       - name: body
         type: rich-text
   - name: config
@@ -59,3 +83,50 @@ content:
         type: string
       - name: title
         type: string
+      - name: menu
+        type: object
+        fields:
+          - name: main
+            type: object
+            list: true
+            fields:
+              - name: name
+                type: string
+              - name: url
+                type: string
+      - name: params
+        type: object
+        fields:
+          - name: defaultTheme
+            type: string
+          - name: disableThemeToggle
+            type: boolean
+          - name: showCodeCopyButtons
+            type: boolean
+          - name: profileMode
+            type: object
+            fields:
+              - name: enabled
+                type: boolean
+              - name: title
+                type: string
+              - name: subtitle
+                type: string
+              - name: imageUrl
+                type: image
+              - name: imageWidth
+                type: number
+              - name: imageHeight
+                type: number
+          - name: socialIcons
+            type: object
+            list: true
+            fields:
+              - name: name
+                type: string
+              - name: url
+                type: string
+          - name: hideFooter
+            type: boolean
+      - name: disableHugoGeneratorInject
+        type: boolean

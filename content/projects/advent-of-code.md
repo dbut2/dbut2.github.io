@@ -1,8 +1,9 @@
 ---
-title: Advent Of Code
-date: 2021-12-01
+title: Advent of Code
+date: 2024-12-01
+draft: false
 ---
 
-Advent of Code Go solutions
+Advent of Code solutions for most days of 2020 to 2024.
 
-[GitHub](https://github.com/dbut2/advent-of-code)
+Most days are solved in Go and I have aimed for concise solutions. I also maintain a `sped` branch that has more efficient solutions.

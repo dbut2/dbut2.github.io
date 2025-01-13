@@ -1,7 +1,6 @@
-languageCode: en-us
-theme: "github.com/adityatelange/hugo-PaperMod"
+baseURL: https://dev.dbut2-github-io.pages.dev/
+theme: github.com/adityatelange/hugo-PaperMod
 title: "@dbut2"
-
 menu:
   main:
     - name: Blog
@@ -16,19 +15,19 @@ params:
   showCodeCopyButtons: true
   profileMode:
     enabled: true
-    title: "Dylan Butler"
-    subtitle: "software engineer | melbourne"
-    imageUrl: "/images/profile.jpg"
+    title: Dylan Butler
+    subtitle: software engineer | melbourne
+    imageUrl: /images/profile.jpg
     imageWidth: 120
     imageHeight: 120
   socialIcons:
-    - name: "github"
-      url: "https://github.com/dbut2"
-    - name: "linkedin"
-      url: "https://linkedin.com/in/dbut2"
-    - name: "strava"
-      url: "https://strava.com/athletes/dbut2"
-    - name: "lastfm"
-      url: "https://www.last.fm/user/dbut2"
-
-disableHugoGeneratorInject: true
+    - name: github
+      url: https://github.com/dbut2
+    - name: linkedin
+      url: https://linkedin.com/in/dbut2
+    - name: strava
+      url: https://strava.com/athletes/dbut2
+    - name: lastfm
+      url: https://www.last.fm/user/dbut2
+  hideFooter: true
+disableHugoGeneratorInject: false
