@@ -1,5 +1,5 @@
 ---
-title: Self-hosted traefik ingress
+title: Self-hosted traffic ingress
 date: 2024-05-13
 draft: false
 ---
@@ -16,12 +16,10 @@ A quick snippet of my docker compose config for managing traffic ingress into my
     environment:
 
 *   "TUNNEL\_TOKEN=${TUNNEL\_TOKEN}"
-    
 
     networks:
 
 *   ingress
-    
 
   traefik:  
     container\_name: traefik  
@@ -42,7 +40,6 @@ A quick snippet of my docker compose config for managing traffic ingress into my
     volumes:
 
 *   "/var/run/docker.sock:/var/run/docker.sock"
-    
 
     networks:
 
@@ -61,11 +58,9 @@ compose.yamlAn example config for a service that routes traffic bound for [examp
     image: nginxdemos/hell[o label](http://example.com/)s:
 
 *   "traefik.http.routers.hello-world.rule=Host(\`[example.com](http://example.com)\`)"
-    
 
     networks:
 
 *   web
-    
 
 amended compose.yaml
