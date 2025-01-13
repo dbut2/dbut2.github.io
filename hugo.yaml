@@ -17,7 +17,7 @@ params:
     enabled: true
     title: Dylan Butler
     subtitle: software engineer | melbourne
-    imageUrl: //images/profile.jpg
+    imageUrl: /images/profile.jpg
     imageWidth: 120
     imageHeight: 120
   socialIcons:
