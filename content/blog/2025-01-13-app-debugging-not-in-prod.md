@@ -36,6 +36,7 @@ We now how 2 more emu files.
 
 ```go
 //go:build !debug
+
 package gba
 
 type Emulator struct {
@@ -48,6 +49,7 @@ func (e *Emulator) stepCPU() {
 
 ```go
 //go:build debug
+
 package gba
 
 import (
