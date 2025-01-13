@@ -3,6 +3,7 @@ title: App debugging not in prod
 date: 2024-06-06
 draft: false
 ---
+
 Building a Game Boy Advance emulator has gotten difficult, currently stuck on what appears to be I/O Registers not outputting their correct values and when a game is loaded in the gamepak, the device runs into a boot-loop.
 
 Investigating memory data and it's meaning is difficult, converting binary data to something meaningful, then tracing that to another address if it's a pointer and the cycle repeats. Doing these steps for every CPU cycle to investigate how data is changing is cumbersome and led to the project collecting dust for a few months as I gained the courage to dive into this.
