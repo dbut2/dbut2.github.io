@@ -3,6 +3,7 @@ title: Adding GPUs to Docker Swarm and Running GPU-Enabled Services
 date: 2024-09-26
 draft: false
 ---
+
 ## Introduction
 
 This guide will walk you through the process of attaching GPUs to a Docker Swarm node and running services that can utilize these GPUs. This setup is particularly useful for running GPU-intensive workloads in a distributed environment.
