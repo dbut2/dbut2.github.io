@@ -43,7 +43,36 @@ func (e Emulator) stepCPU() {
 ```
 
 _  
-emu\_prod.go//go:build debugpackage gbaimport (  
+emu\_prod.go_
+
+```go
+//go:build debug
+package gba
+
+import (
+    "github.com/dbut2/sapphire/debugger/hooks"
+)
+
+type Emulator struct {
+    _     Motherboard
+    Hooks hooks.HookService[EmuHook, Emulator]
+}
+
+type EmuHook int
+
+const (
+    PreStepCPUEmuHook EmuHook = iota
+    PostStepCPUEmuHook
+)
+
+func (e Emulator) stepCPU() {
+    e.Hooks.Hook(PreStepCPUEmuHook, e)
+    e.CPU.Step()
+    e.Hooks.Hook(PostStepCPUEmuHook, e)
+}
+```
+
+_//go:build debugpackage gbaimport (  
 "_[_github.com/dbut2/sapphire/debugger/hooks"  
 )type_](http://github.com/dbut2/sapphire/debugger/hooks%22%EF%BF%BC\)type) \_Emulator struct {\_Motherboard Hooks hooks.HookService\[EmuHook, _Emulator\]  
 }type EmuHook intconst (  
