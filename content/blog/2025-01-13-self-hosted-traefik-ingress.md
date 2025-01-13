@@ -16,26 +16,28 @@ services:
   tunnel:
     image: cloudflare/cloudflared
     command:
-"tunnel"
-"run"
+      - "tunnel"
+      - "run"
     environment:
-"TUNNEL_TOKEN=${TUNNEL_TOKEN}"
+      - "TUNNEL_TOKEN=${TUNNEL_TOKEN}"
     networks:
-ingress
+      - ingress
+
   traefik:
     container_name: traefik
     image: traefik
     command:
-"--entrypoints.web.address=:80"
-"--entrypoints.traefik.address=:8080"
-"--api.dashboard=true"
-"--providers.docker=true"
-"--providers.docker.network=web"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.traefik.address=:8080"
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.network=web"
     volumes:
-"/var/run/docker.sock:/var/run/docker.sock"
+      - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
-ingress
-web
+      - ingress
+      - web
+
 networks:
   ingress:
     driver: bridge
@@ -49,8 +51,9 @@ An example config for a service that routes traffic bound for [example.com.servi
 services:
   ...
   hello-world:
-    image: nginxdemos/hello labels:
-"traefik.http.routers.hello-world.rule=Host(`example.com`)"
+    image: nginxdemos/hello
+    labels:
+      - "traefik.http.routers.hello-world.rule=Host(`example.com`)"
     networks:
-web
+      - web
 ```
