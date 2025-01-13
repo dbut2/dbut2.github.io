@@ -2,8 +2,9 @@
 title: Self-Dependant, Self-Hosted GitHub Runners
 date: 2024-06-05
 draft: false
+tags:
+  - self-hosted
 ---
-
 On the journey of self hosting, one thing I want to get automated and running locally was my deployments. Having all of my services defined as Docker Compose services would be ideal. Wanting to keep this configuration held in GitHub, alongside my other code, this raises the next question, how do I propagate these changes to my local machine and redeploy my services?
 
 My initial thoughts were to try to find a CI/CD platform that was able to be ran as a self-hosted setup, and also support Docker deployments, specifically supporting Compose as I wanted to keep my configs simple and familiar.
