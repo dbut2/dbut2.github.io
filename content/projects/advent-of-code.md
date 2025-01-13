@@ -1,7 +1,7 @@
 ---
-draft: false
-date: 2024-12-01
 title: Advent of Code
+date: 2024-12-01
+draft: false
 ---
 Advent of Code solutions for most days of 2020 to 2024.
 
