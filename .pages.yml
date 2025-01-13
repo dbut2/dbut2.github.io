@@ -126,7 +126,7 @@ content:
                 type: string
               - name: url
                 type: string
-        - name: hideFooter
-          type: boolean
+          - name: hideFooter
+            type: boolean
       - name: disableHugoGeneratorInject
         type: boolean
