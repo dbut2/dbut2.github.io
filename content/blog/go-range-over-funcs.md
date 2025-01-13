@@ -2,8 +2,9 @@
 title: Go range over funcs
 date: 2024-05-14
 draft: false
+tags:
+  - go
 ---
-
 Following discussions and read throughs on the following proposal, I hadn't fully understood what the use case for this was or what the value of being able to range over functions would be.
 
 spec: add range over int, range over func · Issue #61405 · golang/go  
@@ -19,13 +20,13 @@ Consider the following rudimentary implementation of a queue in Go:
 type Queue[T any] []T
 
 func (q *Queue[T]) Push(v T) {
-	*q = append(*q, v)
+    *q = append(*q, v)
 }
 
 func (q *Queue[T]) Pop() T {
-	v := (*q)[0]
-	*q = (*q)[1:]
-	return v
+    v := (*q)[0]
+    *q = (*q)[1:]
+    return v
 }
 ```
 
@@ -34,8 +35,8 @@ In order to action item correctly, this is the current usage of pulling every it
 ```go
 q := Queue[any]{}
 for len(q) > 0 {
-	item := q.Pop()
-	dosomething(item)
+    item := q.Pop()
+    dosomething(item)
 }
 ```
 
@@ -58,12 +59,12 @@ We can implement this type as a method on the queue, managing the length check a
 
 ```go
 func (q *Queue[T]) Seq(yield func(T) bool) {
-	for len(*q) > 0 {
-		item := q.Pop()
-		if !yield(item) {
-			return
-		}
-	}
+    for len(*q) > 0 {
+        item := q.Pop()
+        if !yield(item) {
+            return
+        }
+    }
 }
 ```
 
@@ -72,7 +73,7 @@ Meaning pulling all items from the queue can be simplified to:
 ```go
 q := Queue[any]{}
 for item := range q.Seq {
-	dosomething(item)
+    dosomething(item)
 }
 ```
 
@@ -110,18 +111,18 @@ What if we want the items in order? Let's look at the following sequence:
 type Seq2[K, V any] func(func(K, V)bool)
 
 func OrderedMap[K cmp.Ordered, V any](m map[K]V) Seq2[K, V] {
-	keys := make([]K, 0, len(m))
-	for k := range m {
-		keys = append(keys, k)
-	}
-	slices.Sort(keys)
-	return func(yield func(K, V)bool) {
-		for _, k := range keys {
-			if !yield(k, m[k]) {
-				return
-			}
-		}
-	}
+    keys := make([]K, 0, len(m))
+    for k := range m {
+        keys = append(keys, k)
+    }
+    slices.Sort(keys)
+    return func(yield func(K, V)bool) {
+        for _, k := range keys {
+            if !yield(k, m[k]) {
+                return
+            }
+        }
+    }
 }
 ```
 
