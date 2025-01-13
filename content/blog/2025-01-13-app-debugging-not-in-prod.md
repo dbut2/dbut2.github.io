@@ -17,12 +17,12 @@ Namely, I want to modify this function to add some hook functions before and aft
 
 ```go
 e.CPU.Step().func (e _Emulator) step() {
-dispstat := ReadIORegister(e.Memory, DISPSTAT)
-HBlank := (1005 - e.CPU.cycles) >> 31 // 0: 0-1005, 1: 1006-1231
-dispstat = SetBits(dispstat, 1, 1, uint16(HBlank))
-SetIORegister(e.Memory, DISPSTAT, dispstat) preCount := e.CPU.cycles
-e.CPU.Step()
-postCount := e.CPU.cycles e.Timer.Tick(postCount - preCount)
+	dispstat := ReadIORegister(e.Memory, DISPSTAT)
+	HBlank := (1005 - e.CPU.cycles) >> 31 // 0: 0-1005, 1: 1006-1231
+	dispstat = SetBits(dispstat, 1, 1, uint16(HBlank))
+	SetIORegister(e.Memory, DISPSTAT, dispstat) preCount := e.CPU.cycles
+	e.CPU.Step()
+	postCount := e.CPU.cycles e.Timer.Tick(postCount - preCount)
 }
 ```
 
