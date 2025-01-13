@@ -20,9 +20,13 @@ func (e _Emulator) step() {
     dispstat := ReadIORegister(e.Memory, DISPSTAT)
     HBlank := (1005 - e.CPU.cycles) >> 31 // 0: 0-1005, 1: 1006-1231
     dispstat = SetBits(dispstat, 1, 1, uint16(HBlank))
-    SetIORegister(e.Memory, DISPSTAT, dispstat) preCount := e.CPU.cycles
+    SetIORegister(e.Memory, DISPSTAT, dispstat)
+
+    preCount := e.CPU.cycles
     e.CPU.Step()
-    postCount := e.CPU.cycles e.Timer.Tick(postCount - preCount)
+    postCount := e.CPU.cycles
+
+    e.Timer.Tick(postCount - preCount)
 }
 ```
 
@@ -35,15 +39,12 @@ We now how 2 more emu files.
 package gba
 
 type Emulator struct {
-    _ Motherboard
+    *Motherboard
 }
-func (e Emulator) stepCPU() {
+func (e *Emulator) stepCPU() {
     e.CPU.Step()
 }
 ```
-
-_  
-emu\_prod.go_
 
 ```go
 //go:build debug
@@ -54,33 +55,23 @@ import (
 )
 
 type Emulator struct {
-    _     Motherboard
-    Hooks hooks.HookService[EmuHook, Emulator]
+	*Motherboard
+
+	Hooks hooks.HookService[EmuHook, Emulator]
 }
 
 type EmuHook int
 
 const (
-    PreStepCPUEmuHook EmuHook = iota
-    PostStepCPUEmuHook
+	PreStepCPUEmuHook EmuHook = iota
+	PostStepCPUEmuHook
 )
 
-func (e Emulator) stepCPU() {
-    e.Hooks.Hook(PreStepCPUEmuHook, e)
-    e.CPU.Step()
-    e.Hooks.Hook(PostStepCPUEmuHook, e)
+func (e *Emulator) stepCPU() {
+	e.Hooks.Hook(PreStepCPUEmuHook, e)
+	e.CPU.Step()
+	e.Hooks.Hook(PostStepCPUEmuHook, e)
 }
 ```
 
-_//go:build debugpackage gbaimport (  
-"_[_github.com/dbut2/sapphire/debugger/hooks"  
-)type_](http://github.com/dbut2/sapphire/debugger/hooks%22%EF%BF%BC\)type) \_Emulator struct {\_Motherboard Hooks hooks.HookService\[EmuHook, _Emulator\]  
-}type EmuHook intconst (  
-PreStepCPUEmuHook EmuHook = iota  
-PostStepCPUEmuHook  
-)func (e_ Emulator) stepCPU() {  
-e.Hooks.Hook(PreStepCPUEmuHook, e)  
-e.CPU.Step()  
-e.Hooks.Hook(PostStepCPUEmuHook, e)  
-}  
-emu\_debug.goNow when we build for production, we don't include any build tags, without debug we will build with the prod file, and for debugging we can include the debug tag and the binary will be built with the debug file.
+Now when we build for production, we don't include any build tags, without debug we will build with the prod file, and for debugging we can include the debug tag and the binary will be built with the debug file.
