@@ -10,6 +10,13 @@ menu:
     - name: Photography
       url: /photography
 params:
+  author: Dylan Butler
+  showReadingTime: false
+  showWordCount: false
+  editPost:
+    URL: https://github.com/dbut2/dbut2.github.io/edit/main/content
+    text: Suggest Changes
+    appendFilePath: true
   defaultTheme: auto
   disableThemeToggle: false
   showCodeCopyButtons: true
