@@ -8,4 +8,6 @@ cascade:
       kind: page
     params:
       showBreadCrumbs: true
+      tags:
+        - travel
 ---
