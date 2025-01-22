@@ -1,6 +1,6 @@
 ---
 title: Day 1
-date: 2025-01-22
+date: 2025-01-21
 draft: false
 ---
 # Hello, world!
