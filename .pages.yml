@@ -20,6 +20,10 @@ content:
         label: Draft
         type: boolean
         default: false
+      - name: hiddenInHomelist
+        label: Hiden In Home List
+        type: boolean
+        default: false
       - name: tags
         label: Tags
         list: true
