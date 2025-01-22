@@ -7,7 +7,7 @@ cascade:
   - _target:
       kind: page
     params:
-      showBreadCrumbs: true
+      ShowBreadCrumbs: true
       tags:
         - travel
 ---
