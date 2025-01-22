@@ -1,6 +1,7 @@
 ---
 title: Day 1
 date: 2025-01-22
+lastmod: 2025-01-23
 draft: false
 ---
 # Hello, world!
