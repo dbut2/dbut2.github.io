@@ -1,7 +1,6 @@
 ---
 title: Japan 2025
-draft: true
-hiddenInHomelist: false
+draft: false
 tags:
   - travel
 ---
