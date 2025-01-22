@@ -10,4 +10,3 @@ draft: false
 {{< instagram CxOWiQNP2MO >}}
 
 {{< qr text="https://gohugo.io" />}}
-
