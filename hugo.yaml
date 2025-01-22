@@ -11,8 +11,8 @@ menu:
       url: /photography
 params:
   author: Dylan Butler
-  showReadingTime: true
-  showWordCount: true
+  showReadingTime: false
+  showWordCount: false
   editPost:
     URL: https://github.com/dbut2/dbut2.github.io/edit/main/content
     text: Suggest Changes
