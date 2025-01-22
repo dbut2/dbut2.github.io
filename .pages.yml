@@ -77,8 +77,6 @@ content:
     path: hugo.yaml
     type: file
     fields:
-      - name: baseURL
-        type: string
       - name: theme
         type: string
       - name: title
