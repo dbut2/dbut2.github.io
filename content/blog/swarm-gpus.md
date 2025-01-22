@@ -4,7 +4,6 @@ date: 2024-09-26
 draft: false
 tags:
   - self-hosted
-ShowToc: true
 ---
 ## Introduction
 
