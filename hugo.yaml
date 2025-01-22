@@ -37,3 +37,5 @@ params:
       url: https://www.last.fm/user/dbut2
   hideFooter: true
 disableHugoGeneratorInject: false
+taxonomies:
+  tag: tags
