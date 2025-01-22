@@ -1,4 +1,3 @@
 ---
-title: index
-draft: false
+title: Japan 2025
 ---
