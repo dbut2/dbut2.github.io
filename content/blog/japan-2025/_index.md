@@ -1,8 +1,11 @@
 ---
 title: Japan 2025
 draft: false
-tags:
-  - travel
 build:
   list: never
+cascade:
+  - _target:
+      kind: page
+    params:
+      showBreadCrumbs: true
 ---
