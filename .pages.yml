@@ -74,6 +74,7 @@ content:
         type: rich-text
   - name: search
     label: Search
+    type: file
     path: search.md
     fields:
       - name: title
