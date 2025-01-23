@@ -39,3 +39,9 @@ params:
       url: https://www.last.fm/user/dbut2
   hideFooter: true
 disableHugoGeneratorInject: false
+timezone: Austrlalia/Melbourne
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
