@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Self-Hosted on @dbut2</title>
+    <link>/tags/self-hosted/</link>
+    <description>Recent content in Self-Hosted on @dbut2</description>
+    <generator>Hugo -- 0.141.0</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 26 Sep 2024 00:00:00 +1000</lastBuildDate>
+    <atom:link href="/tags/self-hosted/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Adding GPUs to Docker Swarm and Running GPU-Enabled Services</title>
+      <link>/blog/swarm-gpus/</link>
+      <pubDate>Thu, 26 Sep 2024 00:00:00 +1000</pubDate>
+      <guid>/blog/swarm-gpus/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;This guide will walk you through the process of attaching GPUs to a Docker Swarm node and running services that can utilize these GPUs. This setup is particularly useful for running GPU-intensive workloads in a distributed environment.&lt;/p&gt;
+&lt;h2 id=&#34;assumptions&#34;&gt;Assumptions&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;You are running a recent version of Ubuntu (Noble 24.04 LTS in this case).&lt;/li&gt;
+&lt;li&gt;You have NVIDIA drivers already installed (preferably the &lt;code&gt;-server&lt;/code&gt; version).
+&lt;ul&gt;
+&lt;li&gt;If not, follow the instructions at &lt;a href=&#34;https://ubuntu.com/server/docs/nvidia-drivers-installation&#34;&gt;Ubuntu&amp;rsquo;s NVIDIA driver installation guide&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;You have Docker and Docker Swarm already set up on your system.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;steps-to-add-gpus-to-docker-swarm&#34;&gt;Steps to Add GPUs to Docker Swarm&lt;/h2&gt;
+&lt;h3 id=&#34;1-identify-your-gpu&#34;&gt;1. Identify Your GPU&lt;/h3&gt;
+&lt;p&gt;First, we need to find the UUID of the GPU you want to attach to Docker Swarm.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Self-Dependant, Self-Hosted GitHub Runners</title>
+      <link>/blog/self-dependant-self-hosted-github-runners/</link>
+      <pubDate>Wed, 05 Jun 2024 00:00:00 +1000</pubDate>
+      <guid>/blog/self-dependant-self-hosted-github-runners/</guid>
+      <description>&lt;p&gt;On the journey of self hosting, one thing I want to get automated and running locally was my deployments. Having all of my services defined as Docker Compose services would be ideal. Wanting to keep this configuration held in GitHub, alongside my other code, this raises the next question, how do I propagate these changes to my local machine and redeploy my services?&lt;/p&gt;
+&lt;p&gt;My initial thoughts were to try to find a CI/CD platform that was able to be ran as a self-hosted setup, and also support Docker deployments, specifically supporting Compose as I wanted to keep my configs simple and familiar.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Self-hosted traffic ingress</title>
+      <link>/blog/self-hosted-traefik-ingress/</link>
+      <pubDate>Mon, 13 May 2024 00:00:00 +1000</pubDate>
+      <guid>/blog/self-hosted-traefik-ingress/</guid>
+      <description>&lt;p&gt;A quick snippet of my docker compose config for managing traffic ingress into my self-hosted setup.&lt;/p&gt;
+&lt;p&gt;Cloudflare Zero Trust tunnel is being used to manage forwarding traffic from the public internet to my machine as I didn’t want to expose my network directly.&lt;/p&gt;
+&lt;p&gt;Exiting the tunnel, cloudflare has been setup to direct all traffic to &lt;code&gt;traefik:80&lt;/code&gt; which is exposed on the ingress network.&lt;/p&gt;
+&lt;p&gt;Based on rules defined on each service, traefik will the route the traffic to each of those services:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

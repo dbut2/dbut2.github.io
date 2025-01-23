@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>App debugging not in prod | @dbut2</title>
+<meta name="keywords" content="go">
+<meta name="description" content="Building a Game Boy Advance emulator has gotten difficult, currently stuck on what appears to be I/O Registers not outputting their correct values and when a game is loaded in the gamepak, the device runs into a boot-loop.
+Investigating memory data and it&rsquo;s meaning is difficult, converting binary data to something meaningful, then tracing that to another address if it&rsquo;s a pointer and the cycle repeats. Doing these steps for every CPU cycle to investigate how data is changing is cumbersome and led to the project collecting dust for a few months as I gained the courage to dive into this.">
+<meta name="author" content="Dylan Butler">
+<link rel="canonical" href="/blog/app-debugging-not-in-prod/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.45e028aa8ce0961349adf411b013ee39406be2c0bc80d4ea3fc04555f7f4611a.css" integrity="sha256-ReAoqozglhNJrfQRsBPuOUBr4sC8gNTqP8BFVff0YRo=" rel="preload stylesheet" as="style">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="/blog/app-debugging-not-in-prod/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="/blog/app-debugging-not-in-prod/">
+  <meta property="og:site_name" content="@dbut2">
+  <meta property="og:title" content="App debugging not in prod">
+  <meta property="og:description" content="Building a Game Boy Advance emulator has gotten difficult, currently stuck on what appears to be I/O Registers not outputting their correct values and when a game is loaded in the gamepak, the device runs into a boot-loop.
+Investigating memory data and it’s meaning is difficult, converting binary data to something meaningful, then tracing that to another address if it’s a pointer and the cycle repeats. Doing these steps for every CPU cycle to investigate how data is changing is cumbersome and led to the project collecting dust for a few months as I gained the courage to dive into this.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2024-06-06T00:00:00+10:00">
+    <meta property="article:modified_time" content="2024-06-06T00:00:00+10:00">
+    <meta property="article:tag" content="Go">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="App debugging not in prod">
+<meta name="twitter:description" content="Building a Game Boy Advance emulator has gotten difficult, currently stuck on what appears to be I/O Registers not outputting their correct values and when a game is loaded in the gamepak, the device runs into a boot-loop.
+Investigating memory data and it&rsquo;s meaning is difficult, converting binary data to something meaningful, then tracing that to another address if it&rsquo;s a pointer and the cycle repeats. Doing these steps for every CPU cycle to investigate how data is changing is cumbersome and led to the project collecting dust for a few months as I gained the courage to dive into this.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Blog",
+      "item": "/blog/"
+    }
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "App debugging not in prod",
+      "item": "/blog/app-debugging-not-in-prod/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "App debugging not in prod",
+  "name": "App debugging not in prod",
+  "description": "Building a Game Boy Advance emulator has gotten difficult, currently stuck on what appears to be I/O Registers not outputting their correct values and when a game is loaded in the gamepak, the device runs into a boot-loop.\nInvestigating memory data and it\u0026rsquo;s meaning is difficult, converting binary data to something meaningful, then tracing that to another address if it\u0026rsquo;s a pointer and the cycle repeats. Doing these steps for every CPU cycle to investigate how data is changing is cumbersome and led to the project collecting dust for a few months as I gained the courage to dive into this.\n",
+  "keywords": [
+    "go"
+  ],
+  "articleBody": "Building a Game Boy Advance emulator has gotten difficult, currently stuck on what appears to be I/O Registers not outputting their correct values and when a game is loaded in the gamepak, the device runs into a boot-loop.\nInvestigating memory data and it’s meaning is difficult, converting binary data to something meaningful, then tracing that to another address if it’s a pointer and the cycle repeats. Doing these steps for every CPU cycle to investigate how data is changing is cumbersome and led to the project collecting dust for a few months as I gained the courage to dive into this.\nIt had been suggested to build a debugger for this, and I think this might be the solution. If I can write a program that wraps the current emulator to watch for memory and other device events that may be relevant, automating the parsing of binary data will speed up the debugging process.\nIn building a debugger that holds the emulator, one thing I don’t want to do is include this debugging code in the main binary when built, as it is not relevant to the main application, and would waste resources. Hooks and other parsing logic has no need here.\nThe first thing I’m looking to debug is how memory is changing before/after each CPU cycle. I need a way to hook into the cpu cycle mechanism to read data for each loop. This currently isn’t possible in the emulator as I don’t allow for hooks or any non-emulator logic from running in any of the functions.\nNamely, I want to modify this function to add some hook functions before and after e.CPU.Step().\nfunc (e _Emulator) step() { dispstat := ReadIORegister(e.Memory, DISPSTAT) HBlank := (1005 - e.CPU.cycles) \u003e\u003e 31 // 0: 0-1005, 1: 1006-1231 dispstat = SetBits(dispstat, 1, 1, uint16(HBlank)) SetIORegister(e.Memory, DISPSTAT, dispstat) preCount := e.CPU.cycles e.CPU.Step() postCount := e.CPU.cycles e.Timer.Tick(postCount - preCount) } Using build tags we can add this functionality. Adding a build tag named build, we can seperate out just the CPU step call into 2 files, 1 in emu_prod.go, and 1 in emu_debug.go, with build constraints //go:build !debug for prod, and //go:build debug for debug.\nWe now how 2 more emu files.\n//go:build !debug package gba type Emulator struct { *Motherboard } func (e *Emulator) stepCPU() { e.CPU.Step() } //go:build debug package gba import ( \"github.com/dbut2/sapphire/debugger/hooks\" ) type Emulator struct { *Motherboard Hooks hooks.HookService[EmuHook, Emulator] } type EmuHook int const ( PreStepCPUEmuHook EmuHook = iota PostStepCPUEmuHook ) func (e *Emulator) stepCPU() { e.Hooks.Hook(PreStepCPUEmuHook, e) e.CPU.Step() e.Hooks.Hook(PostStepCPUEmuHook, e) } Now when we build for production, we don’t include any build tags, without debug we will build with the prod file, and for debugging we can include the debug tag and the binary will be built with the debug file.\n",
+  "wordCount" : "464",
+  "inLanguage": "en",
+  "datePublished": "2024-06-06T00:00:00+10:00",
+  "dateModified": "2024-06-06T00:00:00+10:00",
+  "author":{
+    "@type": "Person",
+    "name": "Dylan Butler"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/blog/app-debugging-not-in-prod/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "@dbut2",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="/" accesskey="h" title="@dbut2 (Alt + H)">@dbut2</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="/blog" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="/photography" title="Photography">
+                    <span>Photography</span>
+                </a>
+            </li>
+            <li>
+                <a href="/projects" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      App debugging not in prod
+    </h1>
+    <div class="post-meta"><span title='2024-06-06 00:00:00 +1000 AEST'>June 6, 2024</span>&nbsp;·&nbsp;Dylan Butler&nbsp;|&nbsp;<a href="https://github.com/dbut2/dbut2.github.io/edit/main/content/blog/app-debugging-not-in-prod.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> 
+  <div class="post-content"><p>Building a Game Boy Advance emulator has gotten difficult, currently stuck on what appears to be I/O Registers not outputting their correct values and when a game is loaded in the gamepak, the device runs into a boot-loop.</p>
+<p>Investigating memory data and it&rsquo;s meaning is difficult, converting binary data to something meaningful, then tracing that to another address if it&rsquo;s a pointer and the cycle repeats. Doing these steps for every CPU cycle to investigate how data is changing is cumbersome and led to the project collecting dust for a few months as I gained the courage to dive into this.</p>
+<p>It had been suggested to build a debugger for this, and I think this might be the solution. If I can write a program that wraps the current emulator to watch for memory and other device events that may be relevant, automating the parsing of binary data will speed up the debugging <a href="http://process.In">process.</a></p>
+<p><a href="http://process.In">In</a> building a debugger that holds the emulator, one thing I don&rsquo;t want to do is include this debugging code in the main binary when built, as it is not relevant to the main application, and would waste resources. Hooks and other parsing logic has no need here.</p>
+<p>The first thing I&rsquo;m looking to debug is how memory is changing before/after each CPU cycle. I need a way to hook into the cpu cycle mechanism to read data for each loop. This currently isn&rsquo;t possible in the emulator as I don&rsquo;t allow for hooks or any non-emulator logic from running in any of the functions.</p>
+<p>Namely, I want to modify this function to add some hook functions before and after e.CPU.Step().</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#a6e22e">_Emulator</span>) <span style="color:#a6e22e">step</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">dispstat</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ReadIORegister</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Memory</span>, <span style="color:#a6e22e">DISPSTAT</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">HBlank</span> <span style="color:#f92672">:=</span> (<span style="color:#ae81ff">1005</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">CPU</span>.<span style="color:#a6e22e">cycles</span>) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">31</span> <span style="color:#75715e">// 0: 0-1005, 1: 1006-1231</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">dispstat</span> = <span style="color:#a6e22e">SetBits</span>(<span style="color:#a6e22e">dispstat</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, uint16(<span style="color:#a6e22e">HBlank</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">SetIORegister</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Memory</span>, <span style="color:#a6e22e">DISPSTAT</span>, <span style="color:#a6e22e">dispstat</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">preCount</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">CPU</span>.<span style="color:#a6e22e">cycles</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">CPU</span>.<span style="color:#a6e22e">Step</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">postCount</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">CPU</span>.<span style="color:#a6e22e">cycles</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Timer</span>.<span style="color:#a6e22e">Tick</span>(<span style="color:#a6e22e">postCount</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">preCount</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Using build tags we can add this functionality. Adding a build tag named build, we can seperate out just the CPU step call into 2 files, 1 in emu_prod.go, and 1 in emu_debug.go, with build constraints //go:build !debug for prod, and //go:build debug for debug.</p>
+<p>We now how 2 more emu files.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">//go:build !debug</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">gba</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Emulator</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">*</span><span style="color:#a6e22e">Motherboard</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Emulator</span>) <span style="color:#a6e22e">stepCPU</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">CPU</span>.<span style="color:#a6e22e">Step</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">//go:build debug</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">gba</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/dbut2/sapphire/debugger/hooks&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Emulator</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">*</span><span style="color:#a6e22e">Motherboard</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Hooks</span> <span style="color:#a6e22e">hooks</span>.<span style="color:#a6e22e">HookService</span>[<span style="color:#a6e22e">EmuHook</span>, <span style="color:#a6e22e">Emulator</span>]
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">EmuHook</span> <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">PreStepCPUEmuHook</span> <span style="color:#a6e22e">EmuHook</span> = <span style="color:#66d9ef">iota</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">PostStepCPUEmuHook</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Emulator</span>) <span style="color:#a6e22e">stepCPU</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Hooks</span>.<span style="color:#a6e22e">Hook</span>(<span style="color:#a6e22e">PreStepCPUEmuHook</span>, <span style="color:#a6e22e">e</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">CPU</span>.<span style="color:#a6e22e">Step</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Hooks</span>.<span style="color:#a6e22e">Hook</span>(<span style="color:#a6e22e">PostStepCPUEmuHook</span>, <span style="color:#a6e22e">e</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Now when we build for production, we don&rsquo;t include any build tags, without debug we will build with the prod file, and for debugging we can include the debug tag and the binary will be built with the debug file.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="/tags/go/">Go</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

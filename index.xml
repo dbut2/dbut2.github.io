@@ -1,7 +1,2361 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>@dbut2</title><link>https://dylanbutler.dev/</link><description>Recent content on @dbut2</description><generator>Hugo -- 0.125.2</generator><language>en</language><lastBuildDate>Mon, 14 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://dylanbutler.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Japan in film</title><link>https://dylanbutler.dev/photography/japan/</link><pubDate>Mon, 14 Aug 2023 00:00:00 +0000</pubDate><guid>https://dylanbutler.dev/photography/japan/</guid><description/></item><item><title>The Coach</title><link>https://dylanbutler.dev/projects/the-coach/</link><pubDate>Tue, 04 Apr 2023 00:00:00 +0000</pubDate><guid>https://dylanbutler.dev/projects/the-coach/</guid><description>Slack single user group manager
-GitHub</description></item><item><title>SlackGPT</title><link>https://dylanbutler.dev/projects/slackgpt/</link><pubDate>Mon, 20 Feb 2023 00:00:00 +0000</pubDate><guid>https://dylanbutler.dev/projects/slackgpt/</guid><description>AI Slack chat bot using models from OpenAI
-GitHub</description></item><item><title>Fetch</title><link>https://dylanbutler.dev/projects/fetch/</link><pubDate>Wed, 14 Dec 2022 00:00:00 +0000</pubDate><guid>https://dylanbutler.dev/projects/fetch/</guid><description>Advent of Code puzzle and input fetcher and opener
-GitHub</description></item><item><title>Slack Diffusion</title><link>https://dylanbutler.dev/projects/slack-diffusion/</link><pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate><guid>https://dylanbutler.dev/projects/slack-diffusion/</guid><description>Slack bot for generating images with Stable Diffusion
-GitHub</description></item><item><title>Advent Of Code</title><link>https://dylanbutler.dev/projects/advent-of-code/</link><pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate><guid>https://dylanbutler.dev/projects/advent-of-code/</guid><description>Advent of Code Go solutions
-GitHub</description></item><item><title/><link>https://dylanbutler.dev/projects/shortener/</link><pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate><guid>https://dylanbutler.dev/projects/shortener/</guid><description>URL shortener written in Go
-GitHub</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>@dbut2</title>
+    <link>/</link>
+    <description>Recent content on @dbut2</description>
+    <generator>Hugo -- 0.141.0</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 01 Dec 2024 00:00:00 +1100</lastBuildDate>
+    <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Advent of Code</title>
+      <link>/projects/advent-of-code/</link>
+      <pubDate>Sun, 01 Dec 2024 00:00:00 +1100</pubDate>
+      <guid>/projects/advent-of-code/</guid>
+      <description>&lt;p&gt;Advent of Code solutions for most days of 2020 to 2024.&lt;/p&gt;
+&lt;p&gt;Most days are solved in Go and I have aimed for concise solutions. I also maintain a &lt;code&gt;sped&lt;/code&gt; branch that has more efficient solutions.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Adding GPUs to Docker Swarm and Running GPU-Enabled Services</title>
+      <link>/blog/swarm-gpus/</link>
+      <pubDate>Thu, 26 Sep 2024 00:00:00 +1000</pubDate>
+      <guid>/blog/swarm-gpus/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;This guide will walk you through the process of attaching GPUs to a Docker Swarm node and running services that can utilize these GPUs. This setup is particularly useful for running GPU-intensive workloads in a distributed environment.&lt;/p&gt;
+&lt;h2 id=&#34;assumptions&#34;&gt;Assumptions&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;You are running a recent version of Ubuntu (Noble 24.04 LTS in this case).&lt;/li&gt;
+&lt;li&gt;You have NVIDIA drivers already installed (preferably the &lt;code&gt;-server&lt;/code&gt; version).
+&lt;ul&gt;
+&lt;li&gt;If not, follow the instructions at &lt;a href=&#34;https://ubuntu.com/server/docs/nvidia-drivers-installation&#34;&gt;Ubuntu&amp;rsquo;s NVIDIA driver installation guide&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;You have Docker and Docker Swarm already set up on your system.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;steps-to-add-gpus-to-docker-swarm&#34;&gt;Steps to Add GPUs to Docker Swarm&lt;/h2&gt;
+&lt;h3 id=&#34;1-identify-your-gpu&#34;&gt;1. Identify Your GPU&lt;/h3&gt;
+&lt;p&gt;First, we need to find the UUID of the GPU you want to attach to Docker Swarm.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>App debugging not in prod</title>
+      <link>/blog/app-debugging-not-in-prod/</link>
+      <pubDate>Thu, 06 Jun 2024 00:00:00 +1000</pubDate>
+      <guid>/blog/app-debugging-not-in-prod/</guid>
+      <description>&lt;p&gt;Building a Game Boy Advance emulator has gotten difficult, currently stuck on what appears to be I/O Registers not outputting their correct values and when a game is loaded in the gamepak, the device runs into a boot-loop.&lt;/p&gt;
+&lt;p&gt;Investigating memory data and it&amp;rsquo;s meaning is difficult, converting binary data to something meaningful, then tracing that to another address if it&amp;rsquo;s a pointer and the cycle repeats. Doing these steps for every CPU cycle to investigate how data is changing is cumbersome and led to the project collecting dust for a few months as I gained the courage to dive into this.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Self-Dependant, Self-Hosted GitHub Runners</title>
+      <link>/blog/self-dependant-self-hosted-github-runners/</link>
+      <pubDate>Wed, 05 Jun 2024 00:00:00 +1000</pubDate>
+      <guid>/blog/self-dependant-self-hosted-github-runners/</guid>
+      <description>&lt;p&gt;On the journey of self hosting, one thing I want to get automated and running locally was my deployments. Having all of my services defined as Docker Compose services would be ideal. Wanting to keep this configuration held in GitHub, alongside my other code, this raises the next question, how do I propagate these changes to my local machine and redeploy my services?&lt;/p&gt;
+&lt;p&gt;My initial thoughts were to try to find a CI/CD platform that was able to be ran as a self-hosted setup, and also support Docker deployments, specifically supporting Compose as I wanted to keep my configs simple and familiar.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Go range over funcs</title>
+      <link>/blog/go-range-over-funcs/</link>
+      <pubDate>Tue, 14 May 2024 00:00:00 +1000</pubDate>
+      <guid>/blog/go-range-over-funcs/</guid>
+      <description>&lt;p&gt;Following discussions and read throughs on the following proposal, I hadn&amp;rsquo;t fully understood what the use case for this was or what the value of being able to range over functions would be.&lt;/p&gt;
+&lt;p&gt;spec: add range over int, range over func · Issue #61405 · golang/go&lt;br&gt;
+Following discussion on #56413, I propose to add two new types that a for-range statement can range over: integers and functions. In the spec, the table that begins the section would have a few mor…&lt;br&gt;
+GitHubgolangGo Wiki: Rangefunc Experiment - The Go Programming Language&lt;br&gt;
+Google logo&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Self-hosted traffic ingress</title>
+      <link>/blog/self-hosted-traefik-ingress/</link>
+      <pubDate>Mon, 13 May 2024 00:00:00 +1000</pubDate>
+      <guid>/blog/self-hosted-traefik-ingress/</guid>
+      <description>&lt;p&gt;A quick snippet of my docker compose config for managing traffic ingress into my self-hosted setup.&lt;/p&gt;
+&lt;p&gt;Cloudflare Zero Trust tunnel is being used to manage forwarding traffic from the public internet to my machine as I didn’t want to expose my network directly.&lt;/p&gt;
+&lt;p&gt;Exiting the tunnel, cloudflare has been setup to direct all traffic to &lt;code&gt;traefik:80&lt;/code&gt; which is exposed on the ingress network.&lt;/p&gt;
+&lt;p&gt;Based on rules defined on each service, traefik will the route the traffic to each of those services:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Japan in Film</title>
+      <link>/photography/japan-in-film/</link>
+      <pubDate>Mon, 14 Aug 2023 00:00:00 +1000</pubDate>
+      <guid>/photography/japan-in-film/</guid>
+      <description>&lt;p&gt;Here&amp;rsquo;s a collection of film images taken on my Canon F-1 I purchased during a trip to Japan in 2023.&lt;/p&gt;
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+	
+		&lt;script src=&#34;/shortcode-gallery/jquery-3.7.1.min.js&#34;&gt;&lt;/script&gt;
+	
+
+	
+		&lt;script src=&#34;/shortcode-gallery/lazy/jquery.lazy.min.js&#34;&gt;&lt;/script&gt;
+	
+
+	&lt;script src=&#34;/shortcode-gallery/swipebox/js/jquery.swipebox.min.js&#34;&gt;&lt;/script&gt;
+	&lt;link rel=&#34;stylesheet&#34; href=&#34;/shortcode-gallery/swipebox/css/swipebox.min.css&#34;&gt;
+
+	&lt;script src=&#34;/shortcode-gallery/justified_gallery/jquery.justifiedGallery.min.js&#34;&gt;&lt;/script&gt;
+	&lt;link rel=&#34;stylesheet&#34; href=&#34;/shortcode-gallery/justified_gallery/justifiedGallery.min.css&#34;/&gt;
+
+
+&lt;style&gt;
+	
+
+	
+&lt;/style&gt;
+
+
+
+
+
+&lt;div id=&#34;gallery-cdb5b1ffce5e6a8c543f05b9bef541b6-0-wrapper&#34; class=&#34;gallery-wrapper&#34;&gt;
+&lt;div id=&#34;gallery-cdb5b1ffce5e6a8c543f05b9bef541b6-0&#34; class=&#34;justified-gallery&#34;&gt;
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7124.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGLq6&amp;#43;sFBAAA//8DXwGsC3l/IwAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7124_hu6389986417003575151.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7158.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGKqra0ABAAA//8C9QF1IiIx0wAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7158_hu7752422459357289835.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7161.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGLatnUzIAAA//8ESwIhoZmtJwAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7161_hu259220407341690790.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7175.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGKaN282IAAA//8DvQHaYNoHhAAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7175_hu11397920017456807341.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7183.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGLqbq4EBAAA//8DLAGKP3rqtAAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7183_hu4506316101755546086.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7184.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGLauH4NIAAA//8EKQIPijZZdwAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7184_hu16022935159095673660.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7194.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGIqLy0ABAAA//8CywFfjBvRaAAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7194_hu6490205852834240997.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7201.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;600&#34; height=&#34;400&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGJatnw2IAAA//8D5wHrgb6ZIQAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7201_hu9625207401136871202.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7225.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGKy9s0ABAAA//8BvwDzo2Oc8gAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7225_hu10966586621843850888.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7226.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;600&#34; height=&#34;400&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGKqak0HBAAA//8C6wFpwU5qpwAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7226_hu8157905489905330197.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7229.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;600&#34; height=&#34;400&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGJKdHMABAAA//8B&amp;#43;wDqcQc/KgAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7229_hu12065784000669936722.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7238.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGJat34dIAAA//8EIgIOBDS9jgAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7238_hu5780387724954872827.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7242.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;600&#34; height=&#34;400&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGIq8TQCBAAA//8CLADy9Qk12AAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7242_hu13533796910294345931.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7243.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGLqaIoCBAAA//8DAgFnB3Q2aQAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7243_hu4685771878276538387.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7247.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGJavn4dIAAA//8EDQIH01A&amp;#43;ZgAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7247_hu16538907267340420391.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7269.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGLS09cABAAA//8BHACIfbI9hgAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7269_hu16046372383174341670.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7286.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;600&#34; height=&#34;400&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGLatHkTIAAA//8EOgIa7N1J7AAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7286_hu6237374261842267082.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7288.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;600&#34; height=&#34;400&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGKaMi0VEAAA//8DWQGSKuoZZQAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7288_hu10406797722601043693.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7290.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;600&#34; height=&#34;400&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGJqro8BBAAA//8C7wFhcgL4bAAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7290_hu15833189155238675297.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7293.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGI6unsTIAAA//8EgwI1kkckvAAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7293_hu14418948374128583379.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7295.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGLq6&amp;#43;kCBAAA//8DWAGnI1QSlgAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7295_hu4639286764206157629.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7302.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGKaOaMGEAAA//8DgwGw5whoGwAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7302_hu13276394547965071514.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7304.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGKqrI4GBAAA//8CyAFSIl4nhQAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7304_hu11414790567213722158.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7306.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGKaOWcOIAAA//8DqwHUtx8F1gAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7306_hu809414463605206685.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7321.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGIK8LUHBAAA//8B1QDfYOuonQAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7321_hu12620316917126501329.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7347.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;600&#34; height=&#34;400&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGKaMqsTEAAA//8DhQG6CYbyUAAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7347_hu18372892476296624731.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7353.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGIqqM4HBAAA//8CwQFdJ9ZtIgAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7353_hu13266358126925613655.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7367.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGJKTYoABAAA//8CVwEiRHoafwAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7367_hu2593330216443556565.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+		
+
+			
+			
+
+			
+			
+				
+			
+
+			
+				
+			
+
+			
+			
+				
+					
+				
+			
+
+
+			
+			
+
+			&lt;div&gt;
+				
+				
+					
+					
+				
+
+				
+				
+					
+					
+				
+
+				&lt;a href=&#34;/photography/japan-in-film/images/IMG_7373.JPG&#34;
+					class=&#34;galleryImg&#34;
+					
+						
+
+						
+							data-description=&#34;SP500&lt;br/&gt; &#34;
+						
+
+						
+					
+					&gt;
+					&lt;img
+						width=&#34;401&#34; height=&#34;600&#34;
+
+						
+							
+							
+								src=&#34;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAEElEQVR4nGKqrssCBAAA//8C4wFmdT3xeQAAAABJRU5ErkJggg==&#34;
+							
+							class=&#34;lazy&#34;
+							data-src=&#34;/photography/japan-in-film/images/IMG_7373_hu3313010743032150898.JPG&#34;
+						
+
+						
+							
+								
+							
+						
+					&gt;
+				&lt;/a&gt;
+			&lt;/div&gt;
+		
+	
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+	if (!(&#34;HSCGjQuery&#34; in window)) {
+		if (!window.jQuery) {
+			throw new Error(&#34;jQuery is not loaded, hugo-shortcode-gallery wont work without it!&#34;);
+		}
+		window.HSCGjQuery = window.jQuery.noConflict(true);
+	}
+
+	
+	
+	
+	
+	
+	;(function($) {
+
+		$( document ).ready(() =&gt; {
+			const gallery = $(&#34;#gallery-cdb5b1ffce5e6a8c543f05b9bef541b6-0&#34;);
+			
+
+			
+			let swipeboxInstance = null;
+
+			
+			
+			gallery.on(&#39;jg.complete&#39;, () =&gt; {
+				
+					
+					
+					$(() =&gt; {
+						$(&#39;.lazy&#39;).Lazy({
+							visibleOnly: true,
+							afterLoad: element =&gt; element.css({filter: &#34;none&#34;, transition: &#34;filter 1.0s ease-in-out&#34;})
+						});
+					});
+				
+
+				swipeboxInstance = $(&#39;.galleryImg&#39;).swipebox(
+					$.extend({},
+						{  }
+					)
+				);
+			});
+
+			
+			gallery.justifiedGallery($.extend(
+				{
+					rowHeight : &#34;360&#34;,
+					margins : &#34;15&#34;,
+					border : 0,
+					randomize :  true ,
+					waitThumbnailsLoad : false,
+					lastRow : &#34;justify&#34;,
+					captions : false,
+					
+					
+				},
+				{  }
+			));
+
+			
+			
+		});
+
+	
+	
+	
+	})(window.HSCGjQuery)
+&lt;/script&gt;</description>
+    </item>
+    <item>
+      <title>The Coach</title>
+      <link>/projects/the-coach/</link>
+      <pubDate>Tue, 04 Apr 2023 00:00:00 +1000</pubDate>
+      <guid>/projects/the-coach/</guid>
+      <description>&lt;p&gt;Slack single user group manager&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/dbut2/the-coach&#34;&gt;GitHub&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>SlackGPT</title>
+      <link>/projects/slackgpt/</link>
+      <pubDate>Mon, 20 Feb 2023 00:00:00 +1100</pubDate>
+      <guid>/projects/slackgpt/</guid>
+      <description>&lt;p&gt;AI Slack chat bot using models from OpenAI&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/dbut2/SlackGPT&#34;&gt;GitHub&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Fetch</title>
+      <link>/projects/fetch/</link>
+      <pubDate>Wed, 14 Dec 2022 00:00:00 +1100</pubDate>
+      <guid>/projects/fetch/</guid>
+      <description>&lt;p&gt;Advent of Code puzzle and input fetcher and opener&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/dbut2/fetch&#34;&gt;GitHub&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Slack Diffusion</title>
+      <link>/projects/slack-diffusion/</link>
+      <pubDate>Fri, 04 Nov 2022 00:00:00 +1100</pubDate>
+      <guid>/projects/slack-diffusion/</guid>
+      <description>&lt;p&gt;Slack bot for generating images with Stable Diffusion&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/dbut2/slack-diffusion&#34;&gt;GitHub&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Shortener</title>
+      <link>/projects/shortener/</link>
+      <pubDate>Sat, 17 Feb 2018 00:00:00 +1100</pubDate>
+      <guid>/projects/shortener/</guid>
+      <description>&lt;p&gt;URL shortener written in Go&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/dbut2/shortener&#34;&gt;GitHub&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

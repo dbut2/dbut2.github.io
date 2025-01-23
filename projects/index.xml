@@ -1,7 +1,60 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Projects on @dbut2</title><link>https://dylanbutler.dev/projects/</link><description>Recent content in Projects on @dbut2</description><generator>Hugo -- 0.125.2</generator><language>en</language><lastBuildDate>Tue, 04 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://dylanbutler.dev/projects/index.xml" rel="self" type="application/rss+xml"/><item><title>The Coach</title><link>https://dylanbutler.dev/projects/the-coach/</link><pubDate>Tue, 04 Apr 2023 00:00:00 +0000</pubDate><guid>https://dylanbutler.dev/projects/the-coach/</guid><description>Slack single user group manager
-GitHub</description></item><item><title>SlackGPT</title><link>https://dylanbutler.dev/projects/slackgpt/</link><pubDate>Mon, 20 Feb 2023 00:00:00 +0000</pubDate><guid>https://dylanbutler.dev/projects/slackgpt/</guid><description>AI Slack chat bot using models from OpenAI
-GitHub</description></item><item><title>Fetch</title><link>https://dylanbutler.dev/projects/fetch/</link><pubDate>Wed, 14 Dec 2022 00:00:00 +0000</pubDate><guid>https://dylanbutler.dev/projects/fetch/</guid><description>Advent of Code puzzle and input fetcher and opener
-GitHub</description></item><item><title>Slack Diffusion</title><link>https://dylanbutler.dev/projects/slack-diffusion/</link><pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate><guid>https://dylanbutler.dev/projects/slack-diffusion/</guid><description>Slack bot for generating images with Stable Diffusion
-GitHub</description></item><item><title>Advent Of Code</title><link>https://dylanbutler.dev/projects/advent-of-code/</link><pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate><guid>https://dylanbutler.dev/projects/advent-of-code/</guid><description>Advent of Code Go solutions
-GitHub</description></item><item><title/><link>https://dylanbutler.dev/projects/shortener/</link><pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate><guid>https://dylanbutler.dev/projects/shortener/</guid><description>URL shortener written in Go
-GitHub</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Projects on @dbut2</title>
+    <link>/projects/</link>
+    <description>Recent content in Projects on @dbut2</description>
+    <generator>Hugo -- 0.141.0</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 01 Dec 2024 00:00:00 +1100</lastBuildDate>
+    <atom:link href="/projects/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Advent of Code</title>
+      <link>/projects/advent-of-code/</link>
+      <pubDate>Sun, 01 Dec 2024 00:00:00 +1100</pubDate>
+      <guid>/projects/advent-of-code/</guid>
+      <description>&lt;p&gt;Advent of Code solutions for most days of 2020 to 2024.&lt;/p&gt;
+&lt;p&gt;Most days are solved in Go and I have aimed for concise solutions. I also maintain a &lt;code&gt;sped&lt;/code&gt; branch that has more efficient solutions.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The Coach</title>
+      <link>/projects/the-coach/</link>
+      <pubDate>Tue, 04 Apr 2023 00:00:00 +1000</pubDate>
+      <guid>/projects/the-coach/</guid>
+      <description>&lt;p&gt;Slack single user group manager&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/dbut2/the-coach&#34;&gt;GitHub&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>SlackGPT</title>
+      <link>/projects/slackgpt/</link>
+      <pubDate>Mon, 20 Feb 2023 00:00:00 +1100</pubDate>
+      <guid>/projects/slackgpt/</guid>
+      <description>&lt;p&gt;AI Slack chat bot using models from OpenAI&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/dbut2/SlackGPT&#34;&gt;GitHub&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Fetch</title>
+      <link>/projects/fetch/</link>
+      <pubDate>Wed, 14 Dec 2022 00:00:00 +1100</pubDate>
+      <guid>/projects/fetch/</guid>
+      <description>&lt;p&gt;Advent of Code puzzle and input fetcher and opener&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/dbut2/fetch&#34;&gt;GitHub&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Slack Diffusion</title>
+      <link>/projects/slack-diffusion/</link>
+      <pubDate>Fri, 04 Nov 2022 00:00:00 +1100</pubDate>
+      <guid>/projects/slack-diffusion/</guid>
+      <description>&lt;p&gt;Slack bot for generating images with Stable Diffusion&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/dbut2/slack-diffusion&#34;&gt;GitHub&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Shortener</title>
+      <link>/projects/shortener/</link>
+      <pubDate>Sat, 17 Feb 2018 00:00:00 +1100</pubDate>
+      <guid>/projects/shortener/</guid>
+      <description>&lt;p&gt;URL shortener written in Go&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/dbut2/shortener&#34;&gt;GitHub&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

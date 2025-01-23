@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Go on @dbut2</title>
+    <link>/tags/go/</link>
+    <description>Recent content in Go on @dbut2</description>
+    <generator>Hugo -- 0.141.0</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 06 Jun 2024 00:00:00 +1000</lastBuildDate>
+    <atom:link href="/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>App debugging not in prod</title>
+      <link>/blog/app-debugging-not-in-prod/</link>
+      <pubDate>Thu, 06 Jun 2024 00:00:00 +1000</pubDate>
+      <guid>/blog/app-debugging-not-in-prod/</guid>
+      <description>&lt;p&gt;Building a Game Boy Advance emulator has gotten difficult, currently stuck on what appears to be I/O Registers not outputting their correct values and when a game is loaded in the gamepak, the device runs into a boot-loop.&lt;/p&gt;
+&lt;p&gt;Investigating memory data and it&amp;rsquo;s meaning is difficult, converting binary data to something meaningful, then tracing that to another address if it&amp;rsquo;s a pointer and the cycle repeats. Doing these steps for every CPU cycle to investigate how data is changing is cumbersome and led to the project collecting dust for a few months as I gained the courage to dive into this.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Go range over funcs</title>
+      <link>/blog/go-range-over-funcs/</link>
+      <pubDate>Tue, 14 May 2024 00:00:00 +1000</pubDate>
+      <guid>/blog/go-range-over-funcs/</guid>
+      <description>&lt;p&gt;Following discussions and read throughs on the following proposal, I hadn&amp;rsquo;t fully understood what the use case for this was or what the value of being able to range over functions would be.&lt;/p&gt;
+&lt;p&gt;spec: add range over int, range over func · Issue #61405 · golang/go&lt;br&gt;
+Following discussion on #56413, I propose to add two new types that a for-range statement can range over: integers and functions. In the spec, the table that begins the section would have a few mor…&lt;br&gt;
+GitHubgolangGo Wiki: Rangefunc Experiment - The Go Programming Language&lt;br&gt;
+Google logo&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
