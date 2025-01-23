@@ -154,6 +154,8 @@ content:
             type: boolean
       - name: disableHugoGeneratorInject
         type: boolean
+      - name: timezone
+        type: string
       - name: outputs
         type: object
         fields:
