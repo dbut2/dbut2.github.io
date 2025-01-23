@@ -81,6 +81,8 @@ content:
         type: string
       - name: title
         type: string
+      - name: timeout
+        type: string
       - name: menu
         type: object
         fields:
@@ -145,3 +147,12 @@ content:
         type: boolean
       - name: timezone
         type: string
+      - name: module
+        type: object
+        fields:
+          - name: imports
+            type: object
+            list: true
+            fields:
+              - name: path
+                type: string
