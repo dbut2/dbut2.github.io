@@ -8,8 +8,6 @@ menu:
       url: /projects
     - name: Photography
       url: /photography
-    - name: 🔎
-      url: /search
 params:
   author: Dylan Butler
   showReadingTime: false

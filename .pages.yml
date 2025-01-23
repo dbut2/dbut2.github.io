@@ -72,17 +72,6 @@ content:
         default: false
       - name: body
         type: rich-text
-  - name: search
-    label: Search
-    type: file
-    path: search.md
-    fields:
-      - name: title
-        label: Title
-        type: string
-      - name: layout
-        label: Layout
-        type: string
   - name: config
     label: Hugo config
     path: hugo.yaml
