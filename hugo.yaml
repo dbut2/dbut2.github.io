@@ -38,8 +38,3 @@ params:
   hideFooter: true
 disableHugoGeneratorInject: false
 timezone: Australia/Melbourne
-outputs:
-  home:
-    - HTML
-    - RSS
-    - JSON

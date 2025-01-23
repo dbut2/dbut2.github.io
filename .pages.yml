@@ -145,9 +145,3 @@ content:
         type: boolean
       - name: timezone
         type: string
-      - name: outputs
-        type: object
-        fields:
-          - name: home
-            type: string
-            list: true
