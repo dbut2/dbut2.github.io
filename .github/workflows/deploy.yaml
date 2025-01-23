@@ -22,7 +22,7 @@ jobs:
           hugo-version: '0.141.0'
 
       - name: Build
-        run: hugo --minify
+        run: hugo
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
