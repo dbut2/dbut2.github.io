@@ -8,6 +8,8 @@ menu:
       url: /projects
     - name: Photography
       url: /photography
+    - name: Search
+      url: /search
 params:
   author: Dylan Butler
   showReadingTime: false
@@ -37,4 +39,3 @@ params:
       url: https://www.last.fm/user/dbut2
   hideFooter: true
 disableHugoGeneratorInject: false
-timeZone: Australia/Melbourne
