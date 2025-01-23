@@ -24,8 +24,8 @@ params:
     title: Dylan Butler
     subtitle: software engineer | melbourne
     imageUrl: /images/profile.jpg
-    imageWidth: 360
-    imageHeight: 360
+    imageWidth: 250
+    imageHeight: 250
   socialIcons:
     - name: github
       url: https://github.com/dbut2
@@ -38,3 +38,7 @@ params:
   hideFooter: true
 disableHugoGeneratorInject: false
 timezone: Australia/Melbourne
+module:
+  imports:
+    - path: github.com/adityatelange/hugo-PaperMod
+    - path: github.com/mfg92/hugo-shortcode-gallery
