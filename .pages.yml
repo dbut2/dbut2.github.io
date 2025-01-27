@@ -24,7 +24,6 @@ content:
       - name: showBreadCrumbs
         label: Show Breadcrumbs
         type: boolean
-        default: null
       - name: tags
         label: Tags
         list: true
