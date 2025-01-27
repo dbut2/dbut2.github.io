@@ -3,6 +3,8 @@ title: Day 1 - Travelling
 date: 2025-01-26
 draft: false
 ---
+\[Japan 2025\](..)
+
 Today was a day I had been dreading, a 5am wakeup to catch buses, trams, trains, and planes to make it to Tokyo. This was made less dreadful by a message I received from Qantas yesterday morning letting me know my flight had been upgrade to Business Class. I was now looking forward to what was going to be the longest and worst part of the day.
 
 My previous flights to and from Japan had all been overnight flights which meant that I could spend at least some of the 10 hour flight asleep and reset a bet. Sitting in my own little walled off seat with no one next to me would make this much easier to handle.
