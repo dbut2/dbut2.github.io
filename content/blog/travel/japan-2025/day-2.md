@@ -3,6 +3,8 @@ title: Day 2 - Shopping
 date: 2025-01-27
 draft: false
 ---
+[Japan 2025](..)
+
 Today's agenda was simple, shopping. I need to buy some accessories for the cold weather here and in preparation for the snow, and I also wanted to do some perusing for some gifts and souvenirs.
 
 I had a bit of sleep in this morning, thanks to the black out blinds in the hotel. The first things that I had on my list to buy was a warm top layer because my jumpers simply will not be warm enough, and some film for my camera. I needed both of these before I could go anywhere.
