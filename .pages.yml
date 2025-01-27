@@ -21,6 +21,10 @@ content:
         label: Draft
         type: boolean
         default: false
+      - name: showBreadCrumbs
+        label: Show Breadcrumbs
+        type: boolean
+        default: null
       - name: tags
         label: Tags
         list: true
