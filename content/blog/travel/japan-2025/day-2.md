@@ -20,3 +20,5 @@ I wanted to do some more exploring around Tokyo and see how the running situatio
 ![](/blog/travel/japan-2025/images/IMG_6067.jpeg)
 
 I ended the night with a stop in the conbini to grab some dinner and a drink and then headed back to the hotel for an early night before my trip to Lake Kawaguchiko tomorrow.
+
+![](/blog/travel/japan-2025/images/IMG_6068.jpeg)
