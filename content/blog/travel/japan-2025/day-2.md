@@ -1,7 +1,7 @@
 ---
 title: Day 2 - Shopping
 date: 2025-01-27
-draft: true
+draft: false
 ---
 Today's agenda was simple, shopping. I need to buy some accessories for the cold weather here and in preparation for the snow, and I also wanted to do some perusing for some gifts and souvenirs.
 
