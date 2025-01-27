@@ -2,6 +2,7 @@
 title: Day 1 - Travelling
 date: 2025-01-26
 draft: false
+showBreadCrumbs: true
 ---
 [Japan 2025](..)
 
