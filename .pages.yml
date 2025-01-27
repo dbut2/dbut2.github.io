@@ -1,7 +1,7 @@
 media:
-  input: static
+  input: content
   output: ""
-  path: static
+  path: content
 content:
   - name: posts
     label: Posts
