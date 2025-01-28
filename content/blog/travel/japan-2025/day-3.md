@@ -1,7 +1,7 @@
 ---
 title: Day 3 - Mt Fuji
 date: 2025-01-28
-draft: true
+draft: false
 ---
 Today was a day of peace, or zen, and was spent travelling out to Mt Fuji where I will stay the night. I started with an early morning getting my bags packed for the night and out of the hotel by 10am so they could do some cleaning in the room.
 
@@ -31,4 +31,6 @@ I settled in for the night and unpacked my bag. I took some nice photos of Mt Fu
 
 ![](/blog/travel/japan-2025/images/IMG_6574.jpeg)
 
-I finished the night with a trip to the bathhouse.
+I finished the night with a trip to the bathhouse. This was the perfect end to a freezing cold day. When I got in the outside temperature had already dropped to -2! It was sad getting out, but after such a relaxing and mesmerising day I sure will sleep well.
+
+![](/blog/travel/japan-2025/images/IMG_6584.jpeg)
