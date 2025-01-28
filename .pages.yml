@@ -104,15 +104,6 @@ content:
             type: boolean
           - name: showWordCount
             type: boolean
-          - name: editPost
-            type: object
-            fields:
-              - name: URL
-                type: string
-              - name: text
-                type: string
-              - name: appendFilePath
-                type: boolean
           - name: defaultTheme
             type: string
           - name: disableThemeToggle
