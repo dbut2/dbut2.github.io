@@ -2,6 +2,8 @@
 title: Day 3 - Mt Fuji
 date: 2025-01-28
 draft: false
+cover:
+  image: /blog/travel/japan-2025/images/IMG_6558.jpeg
 ---
 Today was a day of peace, or zen, and was spent travelling out to Mt Fuji where I will stay the night. I started with an early morning getting my bags packed for the night and out of the hotel by 10am so they could do some cleaning in the room.
 
