@@ -1,15 +1,27 @@
 ---
 title: Day 4 - Back to Tokyo
 date: 2025-01-29
-draft: true
+draft: false
 ---
 This morning started with an early wake up so I could watch the sun rise over Mt Fuji. The view was limited but it was still beautiful nonetheless.
 
+![](/blog/travel/japan-2025/images/IMG_8300.jpeg)
+
 Soon after I was served breakfast, and without a choice for options was given what was provided, graciously. Claude tells me it was probably grilled mackerel, and I did try and eat everything on my plate.
+
+![](/blog/travel/japan-2025/images/IMG_6587.jpeg)
 
 After breakfast I packed my bags and headed downstairs and they had kindly offered to provide me a lift to bus stop so I could make it back to Kawaguchiko for the first bus. I had already booked a coach that would collect me near the town I was in but I accepted anyway. When I got downstairs the lady had offered for her husband to drive us directly into Kawaguchiko instead. I accepted anyway, I figured I could just catch the coach from there instead.
 
+![](/blog/travel/japan-2025/images/IMG_6590.jpeg)
+
 Once in Kawaguchiko, I did a bit of sightseeing along the lake and in town. I stumbled upon the famous Lawson’s that I didn’t realise was here, so naturally I had to take some photos. I also ventured to Fujiyama Cookies where they bake fresh cookies in the shape of Mt Fuji, some even have white chocolate snow caps! I stole this idea from a teammate who was here a month ago and gifted me one.
+
+![](/blog/travel/japan-2025/images/IMG_6925.jpeg)
+
+![](/blog/travel/japan-2025/images/IMG_6930.jpeg)
+
+![](/blog/travel/japan-2025/images/IMG_8311.jpeg)
 
 After some sightseeing I wasn’t keen on waiting around until the afternoon for the coach I had originally booked, so I quickly booked the next bus back to Tokyo and was on the bus 15 minutes later.
 
