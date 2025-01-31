@@ -11,6 +11,12 @@ After getting the mount I was excited to get to use it so I popped it on my bag 
 
 Instead I passed the National Museum of Nature and Science and decided to come here instead. I paid my dues and started exploring the different areas and exhibitions they had here. It was interesting to learn about the unique aspects of Japan and the history of the landscape and the people and how they had impacts. It was also interesting to learn about the international impact Japan has had on science and technology as we don’t often learn about these at home.
 
+![](/blog/travel/japan-2025/images/IMG_7039.jpeg)
+
 After I perused the museum and the museum shop I headed back out to Ueno park and walked through here for a bit. As I was walking I could hear some sweet harmonica being played. I followed the sound and took a seat down the path by where this man was playing and sat here for a bit just enjoying the serenity.
+
+![](/blog/travel/japan-2025/images/IMG_7047.jpeg)
+
+![](/blog/travel/japan-2025/images/IMG_7055.jpeg)
 
 I headed back to the hotel to drop some stuff off so I wasn’t lugging it around all day and then headed off at night so I could take some night landscape shots of some neon-lit areas of the city. After a nice day venturing out I head back to bed with a strong zero in hand.
