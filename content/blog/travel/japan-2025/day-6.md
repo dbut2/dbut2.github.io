@@ -1,7 +1,7 @@
 ---
 title: Day 6 - Last day in Tokyo
 date: 2025-01-31
-draft: true
+draft: false
 ---
 Today was a bit of a shorter day, with the only thing I needed to accomplish was getting a warm outer layer before I head to the snow tomorrow and packing my bags as I wouldn’t have much time tomorrow morning.
 
