@@ -1,7 +1,7 @@
 ---
 title: Day 5 - National Museum of Nature and Science
 date: 2025-01-30
-draft: true
+draft: false
 ---
 Today started with a bit of a later start as I didn’t have any buses, trains or planes to catch. I had already done the majority of the shopping I needed to do so today was going to be some sightseeing.
 
