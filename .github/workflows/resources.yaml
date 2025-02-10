@@ -24,8 +24,7 @@ jobs:
           git status --porcelain
           echo "changes=$(git status --porcelain | wc -l)" >> $GITHUB_OUTPUT
 
-      - name: Commit and push if changes
-        if: steps.git-check.outputs.changes > 0
+      - if: steps.git-check.outputs.changes > 0
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
