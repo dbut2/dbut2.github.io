@@ -127,3 +127,30 @@ This compose service does the following:
 ## Conclusion
 
 By following these steps, you've successfully added GPU support to your Docker Swarm node and learned how to deploy GPU-enabled services. This setup allows you to leverage the power of GPUs in your distributed Docker environment, enabling more efficient processing for tasks like machine learning, scientific computing, and video processing.
+
+## Edit (2025-03-03):
+
+Should you need multiple services to have a GPU reservation, you can add additional generic reservations in `daemon.json`, each with a unique reference key pointing to the same GPU identifier:
+
+```json
+{
+...
+  "node-generic-resources": [
+    "NVIDIA-GPU-0=GPU-a0df8e5a-e4b9-467d-9bf5-cebb65027549",
+    "NVIDIA-GPU-1=GPU-a0df8e5a-e4b9-467d-9bf5-cebb65027549"
+  ]
+}
+```
+
+Then in your service config use one the available keys per service as the resource spec kind.
+
+```yaml
+...
+        reservations:
+          generic_resources:
+            - discrete_resource_spec:
+                kind: 'NVIDIA-GPU-1'
+                value: 0
+```
+
+You will need to manually keep track of each available key as you can only have each one allocated to single service.
