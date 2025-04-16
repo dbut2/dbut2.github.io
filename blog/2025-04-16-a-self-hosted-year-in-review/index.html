@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Blog | @dbut2</title>
+<title>A self-hosted year in review | @dbut2</title>
 <meta name="keywords" content="">
-<meta name="description" content="Blog - @dbut2">
+<meta name="description" content="A self-hosted year in review - @dbut2">
 <meta name="author" content="Dylan Butler">
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/blog/2025-04-16-a-self-hosted-year-in-review/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.45e028aa8ce0961349adf411b013ee39406be2c0bc80d4ea3fc04555f7f4611a.css" integrity="sha256-ReAoqozglhNJrfQRsBPuOUBr4sC8gNTqP8BFVff0YRo=" rel="preload stylesheet" as="style">
 <link rel="icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -18,8 +18,7 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="/blog/index.xml">
-<link rel="alternate" hreflang="en" href="/blog/">
+<link rel="alternate" hreflang="en" href="/blog/2025-04-16-a-self-hosted-year-in-review/">
 <noscript>
     <style>
         #theme-toggle,
@@ -56,13 +55,14 @@
         }
 
     </style>
-</noscript><meta property="og:url" content="/blog/">
+</noscript><meta property="og:url" content="/blog/2025-04-16-a-self-hosted-year-in-review/">
   <meta property="og:site_name" content="@dbut2">
-  <meta property="og:title" content="Blog">
+  <meta property="og:title" content="A self-hosted year in review">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Blog">
+<meta name="twitter:title" content="A self-hosted year in review">
 <meta name="twitter:description" content="">
 
 
@@ -77,12 +77,51 @@
       "name": "Blog",
       "item": "/blog/"
     }
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "A self-hosted year in review",
+      "item": "/blog/2025-04-16-a-self-hosted-year-in-review/"
+    }
   ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "A self-hosted year in review",
+  "name": "A self-hosted year in review",
+  "description": "",
+  "keywords": [
+    
+  ],
+  "articleBody": "",
+  "wordCount" : "0",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Dylan Butler"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/blog/2025-04-16-a-self-hosted-year-in-review/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "@dbut2",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/favicon.ico"
+    }
+  }
 }
 </script>
 </head>
 
-<body class="list" id="top">
+<body class="" id="top">
 <script>
     if (localStorage.getItem("pref-theme") === "dark") {
         document.body.classList.add('dark');
@@ -124,7 +163,7 @@
         <ul id="menu">
             <li>
                 <a href="/blog" title="Blog">
-                    <span class="active">Blog</span>
+                    <span>Blog</span>
                 </a>
             </li>
             <li>
@@ -140,98 +179,23 @@
         </ul>
     </nav>
 </header>
-<main class="main"> 
-<header class="page-header">
-  <h1>
-    Blog
-  </h1>
-</header>
+<main class="main">
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Adding GPUs to Docker Swarm and Running GPU-Enabled Services
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Introduction This guide will walk you through the process of attaching GPUs to a Docker Swarm node and running services that can utilize these GPUs. This setup is particularly useful for running GPU-intensive workloads in a distributed environment.
-Assumptions You are running a recent version of Ubuntu (Noble 24.04 LTS in this case). You have NVIDIA drivers already installed (preferably the -server version). If not, follow the instructions at Ubuntu’s NVIDIA driver installation guide. You have Docker and Docker Swarm already set up on your system. Steps to Add GPUs to Docker Swarm 1. Identify Your GPU First, we need to find the UUID of the GPU you want to attach to Docker Swarm.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-09-26 00:00:00 +1000 AEST'>September 26, 2024</span>&nbsp;·&nbsp;Dylan Butler</footer>
-  <a class="entry-link" aria-label="post link to Adding GPUs to Docker Swarm and Running GPU-Enabled Services" href="/blog/swarm-gpus/"></a>
-</article>
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      A self-hosted year in review
+    </h1>
+    <div class="post-meta">Dylan Butler
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">App debugging not in prod
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Building a Game Boy Advance emulator has gotten difficult, currently stuck on what appears to be I/O Registers not outputting their correct values and when a game is loaded in the gamepak, the device runs into a boot-loop.
-Investigating memory data and it’s meaning is difficult, converting binary data to something meaningful, then tracing that to another address if it’s a pointer and the cycle repeats. Doing these steps for every CPU cycle to investigate how data is changing is cumbersome and led to the project collecting dust for a few months as I gained the courage to dive into this.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-06-06 00:00:00 +1000 AEST'>June 6, 2024</span>&nbsp;·&nbsp;Dylan Butler</footer>
-  <a class="entry-link" aria-label="post link to App debugging not in prod" href="/blog/app-debugging-not-in-prod/"></a>
-</article>
+</div>
+  </header> 
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Self-Dependant, Self-Hosted GitHub Runners
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>On the journey of self hosting, one thing I want to get automated and running locally was my deployments. Having all of my services defined as Docker Compose services would be ideal. Wanting to keep this configuration held in GitHub, alongside my other code, this raises the next question, how do I propagate these changes to my local machine and redeploy my services?
-My initial thoughts were to try to find a CI/CD platform that was able to be ran as a self-hosted setup, and also support Docker deployments, specifically supporting Compose as I wanted to keep my configs simple and familiar.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-06-05 00:00:00 +1000 AEST'>June 5, 2024</span>&nbsp;·&nbsp;Dylan Butler</footer>
-  <a class="entry-link" aria-label="post link to Self-Dependant, Self-Hosted GitHub Runners" href="/blog/self-dependant-self-hosted-github-runners/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Go range over funcs
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Following discussions and read throughs on the following proposal, I hadn’t fully understood what the use case for this was or what the value of being able to range over functions would be.
-spec: add range over int, range over func · Issue #61405 · golang/go
-Following discussion on #56413, I propose to add two new types that a for-range statement can range over: integers and functions. In the spec, the table that begins the section would have a few mor…
-GitHubgolangGo Wiki: Rangefunc Experiment - The Go Programming Language
-Google logo
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-05-14 00:00:00 +1000 AEST'>May 14, 2024</span>&nbsp;·&nbsp;Dylan Butler</footer>
-  <a class="entry-link" aria-label="post link to Go range over funcs" href="/blog/go-range-over-funcs/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Self-hosted traffic ingress
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>A quick snippet of my docker compose config for managing traffic ingress into my self-hosted setup.
-Cloudflare Zero Trust tunnel is being used to manage forwarding traffic from the public internet to my machine as I didn’t want to expose my network directly.
-Exiting the tunnel, cloudflare has been setup to direct all traffic to traefik:80 which is exposed on the ingress network.
-Based on rules defined on each service, traefik will the route the traffic to each of those services:
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-05-13 00:00:00 +1000 AEST'>May 13, 2024</span>&nbsp;·&nbsp;Dylan Butler</footer>
-  <a class="entry-link" aria-label="post link to Self-hosted traffic ingress" href="/blog/self-hosted-traefik-ingress/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">A self-hosted year in review
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p></p>
-  </div>
-  <footer class="entry-footer">Dylan Butler</footer>
-  <a class="entry-link" aria-label="post link to A self-hosted year in review" href="/blog/2025-04-16-a-self-hosted-year-in-review/"></a>
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
 </article>
     </main>
     
@@ -294,6 +258,53 @@ Based on rules defined on each service, traefik will the route the traffic to ea
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 
