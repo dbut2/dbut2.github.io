@@ -66,12 +66,5 @@ Google logo&lt;/p&gt;</description>
 &lt;p&gt;Exiting the tunnel, cloudflare has been setup to direct all traffic to &lt;code&gt;traefik:80&lt;/code&gt; which is exposed on the ingress network.&lt;/p&gt;
 &lt;p&gt;Based on rules defined on each service, traefik will the route the traffic to each of those services:&lt;/p&gt;</description>
     </item>
-    <item>
-      <title>A self-hosted year in review</title>
-      <link>/blog/2025-04-16-a-self-hosted-year-in-review/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/blog/2025-04-16-a-self-hosted-year-in-review/</guid>
-      <description></description>
-    </item>
   </channel>
 </rss>

@@ -2872,12 +2872,5 @@ Google logo&lt;/p&gt;</description>
       <description>&lt;p&gt;URL shortener written in Go&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/dbut2/shortener&#34;&gt;GitHub&lt;/a&gt;&lt;/p&gt;</description>
     </item>
-    <item>
-      <title>A self-hosted year in review</title>
-      <link>/blog/2025-04-16-a-self-hosted-year-in-review/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/blog/2025-04-16-a-self-hosted-year-in-review/</guid>
-      <description></description>
-    </item>
   </channel>
 </rss>
