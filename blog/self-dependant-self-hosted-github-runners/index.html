@@ -56,7 +56,11 @@ My initial thoughts were to try to find a CI/CD platform that was able to be ran
         }
 
     </style>
-</noscript><meta property="og:url" content="/blog/self-dependant-self-hosted-github-runners/">
+</noscript><style>
+     :root {
+         --main-width: 1024px;
+     }
+</style><meta property="og:url" content="/blog/self-dependant-self-hosted-github-runners/">
   <meta property="og:site_name" content="@dbut2">
   <meta property="og:title" content="Self-Dependant, Self-Hosted GitHub Runners">
   <meta property="og:description" content="On the journey of self hosting, one thing I want to get automated and running locally was my deployments. Having all of my services defined as Docker Compose services would be ideal. Wanting to keep this configuration held in GitHub, alongside my other code, this raises the next question, how do I propagate these changes to my local machine and redeploy my services?
