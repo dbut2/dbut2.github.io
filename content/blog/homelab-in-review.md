@@ -3,6 +3,8 @@ title: "12 Months On: Self-Hosting"
 date: 2025-05-29
 draft: false
 ---
+content
+
 ```mermaid
 flowchart TD
     user((User))
