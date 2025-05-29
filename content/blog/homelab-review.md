@@ -1,60 +1,81 @@
 ---
-title: A self-hosted year in review
+title: "12 Month On: Self-Hosting"
+date: 2025-05-29
 draft: true
 ---
-
 ```mermaid
 flowchart TD
-%% User nodes with descriptive shapes
-    user((External User))
-    local-user((Local User))
-
-%% External services grouping
-    subgraph external-services ["External Services"]
+    user((User))
+    
+    subgraph external-services [External Services]
         cloudflare[Cloudflare]
-        cloudflare-hosting[Cloudflare Hosting]
         cloudflare-dns[Cloudflare DNS]
-        gce[GCE Node]
     end
-
-%% Homelab main grouping
-    subgraph homelab ["Homelab Infrastructure"]
-    %% Compute nodes section
-        subgraph compute-nodes ["Compute Nodes"]
-        %% PVE cluster (VM-based compute)
-            subgraph pve ["PVE Cluster"]
-                dev["dylans-node-dev"]
-                node0["dylans-node-0"]
-            end
-
-        %% TC nodes (bare metal compute)
-            tc0[TC Node 0]
-            tc1[TC Node 1]
-            tc2[TC Node 2]
-            tc3[TC Node 3]
+    
+    subgraph homelab [Homelab Infrastructure]
+        subgraph compute-nodes [Compute Nodes]
+            node0[Node 0]
         end
 
-    %% Storage
-        nas[("NAS Storage")]
-
-    %% Gateway
-        gateway[Gateway]
-
-    %% Docker Swarm
-        subgraph swarm ["Docker Swarm"]
-        %% Services users interact with
+        subgraph compose [Docker Compose]
             service-1[Service 1]
             service-2[Service 2]
             service-3[Service 3]
             service-4[Service 4]
 
-        %% Infrastructure services
+            cloudflared[Cloudflared]
+            traefik[Traefik]
+        end
+    end
+    
+    user --> cloudflare-dns
+    cloudflare-dns --> cloudflare
+    cloudflare --> cloudflared
+    cloudflared --> traefik
+    traefik --> service-1 & service-2 & service-3 & service-4
+
+    compose -..-> node0
+```
+
+```mermaid
+flowchart TD
+    user((External User))
+    local-user((Local User))
+
+    subgraph external-services [External Services]
+        cloudflare[Cloudflare]
+        cloudflare-hosting[Cloudflare Hosting]
+        cloudflare-dns[Cloudflare DNS]
+    end
+
+    subgraph homelab [Homelab Infrastructure]
+        subgraph compute-nodes [Compute Nodes]
+            subgraph pve [PVE Cluster]
+                dev[Development Node]
+                node0[Node 0]
+            end
+
+            tc0[Mini PC 0]
+            tc1[Mini PC 1]
+            tc2[Mini PC 2]
+            tc3[Mini PC 3]
+        end
+
+        nas[(NAS Storage)]
+
+        gateway[Gateway]
+
+        subgraph swarm [Docker Swarm]
+            service-1[Service 1]
+            service-2[Service 2]
+            service-3[Service 3]
+            service-4[Service 4]
+
             cloudflared[Cloudflared]
             traefik[Traefik]
         end
     end
 
-%% External connections
     local-user --> gateway
     gateway --> cloudflare-dns
     gateway --> traefik
@@ -65,23 +86,9 @@ flowchart TD
     cloudflared --> traefik
     cloudflare --> cloudflare-hosting
 
-    cloudflare-dns --> gce
-    gce --> traefik
+    cloudflare-dns --> traefik
 
-%% Visual representation showing any service can run on any compute node
+    traefik --> service-1 & service-2 & service-3 & service-4
     swarm -..-> node0 & tc0 & tc1 & tc2 & tc3
-
-%% NFS connections
-    dev --> nas
-    node0 --NFS--> nas
-    tc0 --> nas
-    tc1 --> nas
-    tc2 --> nas
-    tc3 --> nas
-
-%% Traefik routing
-    traefik --> service-1
-    traefik --> service-2
-    traefik --> service-3
-    traefik --> service-4
+    dev & node0 & tc0 & tc1 & tc2 & tc3 --> nas
 ```
