@@ -1,7 +1,7 @@
 ---
 title: "12 Month On: Self-Hosting"
 date: 2025-05-29
-draft: true
+draft: false
 ---
 ```mermaid
 flowchart TD
