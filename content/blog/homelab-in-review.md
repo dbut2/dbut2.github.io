@@ -70,13 +70,27 @@ From this point on it was clear I needed better rules for myself on keeping back
 
 I also put a note that anything on the machine could be lost at any time, so if it was important then don't leave just on their. I had also later purchased a NAS to further remove any reliance on the machine.
 
+Now with GitHub acting as the only source of method for deployments, anything else deployed had 0 expectation to be up and usable, the NAS serving as storage server for any services, and the network configuration, I was at a point again where things were stable and I was freely able to make changes and add new services without issue.
+
+I had at some point also been frustrated with the amount of manual changes needed for DNS settings, Zero Trust configuration changes, and other manual processes required every time I span up new services, that I ended up added Terraform to the pipeline. This was one of the most satisfying changes with having everything simply defined in a single config.yaml and terraform handling the complexity, and updating references and related resources for me. Seeing Terraform tell me it's handling 150 resources is nice to know I'm not manually controlling that much.
+
+The last upgrade I had made since then is to buy 4x mini PCs with limited resources, just to reduce the load on the single machine I had running, and allow for proxmox and the VMs to run updates etc. This was probably unnecessary to add but is a nice to have, and makes reliability just a little less of an issue.
+
+The only issues with adding more nodes to the cluster is that I would have to find a new solution for defining and deploying services. Docker compose had been working great, but this only works for a single node. My two main options I was considering was using a lightweight kubernetes service like k3s, or using Docker swarm.
+
+Kube is definitely the preferred tool for managing multiple node clusters, and managing the network etc between them for the services, but would require a large migration to change all my configs around and getting the services up and running. Docker swarm on the other hand would have a much simpler migration in that service configs are defined much the same as compose, but had more limitations in it's ability, particularly as I had found during a test with some friends running across 4 physical locations.
+
+For my setup though, I tested using swarm initially given the lower barrier to entry, and it seemed to work fine. A couple tweaks here and there to service configs and everything was up and running fine on the swarm, other than a few difficulties with GPUs, but I've already explored that and resolved issues, mostly, for services that need it.
+
+With that all said and done, the last year has seen not just the creation of my homelab, but also the evolution into a stable and reliable set of infrastructure that I can actually trust to run services I need.
+
 ```mermaid
 flowchart TD
     user((External User))
     local-user((Local User))
 
     subgraph external-services [External Services]
-        cloudflare[Cloudflare]
+        cloudflare[Cloudflare Tunnel]
         cloudflare-hosting[Cloudflare Hosting]
         cloudflare-dns[Cloudflare DNS]
     end
