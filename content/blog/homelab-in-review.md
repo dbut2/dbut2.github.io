@@ -81,7 +81,6 @@ flowchart TD
             service-n[...]
             service-4[Service-N]
 
-
             cloudflared[Cloudflared]
             traefik[Traefik]
         end
