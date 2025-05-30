@@ -35,7 +35,7 @@ flowchart TD
     cloudflare-dns --> cloudflare
     cloudflare --> cloudflared
     cloudflared --> traefik
-    traefik --> service-1 & service-2 & service-3 & service-4
+    traefik --> service-1 & service-2 & service-3
 
     compose -..-> node0
 ```
