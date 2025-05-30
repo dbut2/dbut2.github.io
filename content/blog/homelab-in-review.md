@@ -22,10 +22,9 @@ flowchart TD
         end
 
         subgraph compose [Docker Compose]
-            service-1[Service 1]
-            service-2[Service 2]
-            service-3[Service 3]
-            service-4[Service 4]
+            service-1[Portainer]
+            service-2[Jellyfin]
+            service-3[Shlink]
 
             cloudflared[Cloudflared]
             traefik[Traefik]
@@ -70,10 +69,12 @@ flowchart TD
         gateway[Gateway]
 
         subgraph swarm [Docker Swarm]
-            service-1[Service 1]
-            service-2[Service 2]
-            service-3[Service 3]
-            service-4[Service 4]
+            service-1[Portainer]
+            service-2[Jellyfin]
+            service-3[Shlink]
+            service-n[...]
+            service-4[Service-N]
+
 
             cloudflared[Cloudflared]
             traefik[Traefik]
