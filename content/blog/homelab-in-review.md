@@ -2,6 +2,8 @@
 title: "12 Months On: Self-Hosting"
 date: 2025-05-30
 draft: false
+tags:
+  - Self-Hosted
 ---
 This is kind of a review on the past 12 months since moving my cloud hosted services to all self-hosted, and the sequence of upgrades and changes to my homelab throughout the process.
 
