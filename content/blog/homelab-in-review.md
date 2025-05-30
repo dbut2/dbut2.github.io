@@ -28,7 +28,7 @@ flowchart TD
         subgraph compose [Docker Compose]
             cloudflared[Cloudflared]
 
-            service-1[Portainer]
+            service-1[Uptime Kume]
             service-2[Jellyfin]
             service-3[Shlink]
         end
@@ -45,6 +45,30 @@ flowchart TD
 
     compose -..-> node0
 ```
+
+This setup was my first step in being able to start turning off my Cloud Run services and other projects I had running on cloud. One of the services I had setup was Uptime Kuma, to ensure that all of my services were running fine. Unlike a local Docker instance, or running services on GCP, I didn't really have insight into what services were up, if any had crashed, or any level of insight without shelling into the machine and manually checking.
+
+What Uptime Kuma highlighted was that occasionally and every few hours the requests to any of the services were timing out. Since it applied to all services across the board, I figured it must have to be something on the machine or the network. The logs on the machine and all services looked fine and didn't indicate they went down or anything similar, so I put this down to network issue.
+
+Running services over Wi-Fi on a 5G connection probably wasn't the most stable setup I could have picked and so the first point of order was to wire the machine into my 5G modem/router directly. This seemed to solve some of the dropped connections but the issue still persisted. This mostly went on for a few months until I also upgraded the internet to a gigabit fibre connection when I realised my building supported it.
+
+With the machine wired in and eventually move to a wired connection, this did resolve all of the issues I had seen before.
+
+With everything running stable it was time to actually start utilising what I had and start running some stuff. Over the course of a few months I had deployed some hobby projects I'd been working on, as well as some local services like Portainer, and had set up GitHub actions to act as my deployment process. This was done by creating a repo with all of the compose configuration, and creating a GitHub action to `docker compose up -d` on the single compose file I had defined.
+
+This is where the second contention came up. I often found myself test deploying services and leaving the test compose defined on the machine that I'd just shell into. This often led to a drift in what was defined in GitHub and what was actually deployed. Working across many machines was basically made impossible.
+
+For this reason I decided I should seperate my development and deployment environments. Hearing word on proxmox and people using virtualisation in their labs, this sounded like a good starting approach and to just run 2 seperate machines, one with docker running and the other with my Jetbrains gateway host running.
+
+Step 1 to install proxmox, format drives and create a fresh installation. Done. Step 2, boot up and create VMs. Done. Step 3, set up the VMs and get all of the previous services back up and running. Oh, I just formatted the drives. Crap.
+
+This was probably the hardest lesson to learn. I just lost all of the services I had running, and considering most were still half-deployed locally without any sort of backed up configuration I lost most of what I had set up. This doesn't include everything else I had used the computer for previously for personal use, it was all gone.
+
+What a dumb mistake.
+
+From this point on it was clear I needed better rules for myself on keeping backups, and not allowing myself to lose everything in one go. Luckily at least most of the services I cared about were set up months ago and had made their way to the repo, and for personal stuff I was able to put together various backups, uploads etc I had collected over the years so not too much was lost.
+
+I also put a note that anything on the machine could be lost at any time, so if it was important then don't leave just on their. I had also later purchased a NAS to further remove any reliance on the machine.
 
 ```mermaid
 flowchart TD
