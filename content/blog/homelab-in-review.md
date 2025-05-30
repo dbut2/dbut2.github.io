@@ -74,7 +74,7 @@ Now with GitHub acting as the only source of method for deployments, anything el
 
 I had at some point also been frustrated with the amount of manual changes needed for DNS settings, Zero Trust configuration changes, and other manual processes required every time I span up new services, that I ended up added Terraform to the pipeline. This was one of the most satisfying changes with having everything simply defined in a single config.yaml and terraform handling the complexity, and updating references and related resources for me. Seeing Terraform tell me it's handling 150 resources is nice to know I'm not manually controlling that much.
 
-The last upgrade I had made since then is to buy 4x mini PCs with limited resources, just to reduce the load on the single machine I had running, and allow for proxmox and the VMs to run updates etc. This was probably unnecessary to add but is a nice to have, and makes reliability just a little less of an issue.
+The last upgrade I had made since then is to buy 4x mini PCs with limited resources, running 4-core 2.2GHz processors and 16GB memory, just to reduce the load on the single machine I had running and allow for proxmox and the VMs to run updates etc. This was probably unnecessary to add but is a nice to have, and makes reliability just a little less of an issue.
 
 The only issues with adding more nodes to the cluster is that I would have to find a new solution for defining and deploying services. Docker compose had been working great, but this only works for a single node. My two main options I was considering was using a lightweight kubernetes service like k3s, or using Docker swarm.
 
