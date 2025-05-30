@@ -20,21 +20,21 @@ flowchart TD
     user((User))
     
     subgraph external-services [External Services]
-        cloudflare[Cloudflare]
         cloudflare-dns[Cloudflare DNS]
+        cloudflare[Cloudflare Tunnel]
     end
     
     subgraph homelab [Homelab Infrastructure]
-        subgraph compute-nodes [Compute Nodes]
-            node0[Node 0]
-        end
-
         subgraph compose [Docker Compose]
+            cloudflared[Cloudflared]
+
             service-1[Portainer]
             service-2[Jellyfin]
             service-3[Shlink]
+        end
 
-            cloudflared[Cloudflared]
+        subgraph compute-nodes [Compute Nodes]
+            node0[Node 0]
         end
     end
     
