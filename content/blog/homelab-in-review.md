@@ -140,3 +140,5 @@ flowchart TD
     swarm -..-> node0 & tc0 & tc1 & tc2 & tc3
     dev & node0 & tc0 & tc1 & tc2 & tc3 --> nas
 ```
+
+As for what's next? I'm not sure. I'm happy with how everything is looking at the moment. Services are able to be set up quite quickly with docker compose-like configs, and the rest of the infrastructure all managed already, or at least with minor changes to terraform yaml, and everything is mostly stable and runs without issue. That said, I'm always exploring new technologies, new ideas, and always looking for ways to improve what I have.
