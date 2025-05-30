@@ -113,7 +113,7 @@ flowchart TD
         gateway[Gateway]
 
         subgraph swarm [Docker Swarm]
-            service-1[Portainer]
+            service-1[Uptime Kuma]
             service-2[Jellyfin]
             service-3[Shlink]
             service-n[...]
