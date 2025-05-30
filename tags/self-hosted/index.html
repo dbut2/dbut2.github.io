@@ -56,11 +56,8 @@
         }
 
     </style>
-</noscript><style>
-     :root {
-         --main-width: 1024px;
-     }
-</style><meta property="og:url" content="https://dylanbutler.dev/tags/self-hosted/">
+</noscript>
+<meta property="og:url" content="https://dylanbutler.dev/tags/self-hosted/">
   <meta property="og:site_name" content="@dbut2">
   <meta property="og:title" content="Self-Hosted">
   <meta property="og:locale" content="en">
@@ -138,6 +135,20 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">12 Months On: Self-Hosting
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>This is kind of a review on the past 12 months since moving my cloud hosted services to all self-hosted, and the sequence of upgrades and changes to my homelab throughout the process.
+After a few months of increasingly larger GCP bills, and a final month of accidentally leaving a Cloud Workstation running for a little too long, I decided to give the old self-hosted world a try again after having most of my projects running somewhere in the cloud for the past 5 years, and seeing if I could pull off a $0 GCP bill the end of the next month.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-05-30 00:00:00 +1000 AEST'>May 30, 2025</span>&nbsp;·&nbsp;Dylan Butler</footer>
+  <a class="entry-link" aria-label="post link to 12 Months On: Self-Hosting" href="https://dylanbutler.dev/blog/homelab-in-review/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Adding GPUs to Docker Swarm and Running GPU-Enabled Services
     </h2>
   </header>
@@ -185,7 +196,14 @@ Based on rules defined on each service, traefik will the route the traffic to ea
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark'
+  });
+</script>
+
 
 <script>
     let menu = document.getElementById('menu')

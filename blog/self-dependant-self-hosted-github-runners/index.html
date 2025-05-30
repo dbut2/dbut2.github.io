@@ -56,11 +56,8 @@ My initial thoughts were to try to find a CI/CD platform that was able to be ran
         }
 
     </style>
-</noscript><style>
-     :root {
-         --main-width: 1024px;
-     }
-</style><meta property="og:url" content="https://dylanbutler.dev/blog/self-dependant-self-hosted-github-runners/">
+</noscript>
+<meta property="og:url" content="https://dylanbutler.dev/blog/self-dependant-self-hosted-github-runners/">
   <meta property="og:site_name" content="@dbut2">
   <meta property="og:title" content="Self-Dependant, Self-Hosted GitHub Runners">
   <meta property="og:description" content="On the journey of self hosting, one thing I want to get automated and running locally was my deployments. Having all of my services defined as Docker Compose services would be ideal. Wanting to keep this configuration held in GitHub, alongside my other code, this raises the next question, how do I propagate these changes to my local machine and redeploy my services?
@@ -276,7 +273,14 @@ deploy: The operation was canceled.
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark'
+  });
+</script>
+
 
 <script>
     let menu = document.getElementById('menu')

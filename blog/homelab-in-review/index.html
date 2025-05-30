@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>12 Months On: Self-Hosting | @dbut2</title>
+<meta name="keywords" content="Self-Hosted">
+<meta name="description" content="This is kind of a review on the past 12 months since moving my cloud hosted services to all self-hosted, and the sequence of upgrades and changes to my homelab throughout the process.
+After a few months of increasingly larger GCP bills, and a final month of accidentally leaving a Cloud Workstation running for a little too long, I decided to give the old self-hosted world a try again after having most of my projects running somewhere in the cloud for the past 5 years, and seeing if I could pull off a $0 GCP bill the end of the next month.">
+<meta name="author" content="Dylan Butler">
+<link rel="canonical" href="https://dylanbutler.dev/blog/homelab-in-review/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.45e028aa8ce0961349adf411b013ee39406be2c0bc80d4ea3fc04555f7f4611a.css" integrity="sha256-ReAoqozglhNJrfQRsBPuOUBr4sC8gNTqP8BFVff0YRo=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://dylanbutler.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://dylanbutler.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://dylanbutler.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://dylanbutler.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://dylanbutler.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://dylanbutler.dev/blog/homelab-in-review/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<meta property="og:url" content="https://dylanbutler.dev/blog/homelab-in-review/">
+  <meta property="og:site_name" content="@dbut2">
+  <meta property="og:title" content="12 Months On: Self-Hosting">
+  <meta property="og:description" content="This is kind of a review on the past 12 months since moving my cloud hosted services to all self-hosted, and the sequence of upgrades and changes to my homelab throughout the process.
+After a few months of increasingly larger GCP bills, and a final month of accidentally leaving a Cloud Workstation running for a little too long, I decided to give the old self-hosted world a try again after having most of my projects running somewhere in the cloud for the past 5 years, and seeing if I could pull off a $0 GCP bill the end of the next month.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2025-05-30T00:00:00+10:00">
+    <meta property="article:modified_time" content="2025-05-30T00:00:00+10:00">
+    <meta property="article:tag" content="Self-Hosted">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="12 Months On: Self-Hosting">
+<meta name="twitter:description" content="This is kind of a review on the past 12 months since moving my cloud hosted services to all self-hosted, and the sequence of upgrades and changes to my homelab throughout the process.
+After a few months of increasingly larger GCP bills, and a final month of accidentally leaving a Cloud Workstation running for a little too long, I decided to give the old self-hosted world a try again after having most of my projects running somewhere in the cloud for the past 5 years, and seeing if I could pull off a $0 GCP bill the end of the next month.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Blog",
+      "item": "https://dylanbutler.dev/blog/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "12 Months On: Self-Hosting",
+      "item": "https://dylanbutler.dev/blog/homelab-in-review/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "12 Months On: Self-Hosting",
+  "name": "12 Months On: Self-Hosting",
+  "description": "This is kind of a review on the past 12 months since moving my cloud hosted services to all self-hosted, and the sequence of upgrades and changes to my homelab throughout the process.\nAfter a few months of increasingly larger GCP bills, and a final month of accidentally leaving a Cloud Workstation running for a little too long, I decided to give the old self-hosted world a try again after having most of my projects running somewhere in the cloud for the past 5 years, and seeing if I could pull off a $0 GCP bill the end of the next month.\n",
+  "keywords": [
+    "Self-Hosted"
+  ],
+  "articleBody": "This is kind of a review on the past 12 months since moving my cloud hosted services to all self-hosted, and the sequence of upgrades and changes to my homelab throughout the process.\nAfter a few months of increasingly larger GCP bills, and a final month of accidentally leaving a Cloud Workstation running for a little too long, I decided to give the old self-hosted world a try again after having most of my projects running somewhere in the cloud for the past 5 years, and seeing if I could pull off a $0 GCP bill the end of the next month.\nGetting Started The first thing was to pull out a gaming PC I bought a few years before, but had switched off some time ago due to using the XBOX as the gaming rig instead. The PC was a mid-specced computer with an RTX 3060, 6-core 3.9GHz processor, and some 16GB of memory, enough to at least get started.\nAt the time I booted everything up, I was still running all of my local devices 100% over Wi-Fi, and running on a 5G Home Mobile connection. I already had Ubuntu formatted onto one of the drives for whatever reason, and docker was naturally already running. The 5G connection presented it’s first point of contention with the lack of any ability for statically setting an IP address at least having some stability in a dynamically assigned address.\nNetwork Challenges and Solutions One option considered was to use a Dynamic DNS service, but given the TTL on the domain would need to be set so low to not cause significant issue I looked for other options. I came across Cloudflare Zero Trust tunnels, which seemed to provide what I need: some stability in public facing domain names.\nOnce I had the tunnels figured out and running, I had my first basic setup running:\nflowchart TD user((User)) subgraph external-services [External Services] cloudflare-dns[Cloudflare DNS] cloudflare[Cloudflare Tunnel] end subgraph homelab [Homelab Infrastructure] subgraph compose [Docker Compose] cloudflared[Cloudflared] service-1[Uptime Kume] service-2[Jellyfin] service-3[Shlink] end subgraph compute-nodes [Compute Nodes] node0[Node 0] end end user --\u003e cloudflare-dns cloudflare-dns --\u003e cloudflare cloudflare --\u003e cloudflared cloudflared --\u003e service-1 \u0026 service-2 \u0026 service-3 compose -..-\u003e node0 This setup was my first step in being able to start turning off my Cloud Run services and other projects I had running on cloud. One of the services I had setup was Uptime Kuma, to ensure that all of my services were running fine. Unlike a local Docker instance, or running services on GCP, I didn’t really have insight into what services were up, if any had crashed, or any level of insight without shelling into the machine and manually checking.\nWhat Uptime Kuma highlighted was that occasionally and every few hours the requests to any of the services were timing out. Since it applied to all services across the board, I figured it must have to be something on the machine or the network. The logs on the machine and all services looked fine and didn’t indicate they went down or anything similar, so I put this down to network issue.\nRunning services over Wi-Fi on a 5G connection probably wasn’t the most stable setup I could have picked and so the first point of order was to wire the machine into my 5G modem/router directly. This seemed to solve some of the dropped connections but the issue still persisted. This mostly went on for a few months until I also upgraded the internet to a gigabit fibre connection when I realised my building supported it.\nWith the machine wired in and eventually move to a wired connection, this did resolve all of the issues I had seen before.\nEarly Development and GitOps With everything running stable it was time to actually start utilising what I had and start running some stuff. Over the course of a few months I had deployed some hobby projects I’d been working on, as well as some local services like Portainer, and had set up GitHub actions to act as my deployment process. This was done by creating a repo with all of the compose configuration, and creating a GitHub action to docker compose up -d on the single compose file I had defined.\nThis is where the second contention came up. I often found myself test deploying services and leaving the test compose defined on the machine that I’d just shell into. This often led to a drift in what was defined in GitHub and what was actually deployed. Working across many machines was basically made impossible.\nFor this reason I decided I should seperate my development and deployment environments. Hearing word on proxmox and people using virtualisation in their labs, this sounded like a good starting approach and to just run 2 seperate machines, one with docker running and the other with my Jetbrains gateway host running.\nThe Proxmox Disaster Step 1 to install proxmox, format drives and create a fresh installation. Done. Step 2, boot up and create VMs. Done. Step 3, set up the VMs and get all of the previous services back up and running. Oh, I just formatted the drives. Crap.\nThis was probably the hardest lesson to learn. I just lost all of the services I had running, and considering most were still half-deployed locally without any sort of backed up configuration I lost most of what I had set up. This doesn’t include everything else I had used the computer for previously for personal use, it was all gone.\nWhat a dumb mistake.\nRebuilding with Better Practices From this point on it was clear I needed better rules for myself on keeping backups, and not allowing myself to lose everything in one go. Luckily at least most of the services I cared about were set up months ago and had made their way to the repo, and for personal stuff I was able to put together various backups, uploads etc I had collected over the years so not too much was lost.\nI also put a note that anything on the machine could be lost at any time, so if it was important then don’t leave just on their. I had also later purchased a NAS to further remove any reliance on the machine.\nNow with GitHub acting as the only source of method for deployments, anything else deployed had 0 expectation to be up and usable, the NAS serving as storage server for any services, and the network configuration, I was at a point again where things were stable and I was freely able to make changes and add new services without issue.\nInfrastructure as Code I had at some point also been frustrated with the amount of manual changes needed for DNS settings, Zero Trust configuration changes, and other manual processes required every time I span up new services, that I ended up added Terraform to the pipeline. This was one of the most satisfying changes with having everything simply defined in a single config.yaml and terraform handling the complexity, and updating references and related resources for me. Seeing Terraform tell me it’s handling 150 resources is nice to know I’m not manually controlling that much.\nScaling to Multiple Nodes The last upgrade I had made since then is to buy 4x mini PCs with limited resources, running 4-core 2.2GHz processors and 16GB memory, just to reduce the load on the single machine I had running and allow for proxmox and the VMs to run updates etc. This was probably unnecessary to add but is a nice to have, and makes reliability just a little less of an issue.\nThe only issues with adding more nodes to the cluster is that I would have to find a new solution for defining and deploying services. Docker compose had been working great, but this only works for a single node. My two main options I was considering was using a lightweight kubernetes service like k3s, or using Docker swarm.\nKube is definitely the preferred tool for managing multiple node clusters, and managing the network etc between them for the services, but would require a large migration to change all my configs around and getting the services up and running. Docker swarm on the other hand would have a much simpler migration in that service configs are defined much the same as compose, but had more limitations in it’s ability, particularly as I had found during a test with some friends running across 4 physical locations.\nFor my setup though, I tested using swarm initially given the lower barrier to entry, and it seemed to work fine. A couple tweaks here and there to service configs and everything was up and running fine on the swarm, other than a few difficulties with GPUs, but I’ve already explored that and resolved issues, mostly, for services that need it.\nWith that all said and done, the last year has seen not just the creation of my homelab, but also the evolution into a stable and reliable set of infrastructure that I can actually trust to run services I need.\nflowchart TD user((External User)) local-user((Local User)) subgraph external-services [External Services] cloudflare[Cloudflare Tunnel] cloudflare-hosting[Cloudflare Hosting] cloudflare-dns[Cloudflare DNS] end subgraph homelab [Homelab Infrastructure] subgraph compute-nodes [Compute Nodes] subgraph pve [PVE Cluster] dev[Development Node] node0[Node 0] end tc0[Mini PC 0] tc1[Mini PC 1] tc2[Mini PC 2] tc3[Mini PC 3] end nas[(NAS Storage)] gateway[Gateway] subgraph swarm [Docker Swarm] service-1[Uptime Kuma] service-2[Jellyfin] service-3[Shlink] service-n[...] service-4[Service-N] cloudflared[Cloudflared] traefik[Traefik] end end local-user --\u003e gateway gateway --\u003e cloudflare-dns gateway --\u003e traefik user --\u003e cloudflare-dns cloudflare-dns --\u003e cloudflare cloudflare --\u003e cloudflared cloudflared --\u003e traefik cloudflare --\u003e cloudflare-hosting cloudflare-dns --\u003e traefik traefik --\u003e service-1 \u0026 service-2 \u0026 service-3 \u0026 service-4 swarm -..-\u003e node0 \u0026 tc0 \u0026 tc1 \u0026 tc2 \u0026 tc3 dev \u0026 node0 \u0026 tc0 \u0026 tc1 \u0026 tc2 \u0026 tc3 --\u003e nas What’s Next As for what’s next? I’m not sure. I’m happy with how everything is looking at the moment. Services are able to be set up quite quickly with docker compose-like configs, and the rest of the infrastructure all managed already, or at least with minor changes to terraform yaml, and everything is mostly stable and runs without issue. That said, I’m always exploring new technologies, new ideas, and always looking for ways to improve what I have.\nFor anyone considering a similar path: start small, automate everything, and don’t be afraid to make mistakes. The learning experience alone makes the effort worthwhile.\n",
+  "wordCount" : "1745",
+  "inLanguage": "en",
+  "datePublished": "2025-05-30T00:00:00+10:00",
+  "dateModified": "2025-05-30T00:00:00+10:00",
+  "author":{
+    "@type": "Person",
+    "name": "Dylan Butler"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://dylanbutler.dev/blog/homelab-in-review/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "@dbut2",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://dylanbutler.dev/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://dylanbutler.dev/" accesskey="h" title="@dbut2 (Alt + H)">@dbut2</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://dylanbutler.dev/blog" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://dylanbutler.dev/photography" title="Photography">
+                    <span>Photography</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://dylanbutler.dev/projects" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      12 Months On: Self-Hosting
+    </h1>
+    <div class="post-meta"><span title='2025-05-30 00:00:00 +1000 AEST'>May 30, 2025</span>&nbsp;·&nbsp;Dylan Butler
+
+</div>
+  </header> 
+  <div class="post-content"><p>This is kind of a review on the past 12 months since moving my cloud hosted services to all self-hosted, and the sequence of upgrades and changes to my homelab throughout the process.</p>
+<p>After a few months of increasingly larger GCP bills, and a final month of accidentally leaving a Cloud Workstation running for a little too long, I decided to give the old self-hosted world a try again after having most of my projects running somewhere in the cloud for the past 5 years, and seeing if I could pull off a $0 GCP bill the end of the next month.</p>
+<h2 id="getting-started">Getting Started<a hidden class="anchor" aria-hidden="true" href="#getting-started">#</a></h2>
+<p>The first thing was to pull out a gaming PC I bought a few years before, but had switched off some time ago due to using the XBOX as the gaming rig instead. The PC was a mid-specced computer with an RTX 3060, 6-core 3.9GHz processor, and some 16GB of memory, enough to at least get started.</p>
+<p>At the time I booted everything up, I was still running all of my local devices 100% over Wi-Fi, and running on a 5G Home Mobile connection. I already had Ubuntu formatted onto one of the drives for whatever reason, and docker was naturally already running. The 5G connection presented it&rsquo;s first point of contention with the lack of any ability for statically setting an IP address at least having some stability in a dynamically assigned address.</p>
+<h2 id="network-challenges-and-solutions">Network Challenges and Solutions<a hidden class="anchor" aria-hidden="true" href="#network-challenges-and-solutions">#</a></h2>
+<p>One option considered was to use a Dynamic DNS service, but given the TTL on the domain would need to be set so low to not cause significant issue I looked for other options. I came across Cloudflare Zero Trust tunnels, which seemed to provide what I need: some stability in public facing domain names.</p>
+<p>Once I had the tunnels figured out and running, I had my first basic setup running:</p>
+<pre class="mermaid">
+  flowchart TD
+    user((User))
+    
+    subgraph external-services [External Services]
+        cloudflare-dns[Cloudflare DNS]
+        cloudflare[Cloudflare Tunnel]
+    end
+    
+    subgraph homelab [Homelab Infrastructure]
+        subgraph compose [Docker Compose]
+            cloudflared[Cloudflared]
+
+            service-1[Uptime Kume]
+            service-2[Jellyfin]
+            service-3[Shlink]
+        end
+
+        subgraph compute-nodes [Compute Nodes]
+            node0[Node 0]
+        end
+    end
+    
+    user --&gt; cloudflare-dns
+    cloudflare-dns --&gt; cloudflare
+    cloudflare --&gt; cloudflared
+    cloudflared --&gt; service-1 &amp; service-2 &amp; service-3
+
+    compose -..-&gt; node0
+</pre>
+<p>This setup was my first step in being able to start turning off my Cloud Run services and other projects I had running on cloud. One of the services I had setup was Uptime Kuma, to ensure that all of my services were running fine. Unlike a local Docker instance, or running services on GCP, I didn&rsquo;t really have insight into what services were up, if any had crashed, or any level of insight without shelling into the machine and manually checking.</p>
+<p>What Uptime Kuma highlighted was that occasionally and every few hours the requests to any of the services were timing out. Since it applied to all services across the board, I figured it must have to be something on the machine or the network. The logs on the machine and all services looked fine and didn&rsquo;t indicate they went down or anything similar, so I put this down to network issue.</p>
+<p>Running services over Wi-Fi on a 5G connection probably wasn&rsquo;t the most stable setup I could have picked and so the first point of order was to wire the machine into my 5G modem/router directly. This seemed to solve some of the dropped connections but the issue still persisted. This mostly went on for a few months until I also upgraded the internet to a gigabit fibre connection when I realised my building supported it.</p>
+<p>With the machine wired in and eventually move to a wired connection, this did resolve all of the issues I had seen before.</p>
+<h2 id="early-development-and-gitops">Early Development and GitOps<a hidden class="anchor" aria-hidden="true" href="#early-development-and-gitops">#</a></h2>
+<p>With everything running stable it was time to actually start utilising what I had and start running some stuff. Over the course of a few months I had deployed some hobby projects I&rsquo;d been working on, as well as some local services like Portainer, and had set up GitHub actions to act as my deployment process. This was done by creating a repo with all of the compose configuration, and creating a GitHub action to <code>docker compose up -d</code> on the single compose file I had defined.</p>
+<p>This is where the second contention came up. I often found myself test deploying services and leaving the test compose defined on the machine that I&rsquo;d just shell into. This often led to a drift in what was defined in GitHub and what was actually deployed. Working across many machines was basically made impossible.</p>
+<p>For this reason I decided I should seperate my development and deployment environments. Hearing word on proxmox and people using virtualisation in their labs, this sounded like a good starting approach and to just run 2 seperate machines, one with docker running and the other with my Jetbrains gateway host running.</p>
+<h2 id="the-proxmox-disaster">The Proxmox Disaster<a hidden class="anchor" aria-hidden="true" href="#the-proxmox-disaster">#</a></h2>
+<p>Step 1 to install proxmox, format drives and create a fresh installation. Done. Step 2, boot up and create VMs. Done. Step 3, set up the VMs and get all of the previous services back up and running. Oh, I just formatted the drives. Crap.</p>
+<p>This was probably the hardest lesson to learn. I just lost all of the services I had running, and considering most were still half-deployed locally without any sort of backed up configuration I lost most of what I had set up. This doesn&rsquo;t include everything else I had used the computer for previously for personal use, it was all gone.</p>
+<p>What a dumb mistake.</p>
+<h2 id="rebuilding-with-better-practices">Rebuilding with Better Practices<a hidden class="anchor" aria-hidden="true" href="#rebuilding-with-better-practices">#</a></h2>
+<p>From this point on it was clear I needed better rules for myself on keeping backups, and not allowing myself to lose everything in one go. Luckily at least most of the services I cared about were set up months ago and had made their way to the repo, and for personal stuff I was able to put together various backups, uploads etc I had collected over the years so not too much was lost.</p>
+<p>I also put a note that anything on the machine could be lost at any time, so if it was important then don&rsquo;t leave just on their. I had also later purchased a NAS to further remove any reliance on the machine.</p>
+<p>Now with GitHub acting as the only source of method for deployments, anything else deployed had 0 expectation to be up and usable, the NAS serving as storage server for any services, and the network configuration, I was at a point again where things were stable and I was freely able to make changes and add new services without issue.</p>
+<h2 id="infrastructure-as-code">Infrastructure as Code<a hidden class="anchor" aria-hidden="true" href="#infrastructure-as-code">#</a></h2>
+<p>I had at some point also been frustrated with the amount of manual changes needed for DNS settings, Zero Trust configuration changes, and other manual processes required every time I span up new services, that I ended up added Terraform to the pipeline. This was one of the most satisfying changes with having everything simply defined in a single config.yaml and terraform handling the complexity, and updating references and related resources for me. Seeing Terraform tell me it&rsquo;s handling 150 resources is nice to know I&rsquo;m not manually controlling that much.</p>
+<h2 id="scaling-to-multiple-nodes">Scaling to Multiple Nodes<a hidden class="anchor" aria-hidden="true" href="#scaling-to-multiple-nodes">#</a></h2>
+<p>The last upgrade I had made since then is to buy 4x mini PCs with limited resources, running 4-core 2.2GHz processors and 16GB memory, just to reduce the load on the single machine I had running and allow for proxmox and the VMs to run updates etc. This was probably unnecessary to add but is a nice to have, and makes reliability just a little less of an issue.</p>
+<p>The only issues with adding more nodes to the cluster is that I would have to find a new solution for defining and deploying services. Docker compose had been working great, but this only works for a single node. My two main options I was considering was using a lightweight kubernetes service like k3s, or using Docker swarm.</p>
+<p>Kube is definitely the preferred tool for managing multiple node clusters, and managing the network etc between them for the services, but would require a large migration to change all my configs around and getting the services up and running. Docker swarm on the other hand would have a much simpler migration in that service configs are defined much the same as compose, but had more limitations in it&rsquo;s ability, particularly as I had found during a test with some friends running across 4 physical locations.</p>
+<p>For my setup though, I tested using swarm initially given the lower barrier to entry, and it seemed to work fine. A couple tweaks here and there to service configs and everything was up and running fine on the swarm, other than a few difficulties with GPUs, but I&rsquo;ve already explored that and resolved issues, mostly, for services that need it.</p>
+<p>With that all said and done, the last year has seen not just the creation of my homelab, but also the evolution into a stable and reliable set of infrastructure that I can actually trust to run services I need.</p>
+<pre class="mermaid">
+  flowchart TD
+    user((External User))
+    local-user((Local User))
+
+    subgraph external-services [External Services]
+        cloudflare[Cloudflare Tunnel]
+        cloudflare-hosting[Cloudflare Hosting]
+        cloudflare-dns[Cloudflare DNS]
+    end
+
+    subgraph homelab [Homelab Infrastructure]
+        subgraph compute-nodes [Compute Nodes]
+            subgraph pve [PVE Cluster]
+                dev[Development Node]
+                node0[Node 0]
+            end
+
+            tc0[Mini PC 0]
+            tc1[Mini PC 1]
+            tc2[Mini PC 2]
+            tc3[Mini PC 3]
+        end
+
+        nas[(NAS Storage)]
+
+        gateway[Gateway]
+
+        subgraph swarm [Docker Swarm]
+            service-1[Uptime Kuma]
+            service-2[Jellyfin]
+            service-3[Shlink]
+            service-n[...]
+            service-4[Service-N]
+
+            cloudflared[Cloudflared]
+            traefik[Traefik]
+        end
+    end
+
+    local-user --&gt; gateway
+    gateway --&gt; cloudflare-dns
+    gateway --&gt; traefik
+
+    user --&gt; cloudflare-dns
+    cloudflare-dns --&gt; cloudflare
+    cloudflare --&gt; cloudflared
+    cloudflared --&gt; traefik
+    cloudflare --&gt; cloudflare-hosting
+
+    cloudflare-dns --&gt; traefik
+
+    traefik --&gt; service-1 &amp; service-2 &amp; service-3 &amp; service-4
+    swarm -..-&gt; node0 &amp; tc0 &amp; tc1 &amp; tc2 &amp; tc3
+    dev &amp; node0 &amp; tc0 &amp; tc1 &amp; tc2 &amp; tc3 --&gt; nas
+</pre>
+<h2 id="whats-next">What&rsquo;s Next<a hidden class="anchor" aria-hidden="true" href="#whats-next">#</a></h2>
+<p>As for what&rsquo;s next? I&rsquo;m not sure. I&rsquo;m happy with how everything is looking at the moment. Services are able to be set up quite quickly with docker compose-like configs, and the rest of the infrastructure all managed already, or at least with minor changes to terraform yaml, and everything is mostly stable and runs without issue. That said, I&rsquo;m always exploring new technologies, new ideas, and always looking for ways to improve what I have.</p>
+<p>For anyone considering a similar path: start small, automate everything, and don&rsquo;t be afraid to make mistakes. The learning experience alone makes the effort worthwhile.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://dylanbutler.dev/tags/self-hosted/">Self-Hosted</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a><script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark'
+  });
+</script>
+
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

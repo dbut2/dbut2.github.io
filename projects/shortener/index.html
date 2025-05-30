@@ -56,11 +56,8 @@ GitHub">
         }
 
     </style>
-</noscript><style>
-     :root {
-         --main-width: 1024px;
-     }
-</style><meta property="og:url" content="https://dylanbutler.dev/projects/shortener/">
+</noscript>
+<meta property="og:url" content="https://dylanbutler.dev/projects/shortener/">
   <meta property="og:site_name" content="@dbut2">
   <meta property="og:title" content="Shortener">
   <meta property="og:description" content="URL shortener written in Go
@@ -218,7 +215,14 @@ GitHub">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark'
+  });
+</script>
+
 
 <script>
     let menu = document.getElementById('menu')

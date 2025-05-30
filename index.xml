@@ -6,8 +6,16 @@
     <description>Recent content on @dbut2</description>
     <generator>Hugo -- 0.141.0</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 10 Feb 2025 00:00:00 +1100</lastBuildDate>
+    <lastBuildDate>Fri, 30 May 2025 00:00:00 +1000</lastBuildDate>
     <atom:link href="https://dylanbutler.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>12 Months On: Self-Hosting</title>
+      <link>https://dylanbutler.dev/blog/homelab-in-review/</link>
+      <pubDate>Fri, 30 May 2025 00:00:00 +1000</pubDate>
+      <guid>https://dylanbutler.dev/blog/homelab-in-review/</guid>
+      <description>&lt;p&gt;This is kind of a review on the past 12 months since moving my cloud hosted services to all self-hosted, and the sequence of upgrades and changes to my homelab throughout the process.&lt;/p&gt;
+&lt;p&gt;After a few months of increasingly larger GCP bills, and a final month of accidentally leaving a Cloud Workstation running for a little too long, I decided to give the old self-hosted world a try again after having most of my projects running somewhere in the cloud for the past 5 years, and seeing if I could pull off a $0 GCP bill the end of the next month.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Japan in Film 2025</title>
       <link>https://dylanbutler.dev/photography/japan-in-film-2025/</link>

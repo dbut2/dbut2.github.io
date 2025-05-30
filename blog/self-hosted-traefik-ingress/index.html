@@ -58,11 +58,8 @@ Based on rules defined on each service, traefik will the route the traffic to ea
         }
 
     </style>
-</noscript><style>
-     :root {
-         --main-width: 1024px;
-     }
-</style><meta property="og:url" content="https://dylanbutler.dev/blog/self-hosted-traefik-ingress/">
+</noscript>
+<meta property="og:url" content="https://dylanbutler.dev/blog/self-hosted-traefik-ingress/">
   <meta property="og:site_name" content="@dbut2">
   <meta property="og:title" content="Self-hosted traffic ingress">
   <meta property="og:description" content="A quick snippet of my docker compose config for managing traffic ingress into my self-hosted setup.
@@ -266,7 +263,14 @@ Based on rules defined on each service, traefik will the route the traffic to ea
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark'
+  });
+</script>
+
 
 <script>
     let menu = document.getElementById('menu')
