@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Adding GPUs to Docker Swarm and Running GPU-Enabled Services | @dbut2</title>
+<meta name="keywords" content="self-hosted">
+<meta name="description" content="Introduction
+This guide will walk you through the process of attaching GPUs to a Docker Swarm node and running services that can utilize these GPUs. This setup is particularly useful for running GPU-intensive workloads in a distributed environment.
+Assumptions
+
+You are running a recent version of Ubuntu (Noble 24.04 LTS in this case).
+You have NVIDIA drivers already installed (preferably the -server version).
+
+If not, follow the instructions at Ubuntu&rsquo;s NVIDIA driver installation guide.
+
+
+You have Docker and Docker Swarm already set up on your system.
+
+Steps to Add GPUs to Docker Swarm
+1. Identify Your GPU
+First, we need to find the UUID of the GPU you want to attach to Docker Swarm.">
+<meta name="author" content="Dylan Butler">
+<link rel="canonical" href="https://dylanbutler.dev/blog/swarm-gpus/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.45e028aa8ce0961349adf411b013ee39406be2c0bc80d4ea3fc04555f7f4611a.css" integrity="sha256-ReAoqozglhNJrfQRsBPuOUBr4sC8gNTqP8BFVff0YRo=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://dylanbutler.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://dylanbutler.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://dylanbutler.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://dylanbutler.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://dylanbutler.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://dylanbutler.dev/blog/swarm-gpus/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><style>
+     :root {
+         --main-width: 1024px;
+     }
+</style><meta property="og:url" content="https://dylanbutler.dev/blog/swarm-gpus/">
+  <meta property="og:site_name" content="@dbut2">
+  <meta property="og:title" content="Adding GPUs to Docker Swarm and Running GPU-Enabled Services">
+  <meta property="og:description" content="Introduction This guide will walk you through the process of attaching GPUs to a Docker Swarm node and running services that can utilize these GPUs. This setup is particularly useful for running GPU-intensive workloads in a distributed environment.
+Assumptions You are running a recent version of Ubuntu (Noble 24.04 LTS in this case). You have NVIDIA drivers already installed (preferably the -server version). If not, follow the instructions at Ubuntu’s NVIDIA driver installation guide. You have Docker and Docker Swarm already set up on your system. Steps to Add GPUs to Docker Swarm 1. Identify Your GPU First, we need to find the UUID of the GPU you want to attach to Docker Swarm.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2024-09-26T00:00:00+10:00">
+    <meta property="article:modified_time" content="2024-09-26T00:00:00+10:00">
+    <meta property="article:tag" content="Self-Hosted">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Adding GPUs to Docker Swarm and Running GPU-Enabled Services">
+<meta name="twitter:description" content="Introduction
+This guide will walk you through the process of attaching GPUs to a Docker Swarm node and running services that can utilize these GPUs. This setup is particularly useful for running GPU-intensive workloads in a distributed environment.
+Assumptions
+
+You are running a recent version of Ubuntu (Noble 24.04 LTS in this case).
+You have NVIDIA drivers already installed (preferably the -server version).
+
+If not, follow the instructions at Ubuntu&rsquo;s NVIDIA driver installation guide.
+
+
+You have Docker and Docker Swarm already set up on your system.
+
+Steps to Add GPUs to Docker Swarm
+1. Identify Your GPU
+First, we need to find the UUID of the GPU you want to attach to Docker Swarm.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Blog",
+      "item": "https://dylanbutler.dev/blog/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Adding GPUs to Docker Swarm and Running GPU-Enabled Services",
+      "item": "https://dylanbutler.dev/blog/swarm-gpus/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Adding GPUs to Docker Swarm and Running GPU-Enabled Services",
+  "name": "Adding GPUs to Docker Swarm and Running GPU-Enabled Services",
+  "description": "Introduction This guide will walk you through the process of attaching GPUs to a Docker Swarm node and running services that can utilize these GPUs. This setup is particularly useful for running GPU-intensive workloads in a distributed environment.\nAssumptions You are running a recent version of Ubuntu (Noble 24.04 LTS in this case). You have NVIDIA drivers already installed (preferably the -server version). If not, follow the instructions at Ubuntu\u0026rsquo;s NVIDIA driver installation guide. You have Docker and Docker Swarm already set up on your system. Steps to Add GPUs to Docker Swarm 1. Identify Your GPU First, we need to find the UUID of the GPU you want to attach to Docker Swarm.\n",
+  "keywords": [
+    "self-hosted"
+  ],
+  "articleBody": "Introduction This guide will walk you through the process of attaching GPUs to a Docker Swarm node and running services that can utilize these GPUs. This setup is particularly useful for running GPU-intensive workloads in a distributed environment.\nAssumptions You are running a recent version of Ubuntu (Noble 24.04 LTS in this case). You have NVIDIA drivers already installed (preferably the -server version). If not, follow the instructions at Ubuntu’s NVIDIA driver installation guide. You have Docker and Docker Swarm already set up on your system. Steps to Add GPUs to Docker Swarm 1. Identify Your GPU First, we need to find the UUID of the GPU you want to attach to Docker Swarm.\nRun the following command:\nnvidia-smi -a Look for the GPU UUID line under the desired GPU. In this example, we’re using an RTX 3060:\n==============NVSMI LOG============== Driver Version : 535.183.01 CUDA Version : 12.2 Attached GPUs : 1 GPU 00000000:00:10.0 Product Name : NVIDIA GeForce RTX 3060 ... GPU UUID : GPU-a0df8e5a-e4b9-467d-9bf5-cebb65027549 ... 2. Update Docker Daemon Configuration Edit the Docker daemon configuration file:\nsudo nano /etc/docker/daemon.json Add or modify the following content:\n{ \"runtimes\": { \"nvidia\": { \"args\": [], \"path\": \"/usr/bin/nvidia-container-runtime\" } }, \"default-runtime\": \"nvidia\", \"node-generic-resources\": [ \"NVIDIA-GPU=GPU-a0df8e5a-e4b9-467d-9bf5-cebb65027549\" ] } Replace the UUID in node-generic-resources with the one you found in step 1.\n3. Configure NVIDIA Container Runtime Edit the NVIDIA container runtime configuration:\nsudo nano /etc/nvidia-container-runtime/config.toml Find the swarm-resource line and uncomment it. Replace its content with:\nswarm-resource = \"DOCKER_RESOURCE_NVIDIA-GPU\" 4. Restart Docker Service After making these changes, restart the Docker service:\nsudo systemctl restart docker Running GPU-Enabled Services on Docker Swarm Now that we’ve attached the GPU to our Docker Swarm node, we can run services that utilize this GPU. Here’s how to deploy a GPU-enabled service using Docker Compose:\nCreate a compose.yaml file with the following content:\nservices: gpu-service: image: ubuntu command: nvidia-smi deploy: placement: constraints: - node.labels.gpu == true resources: reservations: generic_resources: - discrete_resource_spec: kind: 'NVIDIA-GPU' value: 0 This compose service does the following:\nCreates a service named gpu-service Constrains the service to run only on nodes with the gpu label set to true Reserves one GPU resource for this service Mounts the NVIDIA container runtime hook Uses your GPU-enabled Docker image Conclusion By following these steps, you’ve successfully added GPU support to your Docker Swarm node and learned how to deploy GPU-enabled services. This setup allows you to leverage the power of GPUs in your distributed Docker environment, enabling more efficient processing for tasks like machine learning, scientific computing, and video processing.\nEdit (2025-03-03): Should you need multiple services to have a GPU reservation, you can add additional generic reservations in daemon.json, each with a unique reference key pointing to the same GPU identifier:\n{ ... \"node-generic-resources\": [ \"NVIDIA-GPU-0=GPU-a0df8e5a-e4b9-467d-9bf5-cebb65027549\", \"NVIDIA-GPU-1=GPU-a0df8e5a-e4b9-467d-9bf5-cebb65027549\" ] } Then in your service config use one the available keys per service as the resource spec kind.\n... reservations: generic_resources: - discrete_resource_spec: kind: 'NVIDIA-GPU-1' value: 0 You will need to manually keep track of each available key as you can only have each one allocated to single service.\n",
+  "wordCount" : "510",
+  "inLanguage": "en",
+  "datePublished": "2024-09-26T00:00:00+10:00",
+  "dateModified": "2024-09-26T00:00:00+10:00",
+  "author":{
+    "@type": "Person",
+    "name": "Dylan Butler"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://dylanbutler.dev/blog/swarm-gpus/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "@dbut2",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://dylanbutler.dev/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://dylanbutler.dev/" accesskey="h" title="@dbut2 (Alt + H)">@dbut2</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://dylanbutler.dev/blog" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://dylanbutler.dev/photography" title="Photography">
+                    <span>Photography</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://dylanbutler.dev/projects" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Adding GPUs to Docker Swarm and Running GPU-Enabled Services
+    </h1>
+    <div class="post-meta"><span title='2024-09-26 00:00:00 +1000 AEST'>September 26, 2024</span>&nbsp;·&nbsp;Dylan Butler
+
+</div>
+  </header> 
+  <div class="post-content"><h2 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h2>
+<p>This guide will walk you through the process of attaching GPUs to a Docker Swarm node and running services that can utilize these GPUs. This setup is particularly useful for running GPU-intensive workloads in a distributed environment.</p>
+<h2 id="assumptions">Assumptions<a hidden class="anchor" aria-hidden="true" href="#assumptions">#</a></h2>
+<ul>
+<li>You are running a recent version of Ubuntu (Noble 24.04 LTS in this case).</li>
+<li>You have NVIDIA drivers already installed (preferably the <code>-server</code> version).
+<ul>
+<li>If not, follow the instructions at <a href="https://ubuntu.com/server/docs/nvidia-drivers-installation">Ubuntu&rsquo;s NVIDIA driver installation guide</a>.</li>
+</ul>
+</li>
+<li>You have Docker and Docker Swarm already set up on your system.</li>
+</ul>
+<h2 id="steps-to-add-gpus-to-docker-swarm">Steps to Add GPUs to Docker Swarm<a hidden class="anchor" aria-hidden="true" href="#steps-to-add-gpus-to-docker-swarm">#</a></h2>
+<h3 id="1-identify-your-gpu">1. Identify Your GPU<a hidden class="anchor" aria-hidden="true" href="#1-identify-your-gpu">#</a></h3>
+<p>First, we need to find the UUID of the GPU you want to attach to Docker Swarm.</p>
+<p>Run the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>nvidia-smi -a
+</span></span></code></pre></div><p>Look for the <code>GPU UUID</code> line under the desired GPU. In this example, we&rsquo;re using an RTX 3060:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">==============</span>NVSMI LOG<span style="color:#f92672">==============</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Driver Version                            : 535.183.01
+</span></span><span style="display:flex;"><span>CUDA Version                              : 12.2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Attached GPUs                             : <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>GPU 00000000:00:10.0
+</span></span><span style="display:flex;"><span>    Product Name                          : NVIDIA GeForce RTX <span style="color:#ae81ff">3060</span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>    GPU UUID                              : GPU-a0df8e5a-e4b9-467d-9bf5-cebb65027549
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><h3 id="2-update-docker-daemon-configuration">2. Update Docker Daemon Configuration<a hidden class="anchor" aria-hidden="true" href="#2-update-docker-daemon-configuration">#</a></h3>
+<p>Edit the Docker daemon configuration file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo nano /etc/docker/daemon.json
+</span></span></code></pre></div><p>Add or modify the following content:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;runtimes&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;nvidia&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;args&#34;</span>: [],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/usr/bin/nvidia-container-runtime&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;default-runtime&#34;</span>: <span style="color:#e6db74">&#34;nvidia&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;node-generic-resources&#34;</span>: [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;NVIDIA-GPU=GPU-a0df8e5a-e4b9-467d-9bf5-cebb65027549&#34;</span>
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Replace the UUID in <code>node-generic-resources</code> with the one you found in step 1.</p>
+<h3 id="3-configure-nvidia-container-runtime">3. Configure NVIDIA Container Runtime<a hidden class="anchor" aria-hidden="true" href="#3-configure-nvidia-container-runtime">#</a></h3>
+<p>Edit the NVIDIA container runtime configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo nano /etc/nvidia-container-runtime/config.toml
+</span></span></code></pre></div><p>Find the <code>swarm-resource</code> line and uncomment it. Replace its content with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#a6e22e">swarm-resource</span> = <span style="color:#e6db74">&#34;DOCKER_RESOURCE_NVIDIA-GPU&#34;</span>
+</span></span></code></pre></div><h3 id="4-restart-docker-service">4. Restart Docker Service<a hidden class="anchor" aria-hidden="true" href="#4-restart-docker-service">#</a></h3>
+<p>After making these changes, restart the Docker service:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo systemctl restart docker
+</span></span></code></pre></div><h2 id="running-gpu-enabled-services-on-docker-swarm">Running GPU-Enabled Services on Docker Swarm<a hidden class="anchor" aria-hidden="true" href="#running-gpu-enabled-services-on-docker-swarm">#</a></h2>
+<p>Now that we&rsquo;ve attached the GPU to our Docker Swarm node, we can run services that utilize this GPU. Here&rsquo;s how to deploy a GPU-enabled service using Docker Compose:</p>
+<p>Create a compose.yaml file with the following content:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">gpu-service</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ubuntu</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">command</span>: <span style="color:#ae81ff">nvidia-smi</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deploy</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">placement</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">constraints</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#ae81ff">node.labels.gpu == true</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">reservations</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">generic_resources</span>:
+</span></span><span style="display:flex;"><span>            - <span style="color:#f92672">discrete_resource_spec</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">kind</span>: <span style="color:#e6db74">&#39;NVIDIA-GPU&#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">value</span>: <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p>This compose service does the following:</p>
+<ul>
+<li>Creates a service named gpu-service</li>
+<li>Constrains the service to run only on nodes with the gpu label set to true</li>
+<li>Reserves one GPU resource for this service</li>
+<li>Mounts the NVIDIA container runtime hook</li>
+<li>Uses your GPU-enabled Docker image</li>
+</ul>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
+<p>By following these steps, you&rsquo;ve successfully added GPU support to your Docker Swarm node and learned how to deploy GPU-enabled services. This setup allows you to leverage the power of GPUs in your distributed Docker environment, enabling more efficient processing for tasks like machine learning, scientific computing, and video processing.</p>
+<h2 id="edit-2025-03-03">Edit (2025-03-03):<a hidden class="anchor" aria-hidden="true" href="#edit-2025-03-03">#</a></h2>
+<p>Should you need multiple services to have a GPU reservation, you can add additional generic reservations in <code>daemon.json</code>, each with a unique reference key pointing to the same GPU identifier:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;node-generic-resources&#34;</span>: [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;NVIDIA-GPU-0=GPU-a0df8e5a-e4b9-467d-9bf5-cebb65027549&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;NVIDIA-GPU-1=GPU-a0df8e5a-e4b9-467d-9bf5-cebb65027549&#34;</span>
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Then in your service config use one the available keys per service as the resource spec kind.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">reservations</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">generic_resources</span>:
+</span></span><span style="display:flex;"><span>            - <span style="color:#f92672">discrete_resource_spec</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">kind</span>: <span style="color:#e6db74">&#39;NVIDIA-GPU-1&#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">value</span>: <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p>You will need to manually keep track of each available key as you can only have each one allocated to single service.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://dylanbutler.dev/tags/self-hosted/">Self-Hosted</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
