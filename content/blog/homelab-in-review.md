@@ -34,7 +34,7 @@ flowchart TD
         subgraph compose [Docker Compose]
             cloudflared[Cloudflared]
 
-            service-1[Uptime Kume]
+            service-1[Uptime Kuma]
             service-2[Jellyfin]
             service-3[Shlink]
         end
@@ -66,7 +66,7 @@ With everything running stable it was time to actually start utilising what I ha
 
 This is where the second contention came up. I often found myself test deploying services and leaving the test compose defined on the machine that I'd just shell into. This often led to a drift in what was defined in GitHub and what was actually deployed. Working across many machines was basically made impossible.
 
-For this reason I decided I should seperate my development and deployment environments. Hearing word on proxmox and people using virtualisation in their labs, this sounded like a good starting approach and to just run 2 seperate machines, one with docker running and the other with my Jetbrains gateway host running.
+For this reason I decided I should separate my development and deployment environments. Hearing word on proxmox and people using virtualisation in their labs, this sounded like a good starting approach and to just run 2 separate machines, one with docker running and the other with my JetBrains gateway host running.
 
 ## The Proxmox Disaster
 
@@ -80,7 +80,7 @@ What a dumb mistake.
 
 From this point on it was clear I needed better rules for myself on keeping backups, and not allowing myself to lose everything in one go. Luckily at least most of the services I cared about were set up months ago and had made their way to the repo, and for personal stuff I was able to put together various backups, uploads etc I had collected over the years so not too much was lost.
 
-I also put a note that anything on the machine could be lost at any time, so if it was important then don't leave just on their. I had also later purchased a NAS to further remove any reliance on the machine.
+I also put a note that anything on the machine could be lost at any time, so if it was important then don't leave just leave it on the machine. I had also later purchased a NAS to further remove any reliance on the machine.
 
 Now with GitHub acting as the only source of method for deployments, anything else deployed had 0 expectation to be up and usable, the NAS serving as storage server for any services, and the network configuration, I was at a point again where things were stable and I was freely able to make changes and add new services without issue.
 
