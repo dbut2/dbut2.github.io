@@ -16,11 +16,13 @@ jobs:
         with:
           hugo-version: '0.145.0'
 
-      - run: hugo
+      - run: |
+          rm -rf resources
+          hugo
 
       - id: git-check
         run: |
-          git add resources/
+          git add resources
           git status --porcelain
           echo "changes=$(git status --porcelain | wc -l)" >> $GITHUB_OUTPUT
 
