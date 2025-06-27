@@ -6,5 +6,7 @@
 </style>
 {{ end }}
 
+{{ if eq (os.Getenv "ENV") "PROD" }}
 <script data-goatcounter="https://counter.dbut.dev/count"
         async src="//counter.dbut.dev/count.js"></script>
+{{ end }}
