@@ -1,0 +1,5 @@
+name: dbut2.github.io
+description: "personal webpage using Hugo"
+url: "https://dylanbutler.dev"
+pages:
+  branch: main
