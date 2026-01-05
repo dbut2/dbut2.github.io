@@ -101,72 +101,33 @@ Where `Y` represents bombs and `N` represents safe cells.
 
 ## Implementation
 
-The constraint checking logic is straightforward. For each numbered cell, count the adjacent flags (known bombs) and unknowns:
+The constraint checking logic translates directly to code. For each numbered cell, count adjacent flags and unknowns, then apply the rules:
 
 ```go
-func (b *Board) step(c space.Cell, q *lists.Stack[space.Cell]) {
-    v := b.grid.Get(c)
-    if v == nil || *v < 0 {
-        return
+var flags, unknowns int
+for _, nv := range realSurrounding(b.grid, c) {
+    switch *nv {
+    case unknown:
+        unknowns++
+    case flag:
+        flags++
     }
+}
 
-    var flags, unknowns int
+// Rule 1: all unknowns must be bombs
+if *v == unknowns+flags {
+    // mark all unknown neighbors as flags
+    // add their neighbors to queue for re-evaluation
+}
 
-    for _, nv := range realSurrounding(b.grid, c) {
-        if nv == nil {
-            continue
-        }
-        switch *nv {
-        case unknown:
-            unknowns++
-        case flag:
-            flags++
-        }
-    }
-
-    if unknowns == 0 {
-        return
-    }
-
-    // case remaining flags
-    if *v == unknowns+flags {
-        for nc, nv := range realSurrounding(b.grid, c) {
-            if nv == nil || *nv != unknown {
-                continue
-            }
-            b.grid.Set(nc, flag)
-            for nnc, nnv := range realSurrounding(b.grid, nc) {
-                if nnv == nil || *nnv < 0 {
-                    continue
-                }
-                q.Push(nnc)
-            }
-        }
-        return
-    }
-
-    // case remaining empty
-    if *v == flags {
-        for nc, nv := range realSurrounding(b.grid, c) {
-            if nv == nil || *nv != unknown {
-                continue
-            }
-            b.grid.Set(nc, empty)
-            for nnc, nnv := range realSurrounding(b.grid, nc) {
-                if nnv == nil || *nnv < 0 {
-                    continue
-                }
-                q.Push(nnc)
-            }
-        }
-        return
-    }
+// Rule 2: all unknowns must be safe
+if *v == flags {
+    // mark all unknown neighbors as empty
+    // add their neighbors to queue for re-evaluation
 }
 ```
 
-The first condition checks if the cell's number equals the sum of known flags plus unknowns. If so, all remaining unknowns must be bombs. The second checks if we've already found all the bombs this cell needs. If so, all remaining unknowns must be safe.
-
-When a cell changes state, its neighbors get added to the queue for re-evaluation. The solver continues until the queue is empty and no more deductions can be made.
+The solver processes cells from a queue, applying these rules until no more deductions can be made.
 
 ## Output format
 
