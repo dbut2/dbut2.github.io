@@ -115,10 +115,12 @@ The constraint checking logic translates directly to code. For each numbered cel
 
 ```go
 var flags, unknowns int
-for _, neighbourValue := range cell.Neighbours {
-    switch neighbourValue {
+var unknownCells [][2]int
+for nextCell, nextValue := range grid.Surrounding(cell) {
+    switch *nextValue {
     case unknown:
         unknowns++
+        unknownCells = append(unknownCells, nextCell)
     case flag:
         flags++
     }
@@ -126,14 +128,22 @@ for _, neighbourValue := range cell.Neighbours {
 
 // Rule 1: all unknowns must be bombs
 if unknowns + flags == cellValue {
-    // mark all unknown neighbours as flags
-    // add their neighbours to queue for re-evaluation
+    for unknownCell := range unknownCells {
+        // mark all unknown neighbours as flags
+        grid.Set(unknownCell, flag)
+        // add their neighbours to queue for re-evaluation
+        queue.Push(grid.Surrounding(unknownCell)...)
+    }
 }
 
 // Rule 2: all unknowns must be safe
 if flags == cellValue {
-    // mark all unknown neighbours as empty
-    // add their neighbors to queue for re-evaluation
+    for unknownCell := range unknownCells {
+        // mark all unknown neighbours as empty
+        grid.Set(unknownCell, empty)
+        // add their neighbours to queue for re-evaluation
+        queue.Push(grid.Surrounding(unknownCell)...)
+    }
 }
 ```
 
