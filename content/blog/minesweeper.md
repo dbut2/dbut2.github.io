@@ -43,14 +43,14 @@ The solver uses two basic constraint propagation rules repeatedly until the puzz
 
 ### Rule 1: All unknowns must be bombs
 
-Consider the bottom-right `1` cell. Looking at its neighbors:
+Consider the bottom-right `1` cell. Looking at its neighbours:
 
 ```
     3 1
-    _ 1  ← this 1 has only one unknown neighbor
+    _ 1  ← this 1 has only one unknown neighbour
 ```
 
-The `1` cell needs exactly 1 bomb adjacent to it. It only has one unknown neighbor. Therefore that unknown must be a bomb (`Y`):
+The `1` cell needs exactly 1 bomb adjacent to it. It only has one unknown neighbour. Therefore that unknown must be a bomb (`Y`):
 
 ```
     3 1
@@ -69,7 +69,7 @@ _ 3 _ Y 1  ← marked as bomb
 
 ### Rule 2: All unknowns must be safe
 
-Now look at the middle-right `1` cell and its neighbors:
+Now look at the middle-right `1` cell and its neighbours:
 
 ```
     _ 1  ← unknown above
@@ -97,7 +97,7 @@ _ 3 _ Y 1
 
 ### Iterating to completion
 
-Applying these two rules repeatedly, checking each numbered cell against its neighbors, eventually determines every cell:
+Applying these two rules repeatedly, checking each numbered cell against its neighbours, eventually determines every cell:
 
 ```
 Y Y 1 N N
@@ -128,7 +128,7 @@ for nextCell, nextValue := range grid.Surrounding(cell) {
 
 // Rule 1: all unknowns must be bombs
 if unknowns + flags == cellValue {
-    for unknownCell := range unknownCells {
+    for _, unknownCell := range unknownCells {
         // mark all unknown neighbours as flags
         grid.Set(unknownCell, flag)
         // add their neighbours to queue for re-evaluation
@@ -138,7 +138,7 @@ if unknowns + flags == cellValue {
 
 // Rule 2: all unknowns must be safe
 if flags == cellValue {
-    for unknownCell := range unknownCells {
+    for _, unknownCell := range unknownCells {
         // mark all unknown neighbours as empty
         grid.Set(unknownCell, empty)
         // add their neighbours to queue for re-evaluation
