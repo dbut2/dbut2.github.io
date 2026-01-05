@@ -99,6 +99,75 @@ N 3 Y Y 1
 
 Where `Y` represents bombs and `N` represents safe cells.
 
+## Implementation
+
+The constraint checking logic is straightforward. For each numbered cell, count the adjacent flags (known bombs) and unknowns:
+
+```go
+func (b *Board) step(c space.Cell, q *lists.Stack[space.Cell]) {
+    v := b.grid.Get(c)
+    if v == nil || *v < 0 {
+        return
+    }
+
+    var flags, unknowns int
+
+    for _, nv := range realSurrounding(b.grid, c) {
+        if nv == nil {
+            continue
+        }
+        switch *nv {
+        case unknown:
+            unknowns++
+        case flag:
+            flags++
+        }
+    }
+
+    if unknowns == 0 {
+        return
+    }
+
+    // case remaining flags
+    if *v == unknowns+flags {
+        for nc, nv := range realSurrounding(b.grid, c) {
+            if nv == nil || *nv != unknown {
+                continue
+            }
+            b.grid.Set(nc, flag)
+            for nnc, nnv := range realSurrounding(b.grid, nc) {
+                if nnv == nil || *nnv < 0 {
+                    continue
+                }
+                q.Push(nnc)
+            }
+        }
+        return
+    }
+
+    // case remaining empty
+    if *v == flags {
+        for nc, nv := range realSurrounding(b.grid, c) {
+            if nv == nil || *nv != unknown {
+                continue
+            }
+            b.grid.Set(nc, empty)
+            for nnc, nnv := range realSurrounding(b.grid, nc) {
+                if nnv == nil || *nnv < 0 {
+                    continue
+                }
+                q.Push(nnc)
+            }
+        }
+        return
+    }
+}
+```
+
+The first condition checks if the cell's number equals the sum of known flags plus unknowns. If so, all remaining unknowns must be bombs. The second checks if we've already found all the bombs this cell needs. If so, all remaining unknowns must be safe.
+
+When a cell changes state, its neighbors get added to the queue for re-evaluation. The solver continues until the queue is empty and no more deductions can be made.
+
 ## Output format
 
 Once solved, the result is converted back to compact form. First extract just the bomb/safe values (removing the numbered cells):
