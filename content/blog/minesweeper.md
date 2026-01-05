@@ -10,30 +10,28 @@ I've been working on a programmatic solver for minesweeper puzzles, and wanted t
 
 The solver takes a compact string format and expands it into a 5×5 grid. Letters represent unknown cells, numbers represent revealed cells showing adjacent bomb counts.
 
-Starting with:
+Starting with the compact format:
 ```
 b1c211a1a2a1c31a3b1
 ```
 
-This expands with spaces:
+First, expand with spaces:
 ```
-[ b 1 c 2 1 1 a 1 a 2 a 1 c 3 1 a 3 b 1 ]
-```
-
-Then letters become underscores for unknowns:
-```
-[ _ _ 1 _ _ _ 2 1 1 _ 1 _ 2 _ 1 _ _ _ 3 1 _ 3 _ _ 1 ]
+b 1 c 2 1 1 a 1 a 2 a 1 c 3 1 a 3 b 1
 ```
 
-And finally arranged into a grid:
+Convert letters to underscores (unknowns):
 ```
-[
+_ 1 _ 2 1 1 _ 1 _ 2 _ 1 _ 3 1 _ 3 _ 1
+```
+
+Finally, arrange into a 5×5 grid:
+```
 _ _ 1 _ _
 _ 2 1 1 _
 1 _ 2 _ 1
 _ _ _ 3 1
 _ 3 _ _ 1
-]
 ```
 
 ## The solving logic
@@ -42,96 +40,82 @@ The solver uses two basic constraint propagation rules repeatedly until the puzz
 
 ### Rule 1: All unknowns must be bombs
 
-Consider this section from the bottom-right:
+Consider the bottom-right `1` cell. Looking at its neighbors:
 ```
-[
-3 1
-_ 1
-]
+    3 1
+    _ 1  ← this 1 has only one unknown neighbor
 ```
 
 The `1` cell needs exactly 1 bomb adjacent to it. It only has one unknown neighbor. Therefore that unknown must be a bomb (`Y`):
 ```
-[
-3 1
-Y 1
-]
+    3 1
+    Y 1  ← unknown must be a bomb
 ```
 
-Applied to our grid:
+Applied to the full grid:
 ```
-[
 _ _ 1 _ _
 _ 2 1 1 _
 1 _ 2 _ 1
 _ _ _ 3 1
-_ 3 _ Y 1
-]
+_ 3 _ Y 1  ← marked as bomb
 ```
 
 ### Rule 2: All unknowns must be safe
 
-Now look at this section from the middle-right:
+Now look at the middle-right `1` cell and its neighbors:
 ```
-[
-_ 1
-3 1
-Y 1
-]
+    _ 1  ← unknown above
+    3 1  ← this 1 already has one bomb below
+    Y 1  ← bomb we just marked
 ```
 
 The middle `1` already has 1 bomb adjacent to it (the `Y` below). Since it only needs 1 bomb total, the unknown cell above must not be a bomb (`N`):
 ```
-[
-N 1
-3 1
-Y 1
-]
+    N 1  ← must be safe
+    3 1
+    Y 1
 ```
 
-Applied to our grid:
+Applied to the full grid:
 ```
-[
 _ _ 1 _ _
 _ 2 1 1 _
-1 _ 2 N 1
+1 _ 2 N 1  ← marked as safe
 _ _ _ 3 1
 _ 3 _ Y 1
-]
 ```
 
 ### Iterating to completion
 
 Applying these two rules repeatedly, checking each numbered cell against its neighbors, eventually determines every cell:
 ```
-[
 Y Y 1 N N
 N 2 1 1 Y
 1 N 2 N 1
 N Y Y 3 1
 N 3 Y Y 1
-]
 ```
+
+Where `Y` represents bombs and `N` represents safe cells.
 
 ## Output format
 
-Once solved, the result is converted back to compact form. First extract just the bomb/safe values:
+Once solved, the result is converted back to compact form. First extract just the bomb/safe values (removing the numbered cells):
 ```
-[
 Y Y N N N
 N N N N Y
 N N N N N
 N Y Y N N
 N N Y Y N
-]
 ```
 
-Then to array format:
+Flatten to a single line:
 ```
-[ Y Y N N N N N N N Y N N N N N N Y Y N N N N Y Y N ]
+Y Y N N N N N N N Y N N N N N N Y Y N N N N Y Y N
 ```
 
-And finally to the compact string:
+Convert to lowercase for the final compact string:
 ```
 yynnnnnnnynnnnnnyynnnnyyn
 ```
