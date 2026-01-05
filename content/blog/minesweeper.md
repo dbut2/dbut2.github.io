@@ -116,8 +116,8 @@ The constraint checking logic translates directly to code. For each numbered cel
 ```go
 var flags, unknowns int
 var unknownCells [][2]int
-for nextCell, nextValue := range grid.Surrounding(cell) {
-    switch *nextValue {
+for _, nextCell := range grid.Surrounding(cell) {
+    switch grid.Get(nextCell) {
     case unknown:
         unknowns++
         unknownCells = append(unknownCells, nextCell)
