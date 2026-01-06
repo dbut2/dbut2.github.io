@@ -3,31 +3,40 @@ title: Programmatic Minesweeper Solving
 date: 2026-01-06
 draft: false
 ---
-I've been working on a programmatic solver for minesweeper puzzles, and wanted to document the approach I landed on. The core challenge is taking a compact representation of a puzzle state and using constraint propagation to determine which cells are bombs and which are safe.
+I've been working through puzzles on [puzzle-minesweeper.com](https://www.puzzle-minesweeper.com) for fun lately. The approach I landed on works for the "easy" difficulty puzzles, which are specifically designed to be solvable using just two basic constraint propagation rules - rules that use constraints to deduce new information. Real minesweeper games and harder difficulties require more complex deduction patterns, but for these puzzles, the simple rules are sufficient.
+
+The core challenge is taking a compact representation of a puzzle state and using constraint propagation to determine which cells are bombs and which are safe.
 
 ## Encoding the puzzle
 
-The solver takes a compact string format and expands it into a 5×5 grid. Letters represent unknown cells, numbers represent revealed cells showing adjacent bomb counts.
+The puzzle data is embedded in the page HTML as a compact string, which the solver extracts and parses into an internal grid representation. Letters encode runs of unknown cells (a=1, b=2, c=3, etc.), numbers represent revealed cells showing adjacent bomb counts.
 
-Starting with the compact format:
+Input string:
 
 ```
 b1c211a1a2a1c31a3b1
 ```
 
-First, expand with spaces:
+Parsed character-by-character (unknowns are shown as `_`):
 
 ```
-b 1 c 2 1 1 a 1 a 2 a 1 c 3 1 a 3 b 1
+b → _ _
+1 → 1
+c → _ _ _
+2 → 2
+1 → 1
+1 → 1
+a → _
+...
 ```
 
-Convert letters to underscores (unknowns):
+This produces a sequence of 25 cells:
 
 ```
-_ 1 _ 2 1 1 _ 1 _ 2 _ 1 _ 3 1 _ 3 _ 1
+_ _ 1 _ _ _ 2 1 1 _ 1 _ 2 _ 1 _ _ _ 3 1 _ 3 _ _ 1
 ```
 
-Finally, arrange into a 5×5 grid:
+Since there are 25 cells, the grid must be 5×5. The cells are then arranged into a grid:
 
 ```
 _ _ 1 _ _
@@ -39,22 +48,22 @@ _ 3 _ _ 1
 
 ## The solving logic
 
-The solver uses two basic constraint propagation rules repeatedly until the puzzle is solved.
+The solver uses two basic rules that are repeatedly applied until the puzzle is solved.
 
-### Rule 1: All unknowns must be bombs
+### Rule 1: Mark remaining unknowns as bombs
 
 Consider the bottom-right `1` cell. Looking at its neighbours:
 
 ```
-    3 1
-    _ 1  ← this 1 has only one unknown neighbour
+      3 1
+      _ 1 <- this 1 has only one unknown neighbour
 ```
 
-The `1` cell needs exactly 1 bomb adjacent to it. It only has one unknown neighbour. Therefore that unknown must be a bomb (`Y`):
+The `1` cell needs exactly 1 bomb adjacent to it. It only has one unknown neighbour. Therefore that unknown must be a bomb (`y`):
 
 ```
-    3 1
-    Y 1  ← unknown must be a bomb
+      3 1
+      y 1 <- unknown must be a bomb
 ```
 
 Applied to the full grid:
@@ -64,25 +73,25 @@ _ _ 1 _ _
 _ 2 1 1 _
 1 _ 2 _ 1
 _ _ _ 3 1
-_ 3 _ Y 1  ← marked as bomb
+_ 3 _ y 1 <- marked as bomb
 ```
 
-### Rule 2: All unknowns must be safe
+### Rule 2: Mark remaining unknowns as safe
 
 Now look at the middle-right `1` cell and its neighbours:
 
 ```
-    _ 1  ← unknown above
-    3 1  ← this 1 already has one bomb below
-    Y 1  ← bomb we just marked
+    _ 1 <- unknown above
+    3 1 <- this 1 already has one bomb below-left
+    y 1 <- bomb we just marked
 ```
 
-The middle `1` already has 1 bomb adjacent to it (the `Y` below). Since it only needs 1 bomb total, the unknown cell above must not be a bomb (`N`):
+The middle `1` already has 1 bomb adjacent to it (the `y` below-left). Since it only needs 1 bomb total, the unknown cell above must not be a bomb (`n`):
 
 ```
-    N 1  ← must be safe
+    n 1 <- must be safe
     3 1
-    Y 1
+    y 1
 ```
 
 Applied to the full grid:
@@ -90,9 +99,9 @@ Applied to the full grid:
 ```
 _ _ 1 _ _
 _ 2 1 1 _
-1 _ 2 N 1  ← marked as safe
+1 _ 2 n 1 <- marked as safe
 _ _ _ 3 1
-_ 3 _ Y 1
+_ 3 _ y 1
 ```
 
 ### Iterating to completion
@@ -100,77 +109,73 @@ _ 3 _ Y 1
 Applying these two rules repeatedly, checking each numbered cell against its neighbours, eventually determines every cell:
 
 ```
-Y Y 1 N N
-N 2 1 1 Y
-1 N 2 N 1
-N Y Y 3 1
-N 3 Y Y 1
+y y 1 n n
+n 2 1 1 y
+1 n 2 n 1
+n y y 3 1
+n 3 y y 1
 ```
 
-Where `Y` represents bombs and `N` represents safe cells.
+Where `y` represents bombs and `n` represents safe cells.
 
 ## Implementation
 
-The constraint checking logic translates directly to code. For each numbered cell, count adjacent flags and unknowns, then apply the rules:
+The solver initializes a queue with all numbered cells in the grid, then processes them one by one. For each cell popped from the queue, we skip non-numbered cells and count adjacent bombs and unknowns:
 
 ```go
-var flags, unknowns int
+var bombs, unknowns int
 var unknownCells [][2]int
 for _, nextCell := range grid.Surrounding(cell) {
     switch grid.Get(nextCell) {
     case unknown:
         unknowns++
         unknownCells = append(unknownCells, nextCell)
-    case flag:
-        flags++
+    case bomb:
+        bombs++
     }
 }
 
-// Rule 1: all unknowns must be bombs
-if unknowns + flags == cellValue {
+// Rule 1: mark remaining unknowns as bombs
+if unknowns + bombs == cellValue {
     for _, unknownCell := range unknownCells {
-        // mark all unknown neighbours as flags
-        grid.Set(unknownCell, flag)
+        // mark all unknown neighbours as bombs
+        grid.Set(unknownCell, bomb)
         // add their neighbours to queue for re-evaluation
         queue.Push(grid.Surrounding(unknownCell)...)
     }
 }
 
-// Rule 2: all unknowns must be safe
-if flags == cellValue {
+// Rule 2: mark remaining unknowns as safe
+if bombs == cellValue {
     for _, unknownCell := range unknownCells {
-        // mark all unknown neighbours as empty
-        grid.Set(unknownCell, empty)
+        // mark all unknown neighbours as safe
+        grid.Set(unknownCell, safe)
         // add their neighbours to queue for re-evaluation
         queue.Push(grid.Surrounding(unknownCell)...)
     }
 }
 ```
 
-The solver processes cells from a queue, applying these rules until no more deductions can be made.
+When a cell is marked as a bomb or safe, its neighbors are added back to the queue for re-evaluation. The solver continues processing cells from the queue until it becomes empty, meaning no more deductions can be made.
 
 ## Output format
 
-Once solved, the result is converted back to compact form. First extract just the bomb/safe values (removing the numbered cells):
+Once solved, the full grid is read left-to-right, top-to-bottom to produce an output string that's submitted back to the puzzle website. Numbered cells map to `n` since they are not bombs themselves:
 
 ```
-Y Y N N N
-N N N N Y
-N N N N N
-N Y Y N N
-N N Y Y N
+y y 1 n n      y y n n n
+n 2 1 1 y      n n n n y
+1 n 2 n 1  ->  n n n n n
+n y y 3 1      n y y n n
+n 3 y y 1      n n y y n
 ```
 
-Flatten to a single line:
-
-```
-Y Y N N N N N N N Y N N N N N N Y Y N N N N Y Y N
-```
-
-Convert to lowercase for the final compact string:
+Producing the final output:
 
 ```
 yynnnnnnnynnnnnnyynnnnyyn
 ```
 
 The key insight is that minesweeper is just constraint satisfaction. Each numbered cell tells you exactly how many bombs must be adjacent, and by checking if that constraint is already satisfied or must be fully satisfied by remaining unknowns, you can iteratively solve the puzzle without guessing.
+
+These two rules handle all the easy difficulty puzzles, but more complex minesweeper games require additional deduction patterns. When multiple cells share overlapping unknowns, you need to consider the constraints together rather than individually. For now, this solver does what I need it to.
