@@ -1,7 +1,7 @@
 ---
 title: Cloud Migration
 date: 2026-01-22
-draft: true
+draft: false
 ---
 Monorepo pros:
 
