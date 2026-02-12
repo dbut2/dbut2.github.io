@@ -1,0 +1,18 @@
+{{ $wasm := .Get "src" }}
+{{ $id := .Get "id" | default (replace $wasm "/" "-" | replaceRE "[^a-zA-Z0-9-]" "") }}
+{{ $width := .Get "width" | default "720px" }}
+{{ $height := .Get "height" | default "480px" }}
+<div style="text-align:center;">
+    <canvas id="{{ $id }}" style="width:{{ $width }};height:{{ $height }};image-rendering:pixelated;border:2px solid #444;border-radius:4px;"></canvas>
+    {{ $exec := .Get "exec" | default "/wasm_exec.js" }}
+    <script src="{{ $exec }}"></script>
+    <script>
+        (function() {
+            const go = new Go();
+            go.argv = ["wasm", "--canvas", "{{ $id }}"];
+            WebAssembly.instantiateStreaming(fetch("{{ $wasm }}"), go.importObject).then((result) => {
+                go.run(result.instance);
+            });
+        })();
+    </script>
+</div>
