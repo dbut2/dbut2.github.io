@@ -3,7 +3,7 @@
 {{ $width := .Get "width" | default "720px" }}
 {{ $height := .Get "height" | default "480px" }}
 <div style="text-align:center;">
-    <canvas id="{{ $id }}" style="width:{{ $width }};height:{{ $height }};image-rendering:pixelated;border:2px solid #444;border-radius:4px;"></canvas>
+    <canvas id="{{ $id }}" style="width:{{ $width }};height:{{ $height }};image-rendering:pixelated;"></canvas>
     {{ $exec := .Get "exec" | default "/wasm_exec.js" }}
     <script src="{{ $exec }}"></script>
     <script>
