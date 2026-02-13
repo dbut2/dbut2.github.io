@@ -5,7 +5,7 @@ draft: false
 ---
 {{< wasm src="/sapphire.wasm" exec="/sapphire-wasm-exec.js" >}}
 
-In the meantime play some Pokémon Sapphire in the browser! All running locally in your browser!
+Before you read on, stop and play for a second. What you're seeing here is the emulator written in Go running inside of WASM inside your browser, everything here is local!
 
 **Controls:** Z=A, X=B, A=L, S=R, Enter=Start, Backspace=Select
 
