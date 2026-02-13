@@ -6,14 +6,12 @@ menu:
   main:
     - name: Blog
       url: /blog
-    - name: Projects
-      url: /projects
-    - name: Photography
-      url: /photography
 params:
   author: Dylan Butler
   showReadingTime: false
   showWordCount: false
+  editPost:
+    appendFilePath: false
   defaultTheme: auto
   disableThemeToggle: false
   showCodeCopyButtons: true
@@ -21,7 +19,7 @@ params:
     enabled: true
     title: Dylan Butler
     subtitle: software engineer | melbourne
-    imageUrl: /images/profile.png
+    imageUrl: //images/profile.png
     imageWidth: 250
     imageHeight: 250
   socialIcons:
@@ -40,11 +38,3 @@ module:
   imports:
     - path: github.com/adityatelange/hugo-PaperMod
     - path: github.com/mfg92/hugo-shortcode-gallery
-security:
-  funcs:
-    getenv:
-      - ENV
-markup:
-  goldmark:
-    renderer:
-      unsafe: true
