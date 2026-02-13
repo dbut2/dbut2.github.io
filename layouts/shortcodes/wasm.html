@@ -1,9 +1,10 @@
 {{ $wasm := .Get "src" }}
 {{ $id := .Get "id" | default (replace $wasm "/" "-" | replaceRE "[^a-zA-Z0-9-]" "") }}
-{{ $width := .Get "width" | default "720px" }}
-{{ $height := .Get "height" | default "480px" }}
+{{ $width := .Get "width" | default "720" }}
+{{ $height := .Get "height" | default "480" }}
+{{ $aspectRatio := div (mul (float $height) 100.0) (float $width) }}
 <div style="text-align:center;">
-    <canvas id="{{ $id }}" style="width:{{ $width }};height:{{ $height }};image-rendering:pixelated;"></canvas>
+    <canvas id="{{ $id }}" style="width:100%;max-width:{{ $width }}px;height:auto;aspect-ratio:{{ $width }}/{{ $height }};image-rendering:pixelated;"></canvas>
     {{ $exec := .Get "exec" | default "/wasm_exec.js" }}
     <script src="{{ $exec }}"></script>
     <script>
