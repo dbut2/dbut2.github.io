@@ -35,6 +35,8 @@ Implementing this meant I had to build a rendering engine that could handle thes
 
 This is also where some of the current bugs live. For example, cave fog in Pokémon isn't transparent like it should be because the blending logic between layers isn't quite right yet. In Mario Kart, the players sometimes flash on and off because the way the GBA handles sprite priority is very specific and easy to get wrong.
 
+![](sapphire/broken_title.png)
+
 ## Technical Challenges
 
 ### The CPU and its Two Languages
@@ -56,9 +58,11 @@ The main issue I found with the web version is performance. On a desktop, the em
 
 Debugging an emulator is a unique kind of pain. In a normal Go program, you can just step through the code with a debugger and see exactly where things go wrong. But with an emulator, the code you are debugging isn't the Go code, it is the GBA game itself. There are no off-the-shelf debuggers that support a custom emulator, so if you don't build one from scratch, you are on your own.
 
-The hardest part wasn't necessarily fixing visual bugs like characters walking through walls. It was trying to trace back from a bad state to the original instruction that caused it. If a game crashes or shows a black screen, it is usually because a register or a piece of memory ended up with the wrong value ten thousand instructions ago. 
+The hardest part wasn't necessarily fixing visual glitches like scrambled sprites or flickering backgrounds. It was trying to trace back from a bad state to the original instruction that caused it. If a game crashes or shows a black screen, it is usually because a register or a piece of memory ended up with the wrong value ten thousand instructions ago. 
 
-Without a dedicated debugger, I had to rely on manual breakpoints in my Go code and then manually decode the GBA instructions to understand how the system reached that state. I would have to look at a raw hex dump of memory, figure out which instruction was being executed, and then manually calculate what the registers should look like. It was a tedious process of comparing my internal state against the documentation over and over again until the error became clear. Finding a single bit that was flipped incorrectly in a logic gate implementation could take hours of manual tracing. Unlike a modern application where you get a stack trace, here you just have a silent failure and a lot of hex values to sort through.
+Without a dedicated debugger, I had to rely on manual breakpoints in my Go code and then manually decode the GBA instructions to understand how the system reached that state. I would have to look at a raw hex dump of memory, figure out which instruction was being executed, and then manually calculate what the registers should look like. It was a tedious process of comparing my internal state against the documentation over and over again until the error became clear. Finding a single bit that was flipped incorrectly in an instruction implementation could take hours of manual tracing. Unlike a modern application where you get a stack trace, here you just have a silent failure and a lot of hex values to sort through.
+
+![](sapphire/broken_race.png)
 
 ## "Aha!" Moments
 
