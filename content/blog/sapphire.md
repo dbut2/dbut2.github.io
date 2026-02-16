@@ -35,7 +35,7 @@ Implementing this meant I had to build a rendering engine that could handle thes
 
 This is also where some of the current bugs live. For example, cave fog in Pokémon isn't transparent like it should be because the blending logic between layers isn't quite right yet. In Mario Kart, the players sometimes flash on and off because the way the GBA handles sprite priority is very specific and easy to get wrong.
 
-<img src="//blog/sapphire/broken_title.png" width="100%">
+<img src="broken_title.png" width="100%">
 
 ## Technical Challenges
 
@@ -65,7 +65,7 @@ The hardest part wasn't necessarily fixing visual glitches like scrambled sprite
 
 Without a dedicated debugger, I had to rely on manual breakpoints in my Go code and then manually decode the GBA instructions to understand how the system reached that state. I would have to look at a raw binary dump of memory, figure out which instruction was being executed, and then manually calculate what the registers should look like. It was a tedious process of comparing my internal state against the documentation over and over again until the error became clear. Finding a single bit that was flipped incorrectly in an instruction implementation could take hours of manual tracing. Unlike a modern application where you get a stack trace, here you just have a silent failure and a lot of binary values to sort through.
 
-<img src="//blog/sapphire/broken_race.png" width="100%">
+<img src="broken_race.png" width="100%">
 
 ## "Aha!" Moments
 
