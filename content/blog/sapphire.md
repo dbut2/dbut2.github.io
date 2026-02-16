@@ -31,25 +31,28 @@ One of the most interesting parts of the project was building the LCD, or the di
 
 Some modes use tiles, which are 8x8 squares of pixels that the GBA tiles across the screen to create backgrounds. This was a way to save memory back when every kilobyte mattered. Other modes allow for bitmaps, where you can draw directly to the screen, which is how more complex graphics or 3D effects were often achieved.
 
-Implementing this meant I had to build a rendering engine that could handle these different modes simultaneously. For example, a game might have a tiled background for the world, but use objects (sprites) for the characters. The GBA has to calculate which pixels are visible, which ones are transparent, and which ones are on top of others, all within a very tight window of time. 
+Implementing this meant I had to build a rendering engine that could handle these different modes simultaneously. For example, a game might have a tiled background for the world, but use objects (sprites) for the characters. The GBA has to calculate which pixels are visible, which ones are transparent, and which ones are on top of others, all within a very tight window of time.
 
 This is also where some of the current bugs live. For example, cave fog in Pokémon isn't transparent like it should be because the blending logic between layers isn't quite right yet. In Mario Kart, the players sometimes flash on and off because the way the GBA handles sprite priority is very specific and easy to get wrong.
 
-<img src="broken_title.png" width="100%" />
+<img src="/broken_title.png" width="100%">
 
 ## Technical Challenges
 
 ### The CPU and its Two Languages
-The GBA uses an ARM7TDMI processor. The interesting thing about this CPU is that it speaks two languages: ARM and THUMB. ARM instructions are 32 bits long and very powerful, while THUMB instructions are only 16 bits long and designed to save space. 
+
+The GBA uses an ARM7TDMI processor. The interesting thing about this CPU is that it speaks two languages: ARM and THUMB. ARM instructions are 32 bits long and very powerful, while THUMB instructions are only 16 bits long and designed to save space.
 
 The CPU can switch between these two modes on the fly. This meant I had to implement two entire sets of instruction logic and ensure the transition between them was seamless. If a single instruction is off by even one bit, the whole game will eventually crash or behave in bizarre ways.
 
 ### The Memory Battle
-The hardest part was definitely the memory. The GBA has a very specific way it handles its memory. It has different regions for different things, like internal work RAM, external work RAM, and the game cartridge itself. 
+
+The hardest part was definitely the memory. The GBA has a very specific way it handles its memory. It has different regions for different things, like internal work RAM, external work RAM, and the game cartridge itself.
 
 Each of these regions has different wait states, meaning it takes the CPU longer to read from some areas than others. Getting the emulator to respect all these tiny hardware quirks was a constant battle. If the timing is wrong, the game might run too fast, too slow, or just fail to load entirely. There is also the issue of alignment. If you try to read a 32-bit value from an address that isn't a multiple of four, the GBA does something very specific and strange. If you don't emulate that exact strange behavior, some games will never work.
 
 ### Running in the Browser
+
 Porting the emulator to run in the browser using WASM was actually very easy. Because of how I originally built the emulator to handle graphics, mapping it to a web page took less than an afternoon. I designed the engine to output to a standard image format in Go, which made it easy to draw that image onto a JavaScript canvas.
 
 The main issue I found with the web version is performance. On a desktop, the emulator is fast enough to run the game at 10x its original speed. But in the browser, everything has to run on a single thread. If the computer cannot keep up with the 16.78 MHz requirement of the GBA, the browser tends to freeze up as it tries to catch up. To fix this, I have forced the browser version to run at exactly 1x speed. It is still a work in progress to make it smoother for mobile devices where processor power is more limited.
@@ -58,11 +61,11 @@ The main issue I found with the web version is performance. On a desktop, the em
 
 Debugging an emulator is a unique kind of pain. In a normal Go program, you can just step through the code with a debugger and see exactly where things go wrong. But with an emulator, the code you are debugging isn't the Go code, it is the GBA game itself. There are no off-the-shelf debuggers that support a custom emulator, so if you don't build one from scratch, you are on your own.
 
-The hardest part wasn't necessarily fixing visual glitches like scrambled sprites or flickering backgrounds. It was trying to trace back from a bad state to the original instruction that caused it. If a game crashes or shows a black screen, it is usually because a register or a piece of memory ended up with the wrong value ten thousand instructions ago. 
+The hardest part wasn't necessarily fixing visual glitches like scrambled sprites or flickering backgrounds. It was trying to trace back from a bad state to the original instruction that caused it. If a game crashes or shows a black screen, it is usually because a register or a piece of memory ended up with the wrong value ten thousand instructions ago.
 
 Without a dedicated debugger, I had to rely on manual breakpoints in my Go code and then manually decode the GBA instructions to understand how the system reached that state. I would have to look at a raw hex dump of memory, figure out which instruction was being executed, and then manually calculate what the registers should look like. It was a tedious process of comparing my internal state against the documentation over and over again until the error became clear. Finding a single bit that was flipped incorrectly in an instruction implementation could take hours of manual tracing. Unlike a modern application where you get a stack trace, here you just have a silent failure and a lot of hex values to sort through.
 
-<img src="broken_race.png" width="100%" />
+<img src="/broken_race.png" width="100%">
 
 ## "Aha!" Moments
 
@@ -80,6 +83,6 @@ I also need to fix the "Internal battery has run dry" message that pops up in Po
 
 It has been a long road of working on and off, but finally being able to play through a game on my own engine makes all the hours of staring at documentation worth it.
 
-***
+* * *
 
-*You can find the source code for Sapphire on [GitHub](https://github.com/dbut2/sapphire).*
+_You can find the source code for Sapphire on_ [_GitHub_](https://github.com/dbut2/sapphire)_._
