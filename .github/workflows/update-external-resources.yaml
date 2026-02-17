@@ -1,0 +1,90 @@
+name: Update External Resources
+
+env:
+  RESOURCES: |
+    {
+      "sapphire": {
+        "repo": "dbut2/sapphire",
+        "files": {
+          "sapphire.wasm": "static/sapphire.wasm",
+          "@go/wasm_exec.js": "static/sapphire-wasm-exec.js"
+        }
+      }
+    }
+
+on:
+  repository_dispatch:
+    types: [update-external-resource]
+  workflow_dispatch:
+    inputs:
+      resource:
+        description: 'Resource to update'
+        required: true
+        default: 'sapphire'
+      tag:
+        description: 'Release tag to deploy'
+        required: true
+        default: 'latest'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: site
+
+      - name: Parse config
+        id: config
+        run: |
+          RESOURCE="${{ github.event.inputs.resource || github.event.client_payload.resource }}"
+          TAG="${{ github.event.inputs.tag || github.event.client_payload.tag }}"
+          CONFIG=$(echo '${{ env.RESOURCES }}' | jq -r ".\"$RESOURCE\"")
+          REPO=$(echo "$CONFIG" | jq -r '.repo')
+
+          [ "$TAG" = "latest" ] && TAG=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | jq -r .tag_name)
+
+          echo "resource=$RESOURCE" >> $GITHUB_OUTPUT
+          echo "repo=$REPO" >> $GITHUB_OUTPUT
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+
+      - uses: actions/checkout@v6
+        with:
+          repository: ${{ steps.config.outputs.repo }}
+          ref: ${{ steps.config.outputs.tag }}
+          path: resource
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: resource/go.mod
+
+      - name: Update resource files
+        run: |
+          CONFIG=$(echo '${{ env.RESOURCES }}' | jq -r ".${{ steps.config.outputs.resource }}")
+          REPO="${{ steps.config.outputs.repo }}"
+          TAG="${{ steps.config.outputs.tag }}"
+
+          cd site
+          for ASSET in $(echo "$CONFIG" | jq -r '.files | keys[]'); do
+            DEST=$(echo "$CONFIG" | jq -r ".files.\"$ASSET\"")
+            mkdir -p "$(dirname "$DEST")"
+            if [[ "$ASSET" == @go/* ]]; then
+              cp "$(go env GOROOT)/misc/wasm/${ASSET#@go/}" "$DEST"
+            else
+              curl -sL -o "$DEST" "https://github.com/$REPO/releases/download/$TAG/$ASSET"
+            fi
+          done
+
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          path: site
+          commit-message: 'Update ${{ steps.config.outputs.resource }} to ${{ steps.config.outputs.tag }}'
+          title: 'Update ${{ steps.config.outputs.resource }} to ${{ steps.config.outputs.tag }}'
+          body: 'Release: https://github.com/${{ steps.config.outputs.repo }}/releases/tag/${{ steps.config.outputs.tag }}'
+          branch: update-${{ steps.config.outputs.resource }}-${{ steps.config.outputs.tag }}
+          delete-branch: true
