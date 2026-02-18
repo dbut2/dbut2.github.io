@@ -9,7 +9,7 @@ env:
           "sapphire.wasm": "static/sapphire.wasm"
         },
         "go_files": {
-          "misc/wasm/wasm_exec.js": "static/sapphire-wasm-exec.js"
+          "lib/wasm/wasm_exec.js": "static/sapphire-wasm-exec.js"
         }
       }
     }
