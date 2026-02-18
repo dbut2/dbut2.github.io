@@ -6,8 +6,10 @@ env:
       "sapphire": {
         "repo": "dbut2/sapphire",
         "files": {
-          "sapphire.wasm": "static/sapphire.wasm",
-          "@go/wasm_exec.js": "static/sapphire-wasm-exec.js"
+          "sapphire.wasm": "static/sapphire.wasm"
+        },
+        "go_files": {
+          "misc/wasm/wasm_exec.js": "static/sapphire-wasm-exec.js"
         }
       }
     }
@@ -60,24 +62,32 @@ jobs:
           path: resource
 
       - uses: actions/setup-go@v6
-        with:
-          go-version-file: resource/go.mod
+
+      - name: Get Go version
+        id: go-version
+        run: |
+          cd resource
+          GO_VERSION=$(go list -m -f '{{.GoVersion}}')
+          echo "version=$GO_VERSION" >> $GITHUB_OUTPUT
 
       - name: Update resource files
         run: |
           CONFIG=$(echo '${{ env.RESOURCES }}' | jq -r ".${{ steps.config.outputs.resource }}")
           REPO="${{ steps.config.outputs.repo }}"
           TAG="${{ steps.config.outputs.tag }}"
+          GO_VERSION="${{ steps.go-version.outputs.version }}"
 
           cd site
           for ASSET in $(echo "$CONFIG" | jq -r '.files | keys[]'); do
             DEST=$(echo "$CONFIG" | jq -r ".files.\"$ASSET\"")
             mkdir -p "$(dirname "$DEST")"
-            if [[ "$ASSET" == @go/* ]]; then
-              cp "$(go env GOROOT)/misc/wasm/${ASSET#@go/}" "$DEST"
-            else
-              curl -sL -o "$DEST" "https://github.com/$REPO/releases/download/$TAG/$ASSET"
-            fi
+            curl -sL -o "$DEST" "https://github.com/$REPO/releases/download/$TAG/$ASSET"
+          done
+
+          for GO_FILE in $(echo "$CONFIG" | jq -r '.go_files | keys[]'); do
+            DEST=$(echo "$CONFIG" | jq -r ".go_files.\"$GO_FILE\"")
+            mkdir -p "$(dirname "$DEST")"
+            curl -sL -o "$DEST" "https://raw.githubusercontent.com/golang/go/go$GO_VERSION/$GO_FILE"
           done
 
       - uses: peter-evans/create-pull-request@v7
