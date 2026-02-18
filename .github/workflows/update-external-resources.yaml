@@ -62,6 +62,8 @@ jobs:
           path: resource
 
       - uses: actions/setup-go@v6
+        with:
+          go-version: 'stable'
 
       - name: Get Go version
         id: go-version
