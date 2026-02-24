@@ -1,0 +1,134 @@
+{{ $target := .Get "target" }}
+{{ $id := .Get "id" | default (replace $target "/" "-" | replaceRE "[^a-zA-Z0-9-]" "") }}
+{{ $width := .Get "width" | default "720" }}
+<div id="{{ $id }}-controls" class="gba-controls" style="text-align:center;">
+    <div class="gba-controls-bumpers">
+        <button data-key="KeyA" data-label="L"></button>
+        <button data-key="KeyS" data-label="R"></button>
+    </div>
+    <div class="gba-controls-main">
+        <div class="gba-dpad">
+            <button data-key="ArrowUp" data-label="&#x2191;" class="gba-dpad-up"></button>
+            <button data-key="ArrowLeft" data-label="&#x2190;" class="gba-dpad-left"></button>
+            <button data-key="ArrowRight" data-label="&#x2192;" class="gba-dpad-right"></button>
+            <button data-key="ArrowDown" data-label="&#x2193;" class="gba-dpad-down"></button>
+        </div>
+        <div class="gba-ab">
+            <button data-key="KeyX" data-label="B" class="gba-btn-round"></button>
+            <button data-key="KeyZ" data-label="A" class="gba-btn-round"></button>
+        </div>
+    </div>
+    <div class="gba-menu">
+        <button data-key="Backspace" data-label="SELECT" class="gba-btn-small"></button>
+        <button data-key="Enter" data-label="START" class="gba-btn-small"></button>
+    </div>
+</div>
+
+<style>
+    .gba-controls {
+        display: none;
+    }
+    @media (pointer: coarse) {
+        .gba-controls {
+            display: block;
+            max-width: {{ $width }}px;
+            margin: 16px auto 0;
+            padding: 12px 8px;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+    }
+    .gba-controls button::after {
+        content: attr(data-label);
+    }
+    .gba-controls button {
+        background: #2a2a2a;
+        color: #ccc;
+        border: 1px solid #444;
+        border-radius: 6px;
+        font-family: monospace;
+        font-size: 14px;
+        font-weight: bold;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .gba-controls button:active {
+        background: #555;
+    }
+    .gba-controls-bumpers {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 18px;
+        padding: 0 8px;
+    }
+    .gba-controls-bumpers button {
+        width: 72px;
+        height: 36px;
+    }
+    .gba-controls-main {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .gba-dpad {
+        display: grid;
+        grid-template-columns: 50px 50px 50px;
+        grid-template-rows: 50px 50px 50px;
+        gap: 3px;
+    }
+    .gba-dpad-up    { grid-column: 2; grid-row: 1; }
+    .gba-dpad-left  { grid-column: 1; grid-row: 2; }
+    .gba-dpad-right { grid-column: 3; grid-row: 2; }
+    .gba-dpad-down  { grid-column: 2; grid-row: 3; }
+    .gba-dpad button {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        border-radius: 8px;
+    }
+    .gba-menu {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 14px;
+    }
+    .gba-btn-small {
+        width: 56px;
+        height: 28px;
+        font-size: 10px !important;
+        border-radius: 12px !important;
+    }
+    .gba-ab {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
+    .gba-btn-round {
+        width: 54px;
+        height: 54px;
+        border-radius: 50% !important;
+        font-size: 16px !important;
+    }
+</style>
+
+<script>
+    (function() {
+        var controlsEl = document.getElementById("{{ $id }}-controls");
+        controlsEl.querySelectorAll("button[data-key]").forEach(function(btn) {
+            var code = btn.getAttribute("data-key");
+            btn.addEventListener("touchstart", function(e) {
+                e.preventDefault();
+                document.dispatchEvent(new KeyboardEvent("keydown", { code: code, bubbles: true }));
+            }, { passive: false });
+            btn.addEventListener("touchend", function(e) {
+                e.preventDefault();
+                document.dispatchEvent(new KeyboardEvent("keyup", { code: code, bubbles: true }));
+            }, { passive: false });
+            btn.addEventListener("touchcancel", function(e) {
+                e.preventDefault();
+                document.dispatchEvent(new KeyboardEvent("keyup", { code: code, bubbles: true }));
+            }, { passive: false });
+        });
+    })();
+</script>
