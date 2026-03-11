@@ -14,6 +14,8 @@ This guide will walk you through the process of attaching GPUs to a Docker Swarm
 *   You are running a recent version of Ubuntu (Noble 24.04 LTS in this case).
 *   You have NVIDIA drivers already installed (preferably the `-server` version).
     *   If not, follow the instructions at [Ubuntu's NVIDIA driver installation guide](https://ubuntu.com/server/docs/nvidia-drivers-installation).
+*   You have the NVIDIA Container Toolkit installed.
+    *   If not, follow the instructions at [NVIDIA's container toolkit installation guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
 *   You have Docker and Docker Swarm already set up on your system.
 
 ## Steps to Add GPUs to Docker Swarm
@@ -92,6 +94,16 @@ After making these changes, restart the Docker service:
 ```shell
 sudo systemctl restart docker
 ```
+
+### 5\. Add GPU Label to the Swarm Node
+
+Label the node so services can target it with a placement constraint:
+
+```shell
+docker node update --label-add gpu=true <node-id>
+```
+
+You can find your node ID with `docker node ls`.
 
 ## Running GPU-Enabled Services on Docker Swarm
 
