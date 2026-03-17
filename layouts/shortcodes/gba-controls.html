@@ -21,6 +21,7 @@
     <div class="gba-menu">
         <button data-key="Backspace" data-label="SELECT" class="gba-btn-small"></button>
         <button data-key="Enter" data-label="START" class="gba-btn-small"></button>
+        <button id="{{ $id }}-toggle-btn">&#x26F6;</button>
     </div>
 </div>
 
@@ -93,8 +94,10 @@
     .gba-menu {
         display: flex;
         justify-content: center;
+        align-items: center;
         gap: 12px;
         margin-top: 14px;
+        position: relative;
     }
     .gba-btn-small {
         width: 56px;
@@ -112,6 +115,58 @@
         height: 54px;
         border-radius: 50% !important;
         font-size: 16px !important;
+    }
+
+    /* Toggle button — bottom-right of menu row, mobile only */
+    #{{ $id }}-toggle-btn {
+        display: none;
+    }
+    @media (pointer: coarse) {
+        #{{ $id }}-toggle-btn {
+            display: block;
+            position: absolute;
+            right: 8px;
+            width: 36px;
+            height: 28px;
+            padding: 0;
+            font-size: 14px;
+        }
+    }
+
+    /* Fullscreen overlay (injected by JS) */
+    #gba-fullscreen-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: #000;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        overflow: hidden;
+        touch-action: none;
+        /* Respect iPhone notch / home indicator */
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+    }
+
+    #gba-fullscreen-overlay canvas {
+        display: block;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        image-rendering: pixelated;
+        flex-shrink: 0;
+    }
+
+    #gba-fullscreen-overlay .gba-controls {
+        display: block !important;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 8px;
+        flex-shrink: 0;
     }
 </style>
 
@@ -133,5 +188,98 @@
                 document.dispatchEvent(new KeyboardEvent("keyup", { code: code, bubbles: true }));
             }, { passive: false });
         });
+    })();
+
+    (function() {
+        var canvas    = document.getElementById("{{ $id }}");
+        var controls  = document.getElementById("{{ $id }}-controls");
+        var toggleBtn = document.getElementById("{{ $id }}-toggle-btn");
+
+        if (!canvas || !controls || !toggleBtn) return;
+        if (!window.matchMedia('(pointer: coarse)').matches) return;
+
+        var canvasParent        = canvas.parentNode;
+        var canvasNextSibling   = canvas.nextSibling;
+        var controlsParent      = controls.parentNode;
+        var controlsNextSibling = controls.nextSibling;
+        var savedScrollY        = 0;
+        var locked              = false;
+        var savedCanvasMaxWidth = canvas.style.maxWidth;
+
+        var viewportMeta     = document.querySelector('meta[name="viewport"]');
+        var originalViewport = viewportMeta ? viewportMeta.content : null;
+
+        var overlay = document.createElement('div');
+        overlay.id  = 'gba-fullscreen-overlay';
+
+        function lock() {
+            savedScrollY = window.scrollY;
+            locked = true;
+
+            overlay.appendChild(canvas);
+            overlay.appendChild(controls);
+            document.body.appendChild(overlay);
+
+            // Override the wasm shortcode's max-width so canvas fills full width
+            canvas.style.maxWidth = '100%';
+            // Push controls to bottom of screen
+            controls.style.marginTop = 'auto';
+
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.width    = '100%';
+            document.body.style.top      = '-' + savedScrollY + 'px';
+
+            if (viewportMeta) {
+                viewportMeta.content =
+                    'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover';
+            }
+
+            var fs = overlay.requestFullscreen || overlay.webkitRequestFullscreen;
+            if (fs) fs.call(overlay).catch(function(){});
+        }
+
+        function unlock() {
+            locked = false;
+
+            if (document.fullscreenElement || document.webkitFullscreenElement) {
+                var exitFs = document.exitFullscreen || document.webkitExitFullscreen;
+                if (exitFs) exitFs.call(document).catch(function(){});
+            }
+
+            canvasParent.insertBefore(canvas, canvasNextSibling);
+            controlsParent.insertBefore(controls, controlsNextSibling);
+
+            if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+
+            canvas.style.maxWidth    = savedCanvasMaxWidth;
+            controls.style.marginTop = '';
+
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width    = '';
+            document.body.style.top      = '';
+            window.scrollTo(0, savedScrollY);
+
+            if (viewportMeta && originalViewport) {
+                viewportMeta.content = originalViewport;
+            }
+        }
+
+        toggleBtn.addEventListener('click', function() {
+            if (locked) unlock(); else lock();
+        }, { passive: false });
+
+        document.addEventListener('fullscreenchange', function() {
+            if (!document.fullscreenElement && locked) unlock();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && locked) unlock();
+        });
+
+        // Auto-lock when launched from iPhone home screen
+        if (window.navigator.standalone) {
+            window.addEventListener('load', lock);
+        }
     })();
 </script>
