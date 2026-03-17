@@ -2,6 +2,7 @@
 {{ $id := .Get "id" | default (replace $target "/" "-" | replaceRE "[^a-zA-Z0-9-]" "") }}
 {{ $width := .Get "width" | default "720" }}
 <div id="{{ $id }}-controls" class="gba-controls" style="text-align:center;">
+    <button id="{{ $id }}-lock-btn">&#x26F6; Fullscreen</button>
     <div class="gba-controls-bumpers">
         <button data-key="KeyA" data-label="L"></button>
         <button data-key="KeyS" data-label="R"></button>
@@ -113,6 +114,86 @@
         border-radius: 50% !important;
         font-size: 16px !important;
     }
+
+    /* Lock button — mobile only */
+    #{{ $id }}-lock-btn {
+        display: none;
+    }
+    @media (pointer: coarse) {
+        #{{ $id }}-lock-btn {
+            display: block;
+            width: 100%;
+            margin-bottom: 12px;
+            padding: 10px;
+            background: #1a1a2e;
+            color: #aac;
+            border: 1px solid #446;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+    }
+
+    /* Fullscreen overlay (injected by JS) */
+    #gba-fullscreen-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: #000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        overflow: hidden;
+        touch-action: none;
+    }
+
+    #gba-fullscreen-top-bar {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        padding: 8px;
+        flex-shrink: 0;
+    }
+
+    #gba-fullscreen-unlock-btn {
+        background: #1a1a2e;
+        color: #aac;
+        border: 1px solid #446;
+        border-radius: 8px;
+        padding: 6px 14px;
+        font-size: 14px;
+        font-family: monospace;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    #gba-fullscreen-canvas-wrapper {
+        flex: 1;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        min-height: 0;
+    }
+
+    #gba-fullscreen-canvas-wrapper canvas {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto !important;
+        height: auto !important;
+        image-rendering: pixelated;
+    }
+
+    #gba-fullscreen-overlay .gba-controls {
+        display: block !important;
+        margin: 0 auto;
+        padding: 8px;
+        flex-shrink: 0;
+    }
 </style>
 
 <script>
@@ -132,6 +213,94 @@
                 e.preventDefault();
                 document.dispatchEvent(new KeyboardEvent("keyup", { code: code, bubbles: true }));
             }, { passive: false });
+        });
+    })();
+
+    (function() {
+        var canvasId  = "{{ $id }}";
+        var canvas    = document.getElementById(canvasId);
+        var controls  = document.getElementById("{{ $id }}-controls");
+        var lockBtn   = document.getElementById("{{ $id }}-lock-btn");
+
+        if (!canvas || !controls || !lockBtn) return;
+
+        var canvasParent        = canvas.parentNode;
+        var canvasNextSibling   = canvas.nextSibling;
+        var controlsParent      = controls.parentNode;
+        var controlsNextSibling = controls.nextSibling;
+        var savedScrollY        = 0;
+
+        var viewportMeta     = document.querySelector('meta[name="viewport"]');
+        var originalViewport = viewportMeta ? viewportMeta.content : null;
+
+        var overlay = document.createElement('div');
+        overlay.id  = 'gba-fullscreen-overlay';
+
+        var topBar = document.createElement('div');
+        topBar.id  = 'gba-fullscreen-top-bar';
+
+        var unlockBtn = document.createElement('button');
+        unlockBtn.id  = 'gba-fullscreen-unlock-btn';
+        unlockBtn.textContent = '✕ Unlock';
+        topBar.appendChild(unlockBtn);
+
+        var canvasWrapper = document.createElement('div');
+        canvasWrapper.id  = 'gba-fullscreen-canvas-wrapper';
+
+        overlay.appendChild(topBar);
+        overlay.appendChild(canvasWrapper);
+
+        function lock() {
+            savedScrollY = window.scrollY;
+
+            canvasWrapper.appendChild(canvas);
+            overlay.appendChild(controls);
+            document.body.appendChild(overlay);
+
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.width    = '100%';
+            document.body.style.top      = '-' + savedScrollY + 'px';
+
+            if (viewportMeta) {
+                viewportMeta.content =
+                    'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no';
+            }
+
+            var fs = overlay.requestFullscreen || overlay.webkitRequestFullscreen;
+            if (fs) fs.call(overlay).catch(function(){});
+        }
+
+        function unlock() {
+            if (document.fullscreenElement || document.webkitFullscreenElement) {
+                var exitFs = document.exitFullscreen || document.webkitExitFullscreen;
+                if (exitFs) exitFs.call(document).catch(function(){});
+            }
+
+            canvasParent.insertBefore(canvas, canvasNextSibling);
+            controlsParent.insertBefore(controls, controlsNextSibling);
+
+            if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width    = '';
+            document.body.style.top      = '';
+            window.scrollTo(0, savedScrollY);
+
+            if (viewportMeta && originalViewport) {
+                viewportMeta.content = originalViewport;
+            }
+        }
+
+        lockBtn.addEventListener('click', lock, { passive: false });
+        unlockBtn.addEventListener('click', unlock, { passive: false });
+
+        document.addEventListener('fullscreenchange', function() {
+            if (!document.fullscreenElement && overlay.parentNode) unlock();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && overlay.parentNode) unlock();
         });
     })();
 </script>
