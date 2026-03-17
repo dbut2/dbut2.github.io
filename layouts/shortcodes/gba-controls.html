@@ -2,9 +2,9 @@
 {{ $id := .Get "id" | default (replace $target "/" "-" | replaceRE "[^a-zA-Z0-9-]" "") }}
 {{ $width := .Get "width" | default "720" }}
 <div id="{{ $id }}-controls" class="gba-controls" style="text-align:center;">
-    <button id="{{ $id }}-lock-btn">&#x26F6; Fullscreen</button>
     <div class="gba-controls-bumpers">
         <button data-key="KeyA" data-label="L"></button>
+        <button id="{{ $id }}-lock-btn">&#x26F6;</button>
         <button data-key="KeyS" data-label="R"></button>
     </div>
     <div class="gba-controls-main">
@@ -122,18 +122,22 @@
     @media (pointer: coarse) {
         #{{ $id }}-lock-btn {
             display: block;
-            width: 100%;
-            margin-bottom: 12px;
-            padding: 10px;
+            width: 40px;
+            height: 36px;
+            padding: 0;
             background: #1a1a2e;
             color: #aac;
             border: 1px solid #446;
-            border-radius: 8px;
-            font-size: 14px;
+            border-radius: 6px;
+            font-size: 16px;
             font-family: monospace;
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
         }
+    }
+    /* Hide lock button when inside fullscreen overlay */
+    #gba-fullscreen-overlay #{{ $id }}-lock-btn {
+        display: none !important;
     }
 
     /* Fullscreen overlay (injected by JS) */
