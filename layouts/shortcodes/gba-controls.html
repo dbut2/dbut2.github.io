@@ -4,7 +4,6 @@
 <div id="{{ $id }}-controls" class="gba-controls" style="text-align:center;">
     <div class="gba-controls-bumpers">
         <button data-key="KeyA" data-label="L"></button>
-        <button id="{{ $id }}-lock-btn">&#x26F6;</button>
         <button data-key="KeyS" data-label="R"></button>
     </div>
     <div class="gba-controls-main">
@@ -115,29 +114,43 @@
         font-size: 16px !important;
     }
 
-    /* Lock button — mobile only */
-    #{{ $id }}-lock-btn {
+    /* Canvas container (JS-created wrapper for canvas + toggle btn) */
+    .gba-canvas-container {
+        position: relative;
+        display: block;
+        width: 100%;
+        line-height: 0; /* no gap below canvas */
+    }
+
+    /* Toggle button — corner overlay on canvas, mobile only */
+    #gba-toggle-btn {
         display: none;
     }
     @media (pointer: coarse) {
-        #{{ $id }}-lock-btn {
+        #gba-toggle-btn {
             display: block;
-            width: 40px;
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            z-index: 10;
+            width: 36px;
             height: 36px;
             padding: 0;
-            background: #1a1a2e;
-            color: #aac;
-            border: 1px solid #446;
-            border-radius: 6px;
             font-size: 16px;
+            background: #2a2a2a;
+            color: #ccc;
+            border: 1px solid #444;
+            border-radius: 6px;
             font-family: monospace;
+            font-weight: bold;
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
+            opacity: 0.75;
         }
-    }
-    /* Hide lock button when inside fullscreen overlay */
-    #gba-fullscreen-overlay #{{ $id }}-lock-btn {
-        display: none !important;
+        #gba-toggle-btn:active {
+            background: #555;
+            opacity: 1;
+        }
     }
 
     /* Fullscreen overlay (injected by JS) */
@@ -148,53 +161,25 @@
         background: #000;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
         justify-content: flex-start;
         overflow: hidden;
         touch-action: none;
     }
 
-    #gba-fullscreen-top-bar {
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        padding: 8px;
-        flex-shrink: 0;
-    }
-
-    #gba-fullscreen-unlock-btn {
-        background: #1a1a2e;
-        color: #aac;
-        border: 1px solid #446;
-        border-radius: 8px;
-        padding: 6px 14px;
-        font-size: 14px;
-        font-family: monospace;
-        touch-action: manipulation;
-        -webkit-tap-highlight-color: transparent;
-    }
-
-    #gba-fullscreen-canvas-wrapper {
-        flex: 1;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        min-height: 0;
-    }
-
-    #gba-fullscreen-canvas-wrapper canvas {
-        max-width: 100%;
-        max-height: 100%;
-        width: auto !important;
+    #gba-fullscreen-overlay .gba-canvas-container canvas {
+        display: block;
+        width: 100% !important;
+        max-width: 100% !important;
         height: auto !important;
         image-rendering: pixelated;
     }
 
     #gba-fullscreen-overlay .gba-controls {
         display: block !important;
-        margin: 0 auto;
+        width: 100%;
+        max-width: none;
+        margin: 0;
         padding: 8px;
         flex-shrink: 0;
     }
@@ -221,18 +206,31 @@
     })();
 
     (function() {
-        var canvasId  = "{{ $id }}";
-        var canvas    = document.getElementById(canvasId);
-        var controls  = document.getElementById("{{ $id }}-controls");
-        var lockBtn   = document.getElementById("{{ $id }}-lock-btn");
+        var canvas   = document.getElementById("{{ $id }}");
+        var controls = document.getElementById("{{ $id }}-controls");
 
-        if (!canvas || !controls || !lockBtn) return;
+        if (!canvas || !controls) return;
+        if (!window.matchMedia('(pointer: coarse)').matches) return;
 
-        var canvasParent        = canvas.parentNode;
-        var canvasNextSibling   = canvas.nextSibling;
-        var controlsParent      = controls.parentNode;
-        var controlsNextSibling = controls.nextSibling;
-        var savedScrollY        = 0;
+        // Wrap canvas in a container so we can position the toggle button over it
+        var canvasContainer = document.createElement('div');
+        canvasContainer.className = 'gba-canvas-container';
+        canvas.parentNode.insertBefore(canvasContainer, canvas);
+        canvasContainer.appendChild(canvas);
+
+        // Toggle button — corner overlay on the canvas
+        var toggleBtn = document.createElement('button');
+        toggleBtn.id  = 'gba-toggle-btn';
+        toggleBtn.textContent = '⛶';
+        canvasContainer.appendChild(toggleBtn);
+
+        var containerParent      = canvasContainer.parentNode;
+        var containerNextSibling = canvasContainer.nextSibling;
+        var controlsParent       = controls.parentNode;
+        var controlsNextSibling  = controls.nextSibling;
+        var savedScrollY         = 0;
+        var locked               = false;
+        var savedCanvasMaxWidth  = canvas.style.maxWidth;
 
         var viewportMeta     = document.querySelector('meta[name="viewport"]');
         var originalViewport = viewportMeta ? viewportMeta.content : null;
@@ -240,26 +238,16 @@
         var overlay = document.createElement('div');
         overlay.id  = 'gba-fullscreen-overlay';
 
-        var topBar = document.createElement('div');
-        topBar.id  = 'gba-fullscreen-top-bar';
-
-        var unlockBtn = document.createElement('button');
-        unlockBtn.id  = 'gba-fullscreen-unlock-btn';
-        unlockBtn.textContent = '✕ Unlock';
-        topBar.appendChild(unlockBtn);
-
-        var canvasWrapper = document.createElement('div');
-        canvasWrapper.id  = 'gba-fullscreen-canvas-wrapper';
-
-        overlay.appendChild(topBar);
-        overlay.appendChild(canvasWrapper);
-
         function lock() {
             savedScrollY = window.scrollY;
+            locked = true;
 
-            canvasWrapper.appendChild(canvas);
+            overlay.appendChild(canvasContainer);
             overlay.appendChild(controls);
             document.body.appendChild(overlay);
+
+            // Override the wasm shortcode's max-width so canvas fills full width
+            canvas.style.maxWidth = '100%';
 
             document.body.style.overflow = 'hidden';
             document.body.style.position = 'fixed';
@@ -276,15 +264,19 @@
         }
 
         function unlock() {
+            locked = false;
+
             if (document.fullscreenElement || document.webkitFullscreenElement) {
                 var exitFs = document.exitFullscreen || document.webkitExitFullscreen;
                 if (exitFs) exitFs.call(document).catch(function(){});
             }
 
-            canvasParent.insertBefore(canvas, canvasNextSibling);
+            containerParent.insertBefore(canvasContainer, containerNextSibling);
             controlsParent.insertBefore(controls, controlsNextSibling);
 
             if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+
+            canvas.style.maxWidth = savedCanvasMaxWidth;
 
             document.body.style.overflow = '';
             document.body.style.position = '';
@@ -297,14 +289,15 @@
             }
         }
 
-        lockBtn.addEventListener('click', lock, { passive: false });
-        unlockBtn.addEventListener('click', unlock, { passive: false });
+        toggleBtn.addEventListener('click', function() {
+            if (locked) unlock(); else lock();
+        }, { passive: false });
 
         document.addEventListener('fullscreenchange', function() {
-            if (!document.fullscreenElement && overlay.parentNode) unlock();
+            if (!document.fullscreenElement && locked) unlock();
         });
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && overlay.parentNode) unlock();
+            if (e.key === 'Escape' && locked) unlock();
         });
     })();
 </script>
