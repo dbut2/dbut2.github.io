@@ -144,6 +144,11 @@
         align-items: stretch;
         overflow: hidden;
         touch-action: none;
+        /* Respect iPhone notch / home indicator */
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
     }
 
     #gba-fullscreen-overlay canvas {
@@ -227,7 +232,7 @@
 
             if (viewportMeta) {
                 viewportMeta.content =
-                    'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no';
+                    'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover';
             }
 
             var fs = overlay.requestFullscreen || overlay.webkitRequestFullscreen;
@@ -271,5 +276,10 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && locked) unlock();
         });
+
+        // Auto-lock when launched from iPhone home screen
+        if (window.navigator.standalone) {
+            window.addEventListener('load', lock);
+        }
     })();
 </script>
