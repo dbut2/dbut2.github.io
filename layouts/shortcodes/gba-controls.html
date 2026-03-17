@@ -21,6 +21,7 @@
     <div class="gba-menu">
         <button data-key="Backspace" data-label="SELECT" class="gba-btn-small"></button>
         <button data-key="Enter" data-label="START" class="gba-btn-small"></button>
+        <button id="{{ $id }}-toggle-btn">&#x26F6;</button>
     </div>
 </div>
 
@@ -93,8 +94,10 @@
     .gba-menu {
         display: flex;
         justify-content: center;
+        align-items: center;
         gap: 12px;
         margin-top: 14px;
+        position: relative;
     }
     .gba-btn-small {
         width: 56px;
@@ -114,42 +117,19 @@
         font-size: 16px !important;
     }
 
-    /* Canvas container (JS-created wrapper for canvas + toggle btn) */
-    .gba-canvas-container {
-        position: relative;
-        display: block;
-        width: 100%;
-        line-height: 0; /* no gap below canvas */
-    }
-
-    /* Toggle button — corner overlay on canvas, mobile only */
-    #gba-toggle-btn {
+    /* Toggle button — bottom-right of menu row, mobile only */
+    #{{ $id }}-toggle-btn {
         display: none;
     }
     @media (pointer: coarse) {
-        #gba-toggle-btn {
+        #{{ $id }}-toggle-btn {
             display: block;
             position: absolute;
-            top: 8px;
             right: 8px;
-            z-index: 10;
             width: 36px;
-            height: 36px;
+            height: 28px;
             padding: 0;
-            font-size: 16px;
-            background: #2a2a2a;
-            color: #ccc;
-            border: 1px solid #444;
-            border-radius: 6px;
-            font-family: monospace;
-            font-weight: bold;
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-            opacity: 0.75;
-        }
-        #gba-toggle-btn:active {
-            background: #555;
-            opacity: 1;
+            font-size: 14px;
         }
     }
 
@@ -162,17 +142,17 @@
         display: flex;
         flex-direction: column;
         align-items: stretch;
-        justify-content: flex-start;
         overflow: hidden;
         touch-action: none;
     }
 
-    #gba-fullscreen-overlay .gba-canvas-container canvas {
+    #gba-fullscreen-overlay canvas {
         display: block;
         width: 100% !important;
         max-width: 100% !important;
         height: auto !important;
         image-rendering: pixelated;
+        flex-shrink: 0;
     }
 
     #gba-fullscreen-overlay .gba-controls {
@@ -206,31 +186,20 @@
     })();
 
     (function() {
-        var canvas   = document.getElementById("{{ $id }}");
-        var controls = document.getElementById("{{ $id }}-controls");
+        var canvas    = document.getElementById("{{ $id }}");
+        var controls  = document.getElementById("{{ $id }}-controls");
+        var toggleBtn = document.getElementById("{{ $id }}-toggle-btn");
 
-        if (!canvas || !controls) return;
+        if (!canvas || !controls || !toggleBtn) return;
         if (!window.matchMedia('(pointer: coarse)').matches) return;
 
-        // Wrap canvas in a container so we can position the toggle button over it
-        var canvasContainer = document.createElement('div');
-        canvasContainer.className = 'gba-canvas-container';
-        canvas.parentNode.insertBefore(canvasContainer, canvas);
-        canvasContainer.appendChild(canvas);
-
-        // Toggle button — corner overlay on the canvas
-        var toggleBtn = document.createElement('button');
-        toggleBtn.id  = 'gba-toggle-btn';
-        toggleBtn.textContent = '⛶';
-        canvasContainer.appendChild(toggleBtn);
-
-        var containerParent      = canvasContainer.parentNode;
-        var containerNextSibling = canvasContainer.nextSibling;
-        var controlsParent       = controls.parentNode;
-        var controlsNextSibling  = controls.nextSibling;
-        var savedScrollY         = 0;
-        var locked               = false;
-        var savedCanvasMaxWidth  = canvas.style.maxWidth;
+        var canvasParent        = canvas.parentNode;
+        var canvasNextSibling   = canvas.nextSibling;
+        var controlsParent      = controls.parentNode;
+        var controlsNextSibling = controls.nextSibling;
+        var savedScrollY        = 0;
+        var locked              = false;
+        var savedCanvasMaxWidth = canvas.style.maxWidth;
 
         var viewportMeta     = document.querySelector('meta[name="viewport"]');
         var originalViewport = viewportMeta ? viewportMeta.content : null;
@@ -242,12 +211,14 @@
             savedScrollY = window.scrollY;
             locked = true;
 
-            overlay.appendChild(canvasContainer);
+            overlay.appendChild(canvas);
             overlay.appendChild(controls);
             document.body.appendChild(overlay);
 
             // Override the wasm shortcode's max-width so canvas fills full width
             canvas.style.maxWidth = '100%';
+            // Push controls to bottom of screen
+            controls.style.marginTop = 'auto';
 
             document.body.style.overflow = 'hidden';
             document.body.style.position = 'fixed';
@@ -271,12 +242,13 @@
                 if (exitFs) exitFs.call(document).catch(function(){});
             }
 
-            containerParent.insertBefore(canvasContainer, containerNextSibling);
+            canvasParent.insertBefore(canvas, canvasNextSibling);
             controlsParent.insertBefore(controls, controlsNextSibling);
 
             if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
 
-            canvas.style.maxWidth = savedCanvasMaxWidth;
+            canvas.style.maxWidth    = savedCanvasMaxWidth;
+            controls.style.marginTop = '';
 
             document.body.style.overflow = '';
             document.body.style.position = '';
