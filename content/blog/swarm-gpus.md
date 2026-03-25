@@ -11,47 +11,37 @@ This guide will walk you through the process of attaching GPUs to a Docker Swarm
 
 ## Assumptions
 
-*   You are running a recent version of Ubuntu (Noble 24.04 LTS in this case).
-*   You have NVIDIA drivers already installed (preferably the `-server` version).
-    *   If not, follow the instructions at [Ubuntu's NVIDIA driver installation guide](https://ubuntu.com/server/docs/nvidia-drivers-installation).
-*   You have the NVIDIA Container Toolkit installed.
-    *   If not, follow the instructions at [NVIDIA's container toolkit installation guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
-*   You have Docker and Docker Swarm already set up on your system.
+- You are running a recent version of Ubuntu (Noble 24.04 LTS in this case).
+- You have NVIDIA drivers already installed (preferably the `-server` version).
+  - If not, follow the instructions at [Ubuntu's NVIDIA driver installation guide](https://ubuntu.com/server/docs/nvidia-drivers-installation).
+- You have the NVIDIA Container Toolkit installed.
+  - If not, follow the instructions at [NVIDIA's container toolkit installation guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
+- You have Docker and Docker Swarm already set up on your system.
 
 ## Steps to Add GPUs to Docker Swarm
 
-### 1\. Identify Your GPU
+### 1 Identify Your GPU
 
 First, we need to find the UUID of the GPU you want to attach to Docker Swarm.
 
 Run the following command:
 
 ```shell
-nvidia-smi -a
+nvidia-smi --query-gpu=name,uuid --format=csv,noheader
 ```
 
-Look for the `GPU UUID` line under the desired GPU. In this example, we're using an RTX 3060:
+This will list all GPUs and their UUIDs which we'll need for later.
 
 ```shell
-==============NVSMI LOG==============
-
-Driver Version                            : 535.183.01
-CUDA Version                              : 12.2
-
-Attached GPUs                             : 1
-GPU 00000000:00:10.0
-    Product Name                          : NVIDIA GeForce RTX 3060
-...
-    GPU UUID                              : GPU-a0df8e5a-e4b9-467d-9bf5-cebb65027549
-...
+NVIDIA GeForce RTX 3060, GPU-1618bfaf-6d19-3538-d138-dcbd3c405ace
 ```
 
-### 2\. Update Docker Daemon Configuration
+### 2 Update Docker Daemon Configuration
 
 Edit the Docker daemon configuration file:
 
 ```shell
-sudo nano /etc/docker/daemon.json
+sudo vim /etc/docker/daemon.json
 ```
 
 Add or modify the following content:
@@ -73,12 +63,12 @@ Add or modify the following content:
 
 Replace the UUID in `node-generic-resources` with the one you found in step 1.
 
-### 3\. Configure NVIDIA Container Runtime
+### 3 Configure NVIDIA Container Runtime
 
 Edit the NVIDIA container runtime configuration:
 
 ```shell
-sudo nano /etc/nvidia-container-runtime/config.toml
+sudo vim /etc/nvidia-container-runtime/config.toml
 ```
 
 Find the `swarm-resource` line and uncomment it. Replace its content with:
@@ -87,7 +77,7 @@ Find the `swarm-resource` line and uncomment it. Replace its content with:
 swarm-resource = "DOCKER_RESOURCE_NVIDIA-GPU"
 ```
 
-### 4\. Restart Docker Service
+### 4 Restart Docker Service
 
 After making these changes, restart the Docker service:
 
@@ -95,7 +85,7 @@ After making these changes, restart the Docker service:
 sudo systemctl restart docker
 ```
 
-### 5\. Add GPU Label to the Swarm Node
+### 5 Add GPU Label to the Swarm Node
 
 Label the node so services can target it with a placement constraint:
 
@@ -130,11 +120,11 @@ services:
 
 This compose service does the following:
 
-*   Creates a service named gpu-service
-*   Constrains the service to run only on nodes with the gpu label set to true
-*   Reserves one GPU resource for this service
-*   Mounts the NVIDIA container runtime hook
-*   Uses your GPU-enabled Docker image
+- Creates a service named gpu-service
+- Constrains the service to run only on nodes with the gpu label set to true
+- Reserves one GPU resource for this service
+- Mounts the NVIDIA container runtime hook
+- Uses your GPU-enabled Docker image
 
 ## Conclusion
 
