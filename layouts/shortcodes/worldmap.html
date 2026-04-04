@@ -1,135 +1,107 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css" crossorigin="anonymous"/>
 <style>
-  #travel-map { width: 100%; height: 500px; }
-  .pin-icon { background: none !important; border: none !important; }
-  .leaflet-tooltip { background: var(--entry); color: var(--primary); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: 0 4px 20px rgba(0,0,0,0.5); font-size: 0.85rem; padding: 6px 10px; }
-  .leaflet-tooltip-top::before { border-top-color: var(--entry); }
-  .leaflet-tooltip-bottom::before { border-bottom-color: var(--entry); }
-  .leaflet-control-attribution { font-size: 10px; opacity: 0.6; background: transparent !important; }
-  .leaflet-control-zoom a { background: var(--entry); color: var(--primary); border-color: var(--border); }
-  .leaflet-control-zoom a:hover { background: var(--tertiary); }
-  .leaflet-tile { border-radius: 0 !important; }
-  .edit-toggle { position: absolute; bottom: 10px; right: 10px; z-index: 1000; background: var(--entry); color: var(--primary); border: 1px solid var(--border); border-radius: 4px; padding: 5px 10px; font-size: 12px; cursor: pointer; font-family: inherit; opacity: 0.85; }
-  .edit-toggle:hover { opacity: 1; }
-  .edit-toggle.active { background: var(--primary); color: var(--theme); }
-  #edit-output { display: none; position: absolute; bottom: 44px; right: 10px; z-index: 1000; background: var(--entry); color: var(--primary); border: 1px solid var(--border); border-radius: 4px; padding: 10px 12px; font-size: 11px; font-family: monospace; max-width: 260px; max-height: 200px; overflow-y: auto; line-height: 1.7; }
-  #edit-output.visible { display: block; }
-  #edit-output .copy-btn { display: block; margin-top: 8px; background: var(--primary); color: var(--theme); border: none; border-radius: 3px; padding: 4px 8px; font-size: 11px; cursor: pointer; font-family: inherit; width: 100%; }
+  #globe-container {
+    width: 100%;
+    height: 520px;
+    position: relative;
+    background: #050a0e;
+    border-radius: var(--radius, 4px);
+    overflow: hidden;
+  }
+  #globe-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(20,60,140,0.13) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  #travel-globe {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  .city-label {
+    display: flex;
+    flex-direction: column;
+    padding-left: 7px;
+    border-left: 1px solid rgba(79,158,255,0.35);
+    pointer-events: none;
+    user-select: none;
+  }
+  .city-label .name {
+    color: #e2e8f0;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    line-height: 1.35;
+    white-space: nowrap;
+    text-shadow: 0 0 8px rgba(5,10,14,0.9);
+  }
+  .city-label .year {
+    color: #4f9eff;
+    font-size: 10px;
+    line-height: 1.35;
+    text-shadow: 0 0 8px rgba(5,10,14,0.9);
+  }
 </style>
-<div style="position:relative;">
-  <div id="travel-map"></div>
-  <button class="edit-toggle" id="edit-toggle" style="display:none;">Edit pins</button>
-  <div id="edit-output"></div>
+<div id="globe-container">
+  <div id="globe-glow"></div>
+  <div id="travel-globe"></div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/globe.gl"></script>
 <script>
 (function () {
   var cities = {{ .Page.Params.cities | jsonify | safeJS }};
-  var TILES = {
-    dark: { url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>' },
-    light: { url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>' },
-  };
 
-  function resolvedTheme() {
-    var attr = document.documentElement.dataset.theme;
-    if (attr === 'dark') return 'dark';
-    if (attr === 'light') return 'light';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  var container = document.getElementById('globe-container');
+  var el = document.getElementById('travel-globe');
+
+  var globe = Globe()
+    (el)
+    .width(container.offsetWidth)
+    .height(container.offsetHeight)
+    .backgroundColor('#050a0e')
+    .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-dark.jpg')
+    .atmosphereColor('#1d4a8c')
+    .atmosphereAltitude(0.15)
+    .showGraticules(true)
+    .pointsData(cities)
+    .pointLat(function (d) { return d.lat; })
+    .pointLng(function (d) { return d.lng; })
+    .pointColor(function () { return '#4f9eff'; })
+    .pointAltitude(0.01)
+    .pointRadius(0.4)
+    .htmlElementsData(cities)
+    .htmlElement(function (d) {
+      var div = document.createElement('div');
+      div.className = 'city-label';
+      div.innerHTML = '<span class="name">' + d.name + '</span><span class="year">' + d.year + '</span>';
+      return div;
+    })
+    .htmlAltitude(0.02)
+    .htmlTransitionDuration(0);
+
+  globe.controls().autoRotate = true;
+  globe.controls().autoRotateSpeed = 0.4;
+
+  var resumeTimer;
+  function pauseRotation() {
+    globe.controls().autoRotate = false;
+    clearTimeout(resumeTimer);
+  }
+  function scheduleResume() {
+    resumeTimer = setTimeout(function () { globe.controls().autoRotate = true; }, 2000);
   }
 
-  var PIN_COLORS = ['#e63946','#f4a261','#2a9d8f','#457b9d','#e9c46a','#8338ec','#fb5607','#3a86ff'];
-  var years = Array.from(new Set(cities.map(function (c) { return c.year; }))).sort();
-  var yearColor = {};
-  years.forEach(function (y, i) { yearColor[y] = PIN_COLORS[i % PIN_COLORS.length]; });
+  el.addEventListener('mousedown', pauseRotation);
+  el.addEventListener('mouseup', scheduleResume);
+  el.addEventListener('touchstart', pauseRotation, { passive: true });
+  el.addEventListener('touchend', scheduleResume, { passive: true });
 
-  var validCities = cities.filter(function (c) { return c.lat != null && c.lng != null; });
-  var initialCenter = [20, 15];
-  var initialZoom = 2;
-  if (validCities.length > 0) {
-    var lats = validCities.map(function (c) { return c.lat; });
-    var lngs = validCities.map(function (c) { return c.lng; });
-    initialCenter = [(Math.min.apply(null, lats) + Math.max.apply(null, lats)) / 2, (Math.min.apply(null, lngs) + Math.max.apply(null, lngs)) / 2];
-    var span = Math.max(Math.max.apply(null, lats) - Math.min.apply(null, lats), Math.max.apply(null, lngs) - Math.min.apply(null, lngs));
-    initialZoom = span > 160 ? 1 : span > 80 ? 2 : span > 40 ? 3 : span > 20 ? 4 : 5;
-  }
-
-  var map = L.map('travel-map', {
-    center: initialCenter, zoom: initialZoom, minZoom: 2, maxZoom: 18,
-    scrollWheelZoom: true, worldCopyJump: true,
+  window.addEventListener('resize', function () {
+    globe.width(container.offsetWidth).height(container.offsetHeight);
   });
 
-  var theme = resolvedTheme();
-  var tileLayer = L.tileLayer(TILES[theme].url, {
-    attribution: TILES[theme].attribution, subdomains: 'abcd', maxZoom: 19,
-  }).addTo(map);
-
-  function makePinIcon(color) {
-    return L.divIcon({
-      className: 'pin-icon',
-      html: '<svg width="14" height="22" viewBox="0 0 14 22" xmlns="http://www.w3.org/2000/svg">'
-        + '<line x1="7" y1="22" x2="7" y2="13" stroke="#888" stroke-width="1.5" stroke-linecap="round"/>'
-        + '<circle cx="7" cy="7" r="6" fill="' + color + '" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>'
-        + '</svg>',
-      iconSize: [14, 22],
-      iconAnchor: [7, 22],
-      tooltipAnchor: [0, -22],
-    });
-  }
-
-  var currentCoords = {};
-  var markers = [];
-
-  cities.forEach(function (city) {
-    if (city.lat == null || city.lng == null) return;
-    currentCoords[city.name] = { lat: city.lat, lng: city.lng, year: city.year };
-    var color = yearColor[city.year] || PIN_COLORS[0];
-    var marker = L.marker([city.lat, city.lng], { icon: makePinIcon(color) })
-      .bindTooltip(city.name + ' (' + city.year + ')', { direction: 'top' })
-      .addTo(map);
-    marker.on('dragend', function (e) {
-      var ll = e.target.getLatLng();
-      currentCoords[city.name] = { lat: Math.round(ll.lat * 10000) / 10000, lng: Math.round(ll.lng * 10000) / 10000, year: city.year };
-      renderOutput();
-    });
-    markers.push({ city: city, marker: marker });
-  });
-
-  var editMode = false;
-  var toggleBtn = document.getElementById('edit-toggle');
-  var outputEl = document.getElementById('edit-output');
-
-  function renderOutput() {
-    var text = Object.keys(currentCoords).map(function (name) {
-      var c = currentCoords[name];
-      return '  - name: ' + name + '\n    lat: ' + c.lat + '\n    lng: ' + c.lng + '\n    year: ' + c.year;
-    }).join('\n');
-    outputEl.innerHTML = '<pre style="margin:0;white-space:pre-wrap">' + text + '</pre><button class="copy-btn" id="copy-btn">Copy all</button>';
-    document.getElementById('copy-btn').addEventListener('click', function () {
-      navigator.clipboard.writeText(text);
-      this.textContent = 'Copied!';
-      var btn = this;
-      setTimeout(function () { btn.textContent = 'Copy all'; }, 1500);
-    });
-  }
-
-  function toggleEdit() {
-    editMode = !editMode;
-    toggleBtn.style.display = editMode ? 'block' : 'none';
-    toggleBtn.textContent = editMode ? 'Done' : 'Edit pins';
-    toggleBtn.classList.toggle('active', editMode);
-    outputEl.classList.toggle('visible', editMode);
-    markers.forEach(function (m) {
-      if (editMode) { m.marker.dragging.enable(); }
-      else { m.marker.dragging.disable(); }
-    });
-    if (editMode) renderOutput();
-  }
-
-  toggleBtn.addEventListener('click', toggleEdit);
-  window.travelEdit = toggleEdit;
-
-  new MutationObserver(function () {
-    tileLayer.setUrl(TILES[resolvedTheme()].url);
-  }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  globe.pointOfView({ lat: -10, lng: 140, altitude: 2.2 }, 0);
 })();
 </script>
