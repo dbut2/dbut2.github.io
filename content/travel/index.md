@@ -143,6 +143,4 @@ cities:
 #    year: 2026
 ---
 
-Every city I have been to, coloured by year.
-
 {{< worldmap >}}
