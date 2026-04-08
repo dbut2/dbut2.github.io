@@ -2,6 +2,8 @@
 title: Protect Your Shed
 date: 2026-04-08
 draft: false
+cover:
+  image: /images/IMG_2205.jpg
 ---
 Constructing a skyscraper is a massive undertaking. You need architectural blueprints, council permits, and safety audits before the first piece of steel is even ordered. It requires hundreds of people coordinating over months or years. You can't just throw up some drywall and hope the building holds weight.
 
