@@ -2,8 +2,6 @@
 title: Self-hosted traffic ingress
 date: 2024-05-13
 draft: false
-tags:
-  - self-hosted
 ---
 A quick snippet of my docker compose config for managing traffic ingress into my self-hosted setup.
 

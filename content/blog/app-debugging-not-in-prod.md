@@ -2,8 +2,6 @@
 title: App debugging not in prod
 date: 2024-06-06
 draft: false
-tags:
-  - go
 ---
 Building a Game Boy Advance emulator has gotten difficult, currently stuck on what appears to be I/O Registers not outputting their correct values and when a game is loaded in the gamepak, the device runs into a boot-loop.
 

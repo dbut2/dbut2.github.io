@@ -4,8 +4,6 @@
   <header class="dbx-article-head">
     <div class="dbx-article-head__meta">
       <span class="date">{{ .Date.Format "2006-01-02" }}</span>
-      &nbsp;·&nbsp;
-      <span>{{ len $images }} {{ if eq (len $images) 1 }}frame{{ else }}frames{{ end }}</span>
     </div>
     <h1 class="dbx-article-head__title">{{ .Title }}</h1>
   </header>

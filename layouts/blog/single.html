@@ -2,14 +2,6 @@
   <header class="dbx-article-head">
     <div class="dbx-article-head__meta">
       <span class="date">{{ .Date.Format "2006-01-02" }}</span>
-      {{- with .Params.tags }}
-      &nbsp;·&nbsp;
-      <span class="tags">
-        {{- range . -}}
-          <a href="{{ (printf "/tags/%s" (. | urlize)) | relURL }}">#{{ . }}</a>{{ if ne . (index $.Params.tags (sub (len $.Params.tags) 1)) }} {{ end }}
-        {{- end -}}
-      </span>
-      {{- end }}
     </div>
     <h1 class="dbx-article-head__title">{{ .Title }}</h1>
     {{- with .Description }}
@@ -28,20 +20,4 @@
   <article class="dbx-prose">
     {{ .Content }}
   </article>
-
-  <footer class="dbx-article-footer">
-    <nav class="dbx-article-footer__nav">
-      {{- with .PrevInSection }}
-        <a href="{{ .RelPermalink }}">← {{ .Title | lower }}</a>
-      {{- else }}
-        <a href="{{ "/blog" | relURL }}">← index</a>
-      {{- end }}
-      {{- with .NextInSection }}
-        <a href="{{ .RelPermalink }}">{{ .Title | lower }} →</a>
-      {{- end }}
-    </nav>
-    <div class="dbx-article-footer__meta">
-      <a href="https://github.com/dbut2/dbut2.github.io/edit/main/content/blog/{{ .File.LogicalName }}">edit on github</a>
-    </div>
-  </footer>
 {{ end }}
