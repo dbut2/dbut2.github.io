@@ -3,25 +3,21 @@
 {{- $caption := .Title -}}
 {{- $page := .Page -}}
 
-{{- /* Attempt to get the image from Page Resources (Leaf Bundles) */ -}}
+{{- /* Prefer page resources (leaf bundles), fall back to external URL */ -}}
 {{- $image := $page.Resources.GetMatch $src -}}
 
 {{- if $image -}}
-  <figure style="width: 100%; margin: 0;">
-    <img src="{{ $image.RelPermalink }}" 
-         alt="{{ $alt }}" 
-         {{ with $caption }} title="{{ . }}" {{ end }}
-         loading="lazy"
-         style="width: 100%; height: auto; display: block;">
-    {{- with $caption -}}
-      <figcaption style="text-align: center; font-size: 0.8em; margin-top: 0.5em;">{{ . }}</figcaption>
-    {{- end -}}
-  </figure>
+<figure>
+  <img src="{{ $image.RelPermalink }}" alt="{{ $alt }}"{{ with $caption }} title="{{ . }}"{{ end }} loading="lazy">
+  {{- with $caption }}
+  <figcaption>{{ . }}</figcaption>
+  {{- end }}
+</figure>
 {{- else -}}
-  {{- /* Fallback for external images or static folder */ -}}
-  <img src="{{ $src | safeURL }}" 
-       alt="{{ $alt }}" 
-       {{ with $caption }} title="{{ . }}" {{ end }}
-       loading="lazy"
-       style="width: 100%; height: auto; display: block;">
+<figure>
+  <img src="{{ $src | safeURL }}" alt="{{ $alt }}"{{ with $caption }} title="{{ . }}"{{ end }} loading="lazy">
+  {{- with $caption }}
+  <figcaption>{{ . }}</figcaption>
+  {{- end }}
+</figure>
 {{- end -}}

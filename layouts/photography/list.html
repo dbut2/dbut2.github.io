@@ -1,0 +1,18 @@
+{{ define "main" }}
+  <header class="dbx-article-head">
+    <div class="dbx-article-head__meta">
+      <span class="date">{{ len .Pages }} rolls</span>
+    </div>
+    <h1 class="dbx-article-head__title">photos</h1>
+  </header>
+
+  <section class="dbx-section">
+    {{- range .Pages.ByDate.Reverse }}
+      <a class="dbx-photo-row" href="{{ .RelPermalink }}">
+        <span class="dbx-photo-row__year">{{ .Date.Format "2006-01-02" }}</span>
+        <span class="dbx-photo-row__slug">{{ path.Base .RelPermalink }}</span>
+        <span class="dbx-photo-row__arrow">→</span>
+      </a>
+    {{- end }}
+  </section>
+{{ end }}

@@ -1,0 +1,9 @@
+<footer class="dbx-footer">
+  <span class="dbx-footer__prompt">© {{ now.Format "2006" }} {{ .Site.Params.name | default "dylan butler" }}</span>
+  <span>
+    {{- range .Site.Params.socials -}}
+      <a href="{{ .url }}">{{ .name }}</a>
+    {{- end -}}
+    <a href="{{ "/index.xml" | relURL }}">rss</a>
+  </span>
+</footer>

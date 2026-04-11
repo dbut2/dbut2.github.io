@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <header class="dbx-article-head">
+    <div class="dbx-article-head__meta">
+      <span class="date">{{ len .Pages }} {{ if eq (len .Pages) 1 }}entry{{ else }}entries{{ end }}</span>
+    </div>
+    <h1 class="dbx-article-head__title">{{ .Title | lower }}</h1>
+    {{- with .Description }}
+    <p class="dbx-article-head__desc">{{ . }}</p>
+    {{- end }}
+  </header>
+
+  <section class="dbx-section">
+    {{- range .Pages.ByDate.Reverse }}
+      <a class="dbx-row" href="{{ .RelPermalink }}">
+        <span class="dbx-row__lead">{{ .Date.Format "2006-01-02" }}</span>
+        <span class="dbx-row__title">{{ .Title | lower }}</span>
+        <span class="dbx-row__arrow">→</span>
+      </a>
+    {{- end }}
+  </section>
+{{ end }}
