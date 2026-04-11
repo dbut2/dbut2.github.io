@@ -8,16 +8,9 @@
       <span>{{ len $images }} {{ if eq (len $images) 1 }}frame{{ else }}frames{{ end }}</span>
     </div>
     <h1 class="dbx-article-head__title">{{ .Title }}</h1>
-    {{- with .Content }}
-    <div class="dbx-article-head__desc">{{ . }}</div>
-    {{- end }}
   </header>
 
-  <div class="dbx-photo-gallery">
-    {{- range $i, $img := $images }}
-      <figure class="dbx-photo-gallery__item">
-        <img src="{{ $img.RelPermalink }}" alt="{{ .Title | default (printf "frame %02d" (add $i 1)) }}" loading="lazy">
-      </figure>
-    {{- end }}
+  <div class="dbx-prose">
+    {{ .Content }}
   </div>
 {{ end }}
