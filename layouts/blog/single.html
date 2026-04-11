@@ -1,0 +1,23 @@
+{{ define "main" }}
+  <header class="dbx-article-head">
+    <div class="dbx-article-head__meta">
+      <span class="date">{{ .Date.Format "2006-01-02" }}</span>
+    </div>
+    <h1 class="dbx-article-head__title">{{ .Title }}</h1>
+    {{- with .Description }}
+    <p class="dbx-article-head__desc">{{ . }}</p>
+    {{- end }}
+  </header>
+
+  {{- with .Params.cover }}
+    {{- with .image }}
+  <figure class="dbx-article-cover">
+    <img src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy">
+  </figure>
+    {{- end }}
+  {{- end }}
+
+  <article class="dbx-prose">
+    {{ .Content }}
+  </article>
+{{ end }}

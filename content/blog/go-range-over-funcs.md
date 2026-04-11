@@ -2,8 +2,6 @@
 title: Go range over funcs
 date: 2024-05-14
 draft: false
-tags:
-  - go
 ---
 Following discussions and read throughs on the following proposal, I hadn't fully understood what the use case for this was or what the value of being able to range over functions would be.
 

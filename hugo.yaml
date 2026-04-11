@@ -1,40 +1,24 @@
 baseURL: https://dylanbutler.dev/
-theme: github.com/adityatelange/hugo-PaperMod
-title: "@dbut2"
+theme: dbut.dev/x
+title: "dbut2"
 timeout: 2m
-menu:
-  main:
-    - name: Blog
-      url: /blog
+timezone: Australia/Melbourne
+disableKinds:
+  - taxonomy
+  - term
 params:
-  author: Dylan Butler
-  showReadingTime: false
-  showWordCount: false
-  defaultTheme: auto
-  disableThemeToggle: false
-  showCodeCopyButtons: true
-  profileMode:
-    enabled: true
-    title: Dylan Butler
-    subtitle: software engineer | melbourne
-    imageUrl: /images/profile.png
-    imageWidth: 250
-    imageHeight: 250
-  socialIcons:
+  name: Dylan Butler
+  image: profile.png
+  description: "software engineer in melbourne. i write some code, take some photos, and sometimes write about it too."
+  socials:
     - name: github
       url: https://github.com/dbut2
     - name: linkedin
       url: https://linkedin.com/in/dbut2
-    - name: strava
-      url: https://strava.com/athletes/dbut2
-    - name: lastfm
-      url: https://www.last.fm/user/dbut2
-  hideFooter: true
-disableHugoGeneratorInject: false
-timezone: Australia/Melbourne
+    - name: email
+      url: mailto:dylan@but.la
 module:
   imports:
-    - path: github.com/adityatelange/hugo-PaperMod
     - path: github.com/mfg92/hugo-shortcode-gallery
 security:
   funcs:
@@ -44,3 +28,8 @@ markup:
   goldmark:
     renderer:
       unsafe: true
+  highlight:
+    style: monokai
+    codeFences: true
+    guessSyntax: false
+    lineNos: false
