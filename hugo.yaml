@@ -29,7 +29,7 @@ markup:
     renderer:
       unsafe: true
   highlight:
-    noClasses: false
+    style: monokai
     codeFences: true
     guessSyntax: false
     lineNos: false
