@@ -1,4 +1,6 @@
 dbut.dev/x v0.0.0-20260411143037-123b2247a89a h1:frqx2KiBr9bbCX5PE15bomhB5CbGB+EMGtqzcEcQGaw=
 dbut.dev/x v0.0.0-20260411143037-123b2247a89a/go.mod h1:e6tJgCQpl+P1hEvLwv4+e+uuUN9Rhic63PuIotBW2gQ=
+dbut.dev/x v0.0.0-20260411144546-74a6b492dfee h1:sJCysArOOLoZGK+AsBbXyJlAYjuLr6FcwSCtbn781Nw=
+dbut.dev/x v0.0.0-20260411144546-74a6b492dfee/go.mod h1:e6tJgCQpl+P1hEvLwv4+e+uuUN9Rhic63PuIotBW2gQ=
 github.com/mfg92/hugo-shortcode-gallery v1.4.0 h1:QS6L448HSnMSJwnH4HY+euTemuK1Dsq6lfYIRU8cLV4=
 github.com/mfg92/hugo-shortcode-gallery v1.4.0/go.mod h1:SEdbeBGSMX2lP+4nCqqy9AyTWWktUMWXYnR3r1l01Rw=
