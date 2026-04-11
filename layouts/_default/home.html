@@ -27,7 +27,7 @@
     {{- range $rolls }}
       <a class="dbx-photo-row" href="{{ .RelPermalink }}">
         <span class="dbx-photo-row__year">{{ .Date.Format "2006-01-02" }}</span>
-        <span class="dbx-photo-row__slug">{{ path.Base .RelPermalink }}</span>
+        <span class="dbx-photo-row__slug">{{ .Title | lower }}</span>
         <span class="dbx-photo-row__arrow">→</span>
       </a>
     {{- end }}

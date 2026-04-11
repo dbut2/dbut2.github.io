@@ -7,6 +7,7 @@ disableKinds:
   - term
 params:
   name: Dylan Butler
+  image: profile.png
   description: "software engineer in melbourne. i write some code, take some photos, and sometimes write about it too."
   socials:
     - name: github
