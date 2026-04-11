@@ -3,9 +3,13 @@
   {{- $title = printf "%s · %s" .Title .Site.Title -}}
 {{- end -}}
 {{- $desc := .Description | default .Summary | default .Site.Params.description -}}
+{{- $name := .Site.Params.name | default "Dylan Butler" -}}
 
 <title>{{ $title }}</title>
 <meta name="description" content="{{ $desc }}">
+<meta name="author" content="{{ $name }}">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0c0c0c">
 <link rel="canonical" href="{{ .Permalink }}">
 
 <meta property="og:title" content="{{ $title }}">
@@ -13,6 +17,7 @@
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:locale" content="en">
 
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{{ $title }}">
@@ -26,6 +31,27 @@
 {{- end }}
 {{- end }}
 {{- end }}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  {{ if .IsHome -}}
+  "@type": "Person",
+  "name": "{{ $name }}",
+  "url": "{{ .Site.BaseURL }}",
+  "description": "{{ $desc }}",
+  "sameAs": [
+    {{- range $i, $s := .Site.Params.socials }}{{ if $i }},{{ end }}"{{ $s.url }}"{{ end }}
+  ]
+  {{- else -}}
+  "@type": "Article",
+  "headline": "{{ .Title }}",
+  "datePublished": "{{ .Date.Format "2006-01-02" }}",
+  "author": { "@type": "Person", "name": "{{ $name }}" },
+  "url": "{{ .Permalink }}"
+  {{- end }}
+}
+</script>
 
 <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ "/index.xml" | relURL }}">
 <link rel="icon" href="{{ "/favicon.ico" | relURL }}">
