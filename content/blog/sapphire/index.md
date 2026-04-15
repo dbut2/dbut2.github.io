@@ -11,7 +11,7 @@ Before you read on, stop and play for a second. What you're seeing here is the e
 
 <span class="keyboard-controls-hint">
 
-**Controls:** Z=A, X=B, A=L, S=R, Enter=Start, Backspace=Select
+**Controls:** Z=A, X=B, A=L, S=R, Enter=Start, Backspace=Select, M=Mute
 
 </span>
 
