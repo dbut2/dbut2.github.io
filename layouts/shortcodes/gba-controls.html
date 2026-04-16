@@ -19,6 +19,7 @@
         </div>
     </div>
     <div class="gba-menu">
+        <button id="{{ $id }}-mute-btn">&#x1F50A;</button>
         <button data-key="Backspace" data-label="SELECT" class="gba-btn-small"></button>
         <button data-key="Enter" data-label="START" class="gba-btn-small"></button>
         <button id="{{ $id }}-toggle-btn">&#x26F6;</button>
@@ -118,7 +119,8 @@
     }
 
     /* Toggle button — bottom-right of menu row, mobile only */
-    #{{ $id }}-toggle-btn {
+    #{{ $id }}-toggle-btn,
+    #{{ $id }}-mute-btn {
         display: none;
     }
     @media (pointer: coarse) {
@@ -126,6 +128,15 @@
             display: block;
             position: absolute;
             right: 8px;
+            width: 36px;
+            height: 28px;
+            padding: 0;
+            font-size: 14px;
+        }
+        #{{ $id }}-mute-btn {
+            display: block;
+            position: absolute;
+            left: 8px;
             width: 36px;
             height: 28px;
             padding: 0;
@@ -188,6 +199,20 @@
                 document.dispatchEvent(new KeyboardEvent("keyup", { code: code, bubbles: true }));
             }, { passive: false });
         });
+    })();
+
+    (function() {
+        var muteBtn = document.getElementById("{{ $id }}-mute-btn");
+        if (muteBtn) {
+            muteBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                var muted = false;
+                if (typeof window.sapphireToggleMute === "function") {
+                    muted = window.sapphireToggleMute();
+                }
+                muteBtn.innerHTML = muted ? "&#x1F507;" : "&#x1F50A;";
+            }, { passive: false });
+        }
     })();
 
     (function() {
