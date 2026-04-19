@@ -2,9 +2,11 @@
   {{- $images := .Resources.Match "images/*" -}}
 
   <header class="dbx-article-head">
+    {{- if not .Date.IsZero }}
     <div class="dbx-article-head__meta">
       <span class="date">{{ .Date.Format "2006-01-02" }}</span>
     </div>
+    {{- end }}
     <h1 class="dbx-article-head__title">{{ .Title }}</h1>
   </header>
 

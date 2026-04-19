@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <header class="dbx-article-head">
+    <h1 class="dbx-article-head__title">{{ .Title }}</h1>
+    {{- with .Description }}
+    <p class="dbx-article-head__desc">{{ . }}</p>
+    {{- end }}
+  </header>
+
+  <article class="dbx-prose">
+    {{ .Content }}
+
+    {{- range .Pages.ByDate.Reverse }}
+      <section class="dbx-travel-day" id="{{ path.Base .RelPermalink }}">
+        <h3>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </h3>
+        {{ .Content }}
+      </section>
+    {{- end }}
+  </article>
+{{ end }}

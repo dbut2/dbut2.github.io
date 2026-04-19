@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   {{ range .Pages }}
+    {{ if not .Params.noindex }}
     <url>
       <loc>{{ .Permalink }}</loc>
       {{ if not .Lastmod.IsZero }}
@@ -11,5 +12,6 @@
         <changefreq>{{ . }}</changefreq>
       {{ end }}
     </url>
+    {{ end }}
   {{ end }}
 </urlset>

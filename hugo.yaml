@@ -28,6 +28,8 @@ markup:
   goldmark:
     renderer:
       unsafe: true
+    parser:
+      wrapStandAloneImageWithinParagraph: false
   highlight:
     style: monokai
     codeFences: true
