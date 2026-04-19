@@ -11,9 +11,9 @@
 
     {{- range .Pages.ByDate.Reverse }}
       <section class="dbx-travel-day" id="{{ path.Base .RelPermalink }}">
-        <h3>
+        <h1>
           <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        </h3>
+        </h1>
         {{ .Content }}
       </section>
     {{- end }}
