@@ -1,5 +1,10 @@
 {{ define "main" }}
   <header class="dbx-article-head">
+    {{- if not .Date.IsZero }}
+    <div class="dbx-article-head__meta">
+      <span class="date">{{ .Date.Format "2006-01-02" }}</span>
+    </div>
+    {{- end }}
     <h1 class="dbx-article-head__title">{{ .Title }}</h1>
     {{- with .Description }}
     <p class="dbx-article-head__desc">{{ . }}</p>
@@ -11,8 +16,8 @@
 
     {{- range .Pages.ByDate.Reverse }}
       <section class="dbx-travel-day" id="{{ path.Base .RelPermalink }}">
-        <h1>
-          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <h1 class="dbx-article-head__title">
+          <a href="{{ .RelPermalink }}">{{ if .Title }}{{ .Title }}{{ else }}{{ .Date.Format "January 2" }}{{ end }}</a>
         </h1>
         {{ .Content }}
       </section>

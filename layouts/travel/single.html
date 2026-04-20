@@ -1,12 +1,18 @@
 {{ define "main" }}
+  {{- if .Title }}
   <header class="dbx-article-head">
     {{- if not .Date.IsZero }}
     <div class="dbx-article-head__meta">
-      <span class="date">{{ .Date.Format "2006-01-02" }}</span>
+      <span class="date">{{ .Date.Format "January 2" }}</span>
     </div>
     {{- end }}
     <h1 class="dbx-article-head__title">{{ .Title }}</h1>
   </header>
+  {{- else if not .Date.IsZero }}
+  <header class="dbx-article-head">
+    <h1 class="dbx-article-head__title">{{ .Date.Format "January 2" }}</h1>
+  </header>
+  {{- end }}
 
   <article class="dbx-prose">
     {{ .Content }}
