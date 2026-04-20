@@ -22,10 +22,8 @@ postcard:
     mime_type: image/jpeg
 ---
 
-I should be packing right now. Instead, I spent the day building a better engine for turning photos and voice notes into daily posts—the kind of thing that feels productive until you realize you're a week out from flying to Beijing and your suitcase is still empty.
+I was supposed to spend today packing. Instead I built a better engine for turning photos and voice notes into blog posts—the kind of thing that should've happened before a two-month trip, but here we are.
 
-![Flight itinerary for Asia trip](./media/1200-photo-110.jpg)
+Seven days until I fly out to Beijing. The itinerary's locked in: Melbourne to Hong Kong, then Beijing, down to Chongqing, over to Lijiang, through Kunming, down to Shenzhen, and finishing in Osaka. Six flights across six weeks. I know where I'm going. I just don't have my bag ready.
 
-Six flights across the map. Melbourne to Hong Kong, then Beijing, Chongqing, Lijiang, Kunming, Shenzhen, Osaka. The dates are locked in. Seven days to figure out what actually needs to go in a bag for six weeks of moving between cities with wildly different climates and altitudes.
-
-The engine works though. Feed it voice notes, photos, video, text—timestamps don't matter. It stitches them into something readable in maybe the cadence I'd actually use. No flowery language, no forced enthusiasm, just what happened and what I thought about it. That part felt worth doing before the trip starts, even if it meant putting off the packing another day.
+But the post-building tool works now, at least. Feed it timestamps, photos, audio clips, text notes—whatever comes in during a day—and it turns into something readable without too much fussing. That's the real win here. The packing can wait another few days.
