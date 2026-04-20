@@ -22,4 +22,10 @@ postcard:
     mime_type: image/jpeg
 ---
 
+![Morning light](<postcard/asia-2026/2026-04-21/0754-photo-1.jpeg>)
 
+{{< pcaudio src="postcard/asia-2026/2026-04-21/1400-voice-shortcut-dhy1bjpzndf2.ogg" >}}
+
+By afternoon I'd found my way to a sports complex on the edge of the city. The whole thing was built like a fortress—metal mesh fencing, cranes rigged overhead, floodlights already warming up even though the sun was still up. The field inside was clean grass, hemmed in tight. Advertising boards along the perimeter, the kind of setup you see at any professional stadium anywhere in the world.
+
+![Sports complex at dusk](<postcard/asia-2026/2026-04-21/1414-photo-118.jpg>)
