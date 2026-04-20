@@ -1,7 +1,6 @@
 ---
 date: "2026-04-20"
 postcard:
-  ai_last_run_at: 1776686708
   media:
   - file: 1145-text-1776685503.md
     kind: text
