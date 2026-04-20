@@ -15,6 +15,12 @@ postcard:
     caption: Also worth mentioning from the prior text, today is 7 days before I fly out to Beijing
     status: kept
     mime_type: text/markdown
+  - file: 1200-photo-110.jpg
+    kind: photo
+    captured_at: 1776686411
+    description: A mobile phone screen displays a flight itinerary app showing six upcoming flights across Asia, with each listing showing flight number, route, departure and arrival times, and days until travel. The interface has a dark background with white and gray text, including airline logos and airport codes for destinations in Melbourne, Hong Kong, Beijing, Chongqing, Lijiang, Kunming, Shenzhen, and Osaka.
+    status: kept
+    mime_type: image/jpeg
 ---
 
 Supposed to be packing today. Didn't happen. Instead I built a better engine for turning photos and voice notes into daily blog posts — the kind of thing that makes sense to do when you're seven days out from a flight to Beijing and feeling the itch to optimize something, anything, rather than fold clothes into a suitcase.
