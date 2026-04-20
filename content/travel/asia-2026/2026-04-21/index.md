@@ -19,7 +19,7 @@ postcard:
     kind: voice
     captured_at: 1776697890
     transcript: I've uploaded a couple photos of Alexander Gardens, I think it's called, in the city, of the governor's house, and also another photo down Lakeside Drive in Albert Park Lake with clear blue skies, very sunny day.
-    status: use
+    status: context
     mime_type: audio/x-m4a
 ---
 
