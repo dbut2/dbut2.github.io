@@ -39,6 +39,12 @@ postcard:
     transcript: Alexander Gardens should be Alexandra Gardens, the one in Melbourne.
     status: context
     mime_type: audio/ogg
+  - file: 1521-voice-shortcut-dhy31hpbovor.m4a
+    kind: voice
+    captured_at: 1776698462
+    transcript: Tonight I'm having dinner with all my friends. They're all here with me right now. Say hello everyone. Hello. Hello. Hello. I'm here with John next to me. John's having the pesto. John, what do you think of the pesto? Oh, the pesto is so good. It's so tasty. Very good.
+    status: use
+    mime_type: audio/x-m4a
 ---
 
 ![Tree-lined street with palm trees](./media/0708-photo-shortcut-dhy2qh04xhyb.jpg)
