@@ -14,6 +14,12 @@ postcard:
     transcript: Today is a new day. Good morning.
     status: use
     mime_type: audio/x-m4a
+  - file: 1414-photo-118.jpg
+    kind: photo
+    captured_at: 1776694479
+    description: A sports facility with multiple illuminated cranes and metal mesh fencing surrounds an enclosed athletic field at dusk. Green grass in the foreground extends toward the complex, which features black metal railings, floodlights, and advertising boards along the perimeter.
+    status: use
+    mime_type: image/jpeg
 ---
 
 
