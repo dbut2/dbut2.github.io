@@ -32,6 +32,12 @@ postcard:
     transcript: This is a test voice note.
     status: use
     mime_type: audio/ogg
+  - file: 1357-voice-shortcut-dhy19m59ea81.ogg
+    kind: voice
+    captured_at: 1776693456
+    transcript: Testing testing 123.
+    status: use
+    mime_type: audio/x-m4a
 ---
 
 I was supposed to spend today packing. Instead I built a better engine for turning photos and voice notes into blog posts—the kind of thing that should've happened before a two-month trip, but here we are.
