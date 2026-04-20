@@ -37,7 +37,7 @@ postcard:
     kind: text
     captured_at: 1776698271
     caption: Alexander gardens should be Alexandra Gardens, in Melbourne
-    status: use
+    status: context
     mime_type: text/markdown
 ---
 
