@@ -13,7 +13,7 @@ postcard:
     kind: text
     captured_at: 1776685618
     caption: Also worth mentioning from the prior text, today is 7 days before I fly out to Beijing
-    status: kept
+    status: context
     mime_type: text/markdown
   - file: 1252-photo-112.jpg
     kind: photo
@@ -21,24 +21,6 @@ postcard:
     description: A mobile phone screen displays a travel itinerary app showing "My Flights" with six upcoming flights listed chronologically from April 27 to June 1, including routes between Melbourne, Hong Kong, Beijing, Chongqing, Lijiang, Kunming, Shenzhen, and Osaka, with departure and arrival times and layover durations noted for each flight.
     status: context
     mime_type: image/jpeg
-  - file: 1328-text-1776691692.md
-    kind: text
-    captured_at: 1776691692
-    caption: Here’s some test text
-    status: use
-    mime_type: text/markdown
-  - file: 1342-voice-116.oga
-    kind: voice
-    captured_at: 1776692555
-    transcript: This is a test voice note.
-    status: use
-    mime_type: audio/ogg
-  - file: 1357-voice-shortcut-dhy19m59ea81.ogg
-    kind: voice
-    captured_at: 1776693456
-    transcript: Testing testing 123.
-    status: use
-    mime_type: audio/x-m4a
 ---
 
 I was supposed to spend today packing. Instead I built a better engine for turning photos and voice notes into blog posts—the kind of thing that should've happened before a two-month trip, but here we are.
