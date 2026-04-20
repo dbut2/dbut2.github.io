@@ -3,6 +3,12 @@ date: "2026-04-21"
 draft: true
 postcard:
   media:
+  - file: 0847-photo-shortcut-dhy2vyky9715.jpg
+    kind: photo
+    captured_at: 1772527635
+    description: A blue and dark-colored train travels along tracks beside a paved road, with bare and leafy trees flanking both sides. Power lines stretch across an overcast sky at dusk or dawn.
+    status: use
+    mime_type: image/jpeg
   - file: 0343-photo-shortcut-dhy2tl9aq2bh.jpg
     kind: photo
     captured_at: 1773027827
