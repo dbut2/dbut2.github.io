@@ -1,7 +1,7 @@
 ---
 date: "2026-04-20"
 postcard:
-  ai_last_run_at: 1776685643
+  ai_last_run_at: 1776686469
   media:
   - file: 1145-text-1776685503.md
     kind: text
@@ -23,8 +23,8 @@ postcard:
     mime_type: image/jpeg
 ---
 
-Supposed to be packing today. Didn't happen. Instead I built a better engine for turning photos and voice notes into daily blog posts — the kind of thing that makes sense to do when you're seven days out from a flight to Beijing and feeling the itch to optimize something, anything, rather than fold clothes into a suitcase.
+A week out from Beijing. I've got the Asia leg mapped out—six flights strung together across the region. Melbourne to Hong Kong, then Beijing, down to Chongqing, over to Lijiang, back through Kunming, and eventually Shenzhen before wrapping in Osaka. 
 
-The engine works now. Photos, audio clips, video — all of it threads into markdown with the right shortcodes. Makes the conversion from raw media to publishable post faster. Which means the actual travel part, when it starts, won't have a backlog of material sitting around waiting to be written up.
+![Flight itinerary for Asia trip](./media/1200-photo-110.jpg)
 
-One week to go.
+It's the kind of itinerary that looks chaotic until you're actually executing it. Each hop is deliberate, but the logistics are starting to feel real now that the departure date is close enough to see.
