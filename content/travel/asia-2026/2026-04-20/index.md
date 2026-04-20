@@ -31,7 +31,7 @@ postcard:
     kind: photo
     captured_at: 1776699394
     description: A smartphone screen displaying a flight itinerary app with a dark background shows multiple booked flights across Asia. The screen lists six flights with departure and arrival cities, flight numbers, times, and days until travel, starting with Melbourne to Hong Kong on April 27 and ending with Hong Kong to Osaka on June 1.
-    status: use
+    status: context
     mime_type: image/png
 ---
 
