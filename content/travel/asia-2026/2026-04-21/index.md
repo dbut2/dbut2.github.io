@@ -37,7 +37,7 @@ postcard:
     kind: voice
     captured_at: 1776698346
     transcript: Alexander Gardens should be Alexandra Gardens, the one in Melbourne.
-    status: use
+    status: context
     mime_type: audio/ogg
 ---
 
