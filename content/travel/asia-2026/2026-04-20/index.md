@@ -3,7 +3,7 @@ title: "2026-04-20"
 date: "2026-04-20"
 postcard:
   status: published
-  ai_last_run_at: 1776685522
+  ai_last_run_at: 1776685629
   media:
   - file: 1145-text-1776685503.md
     kind: text
@@ -19,4 +19,4 @@ postcard:
     mime_type: text/markdown
 ---
 
-Meant to pack today and get my stuff sorted for the trip, but instead I built a better engine for turning the day's photos and voice notes into blog posts. It's the kind of thing that feels productive in the moment and definitely will be later, but probably not the smartest use of my time right now. The trade-off is clearer though — spend a few hours now automating the workflow, or spend ten minutes a day manually formatting markdown for the next few weeks. Came out ahead on that deal.
+Meant to pack today but didn't. Instead I built a better engine for turning photos and voice notes into daily posts—the kind of thing that feels urgent at 11 p.m. a week before you leave. Seven days until Beijing now.
