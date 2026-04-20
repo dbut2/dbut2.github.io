@@ -9,6 +9,12 @@ postcard:
     description: A blue and dark-colored train travels along tracks beside a paved road, with bare and leafy trees flanking both sides. Power lines stretch across an overcast sky at dusk or dawn.
     status: use
     mime_type: image/jpeg
+  - file: 0848-photo-shortcut-dhy2wbqkj0ns.jpg
+    kind: photo
+    captured_at: 1772527714
+    description: A rural landscape at sunset or sunrise with golden-orange light illuminating the sky, scattered trees silhouetted against the bright horizon, green fields in the foreground, and electrical power lines stretching across the upper portion of the frame.
+    status: use
+    mime_type: image/jpeg
   - file: 0343-photo-shortcut-dhy2tl9aq2bh.jpg
     kind: photo
     captured_at: 1773027827
