@@ -15,6 +15,12 @@ postcard:
     description: A tree-lined street runs alongside a paved road with green grass verges and palm trees planted along the curb. A street lamp stands on the left side, with clear blue sky above and white building facades visible in the background.
     status: context
     mime_type: image/jpeg
+  - file: 1511-voice-shortcut-dhy2u797aagd.m4a
+    kind: voice
+    captured_at: 1776697890
+    transcript: I've uploaded a couple photos of Alexander Gardens, I think it's called, in the city, of the governor's house, and also another photo down Lakeside Drive in Albert Park Lake with clear blue skies, very sunny day.
+    status: use
+    mime_type: audio/x-m4a
 ---
 
 ![Tree-lined street with palm trees](./media/0708-photo-shortcut-dhy2qh04xhyb.jpg)
