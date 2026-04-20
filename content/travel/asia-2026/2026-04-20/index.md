@@ -26,6 +26,12 @@ postcard:
     caption: Here’s some test text
     status: use
     mime_type: text/markdown
+  - file: 1342-voice-116.oga
+    kind: voice
+    captured_at: 1776692555
+    transcript: This is a test voice note.
+    status: use
+    mime_type: audio/ogg
 ---
 
 I was supposed to spend today packing. Instead I built a better engine for turning photos and voice notes into blog posts—the kind of thing that should've happened before a two-month trip, but here we are.
