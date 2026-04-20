@@ -1,8 +1,6 @@
 ---
-title: "2026-04-20"
 date: "2026-04-20"
 postcard:
-  status: published
   ai_last_run_at: 1776685643
   media:
   - file: 1145-text-1776685503.md
