@@ -13,6 +13,11 @@ postcard:
     captured_at: 1776412467
     status: use
     mime_type: image/jpeg
+  - file: 0754-photo-shortcut-dhy26ktuyyf1.jfif
+    kind: photo
+    captured_at: 1776412467
+    status: use
+    mime_type: image/jpeg
   - file: 1400-voice-shortcut-dhy1bjpzndf2.ogg
     kind: voice
     captured_at: 1776693608
