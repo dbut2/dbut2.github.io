@@ -3,6 +3,11 @@ date: "2026-04-21"
 draft: true
 postcard:
   media:
+  - file: 0754-photo-shortcut-dhy2645hsixu.jfif
+    kind: photo
+    captured_at: 1776412459
+    status: use
+    mime_type: image/jpeg
   - file: 0754-photo-1.jpeg
     kind: photo
     captured_at: 1776412467
