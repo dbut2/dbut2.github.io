@@ -27,12 +27,6 @@ postcard:
     transcript: don't mention self-service, sorry, self-hosted or any of the like infrastructure specific stuff. Make it easy to read for anyone who wants to read anyone outside of tech.
     status: context
     mime_type: audio/webm; codecs=opus
-  - file: 1534-photo-1.png
-    kind: photo
-    captured_at: 1776699273
-    description: A smartphone screen displays a flight itinerary with a dark background, showing multiple flights listed chronologically from April 27 to June 1. Each flight entry includes departure and arrival cities, times, flight numbers, and days until departure, with airline logos in various colors alongside the information.
-    status: use
-    mime_type: image/png
 ---
 
 Instead of packing, I spent the day building a tool to make posting from the road easier. The idea's simple: I can dump photos and voice notes throughout the day—upload them from my phone, record directly on the website, or send them via Telegram—and it spits out a finished blog post. No wrestling with uploads and formatting each night, no huge time sink after dinner trying to write everything up.
