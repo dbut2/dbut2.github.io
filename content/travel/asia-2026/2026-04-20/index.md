@@ -21,6 +21,12 @@ postcard:
     description: A mobile phone screen displays a travel itinerary app showing "My Flights" with six upcoming flights listed chronologically from April 27 to June 1, including routes between Melbourne, Hong Kong, Beijing, Chongqing, Lijiang, Kunming, Shenzhen, and Osaka, with departure and arrival times and layover durations noted for each flight.
     status: context
     mime_type: image/jpeg
+  - file: 1531-voice-1.webm
+    kind: voice
+    captured_at: 1776699116
+    transcript: So for context, it's not really an engine, more so just a service that I span up on my self-hosted stuff that generates markdown for Hugo. All I do is upload all of the images, audio. I can either record on the website, use Safari shortcuts, or use Telegram. Telegram, I can send photos as well. I also have a shortcut for sharing photos directly to Postcard. or else I can just go to the postcard website and upload photos. I did it so that I could write blog posts for my friends without doing a lot of effort into writing posts. So previously when I traveled, I would keep a daily blog, but I'd have to every night upload all the photos, write a big post, and it took a lot of time, and I just don't want to do this time. So I built the tool. All I do is upload all of the content at the end of the day, and then that will generate the blog post, making it easier to share what I'm up to with my friends.
+    status: use
+    mime_type: audio/webm; codecs=opus
 ---
 
 I was supposed to spend today packing. Instead I built a better engine for turning photos and voice notes into blog posts—the kind of thing that should've happened before a two-month trip, but here we are.
