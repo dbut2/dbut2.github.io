@@ -15,12 +15,6 @@ postcard:
     caption: Also worth mentioning from the prior text, today is 7 days before I fly out to Beijing
     status: context
     mime_type: text/markdown
-  - file: 1252-photo-112.jpg
-    kind: photo
-    captured_at: 1776689568
-    description: A mobile phone screen displays a travel itinerary app showing "My Flights" with six upcoming flights listed chronologically from April 27 to June 1, including routes between Melbourne, Hong Kong, Beijing, Chongqing, Lijiang, Kunming, Shenzhen, and Osaka, with departure and arrival times and layover durations noted for each flight.
-    status: context
-    mime_type: image/jpeg
   - file: 1531-voice-1.webm
     kind: voice
     captured_at: 1776699116
