@@ -27,6 +27,12 @@ postcard:
     transcript: don't mention self-service, sorry, self-hosted or any of the like infrastructure specific stuff. Make it easy to read for anyone who wants to read anyone outside of tech.
     status: context
     mime_type: audio/webm; codecs=opus
+  - file: 1536-photo-1.png
+    kind: photo
+    captured_at: 1776699394
+    description: A smartphone screen displaying a flight itinerary app with a dark background shows multiple booked flights across Asia. The screen lists six flights with departure and arrival cities, flight numbers, times, and days until travel, starting with Melbourne to Hong Kong on April 27 and ending with Hong Kong to Osaka on June 1.
+    status: use
+    mime_type: image/png
 ---
 
 Instead of packing, I spent the day building a tool to make posting from the road easier. The idea's simple: I can dump photos and voice notes throughout the day—upload them from my phone, record directly on the website, or send them via Telegram—and it spits out a finished blog post. No wrestling with uploads and formatting each night, no huge time sink after dinner trying to write everything up.
