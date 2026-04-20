@@ -1,0 +1,25 @@
+---
+date: 2024-03-29
+---
+
+Good morning! Yesterday we spent basically the entire day at Universal Studios. It was amazing! Learning from last time, I knew we needed to get there early so that would could reserve a time slot for Super Nintendo World before it all got sold out. We left devhouse before 9am so that we could get there early and then the first thing we would do when we got there was reserve the slot.
+
+By the time we got through the gates and tried to make the reservation it was before 10am and the earliest that we could book was 9pm! We decided that we would do it anyway and spend the whole day at the park waiting for it. Super Nintendo World is pretty cool so it was worth the wait.
+
+![image](c7e1dce6-66ab-4a30-b6ae-574360bffa9d.jpg)
+
+We spent the day going on many rides, the flying dinosaur was my favourite, and we had the ingenious idea of just going in the singles lines on all of the rides so that we wouldn't have to wait as long. Some of the rides had wait times of around 90 minutes but we basically walked into the front of the line and didn't have to wait. I think the longest we had to wait was for the flying dinosaur and we only spent maybe a little over an hour waiting for it but it was worth the wait.
+
+![image](9a5069df-9ab9-4e51-a791-980920a027bb.jpg)
+
+For dinner we had minion burgers and the happiness cafe and they made me very happy. It started raining in the evening and we hoped that this meant the park would start to clear out and maybe we could go to Super Nintendo World early as they had told us if there was not many people in there that we could enter without the reservation. Unfortunately this wasn't the case but it meant that we had time to go on a couple of the rides again, this time at night and in the dark. It made the thrill so much more exciting.
+
+![image](7d3c6b3b-e1e8-4916-b805-a36d37553a1c.jpg)
+
+We finally waited through the day and made it into Super Nintendo World in our slotted time and it was so cool in there. It was like if a Mario game had made it into real life and we were living in it. We spent the rest of the time until park close there and then headed for home when we got kicked out.
+
+![image](591e2f3f-57f0-47f5-a062-c964121bbfc2.jpg)
+
+On the way home we stopped into the conbini and picked up a couple strong zeros and we had a couple of drinks back at devhouse.
+
+See you tomorrow!

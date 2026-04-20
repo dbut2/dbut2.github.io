@@ -1,0 +1,8 @@
+content/travel/japan-2024/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+content/travel/japan-2024/**/*.png filter=lfs diff=lfs merge=lfs -text
+content/travel/japan-2024/**/*.mov filter=lfs diff=lfs merge=lfs -text
+content/travel/japan-2024/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
+content/travel/japan-2025/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+content/travel/japan-2025/**/*.png filter=lfs diff=lfs merge=lfs -text
+content/travel/japan-2025/**/*.mov filter=lfs diff=lfs merge=lfs -text
+content/travel/japan-2025/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
