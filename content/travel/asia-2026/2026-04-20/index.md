@@ -31,7 +31,7 @@ postcard:
     kind: voice
     captured_at: 1776699168
     transcript: don't mention self-service, sorry, self-hosted or any of the like infrastructure specific stuff. Make it easy to read for anyone who wants to read anyone outside of tech.
-    status: use
+    status: context
     mime_type: audio/webm; codecs=opus
 ---
 
