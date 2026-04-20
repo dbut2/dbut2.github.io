@@ -33,6 +33,12 @@ postcard:
     transcript: I've uploaded a couple photos of Alexander Gardens, I think it's called, in the city, of the governor's house, and also another photo down Lakeside Drive in Albert Park Lake with clear blue skies, very sunny day.
     status: use
     mime_type: audio/x-m4a
+  - file: 1519-voice-124.oga
+    kind: voice
+    captured_at: 1776698346
+    transcript: Alexander Gardens should be Alexandra Gardens, the one in Melbourne.
+    status: use
+    mime_type: audio/ogg
 ---
 
 ![Tree-lined street with palm trees](./media/0708-photo-shortcut-dhy2qh04xhyb.jpg)
