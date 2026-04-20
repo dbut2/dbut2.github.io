@@ -1,6 +1,4 @@
-dbut.dev/x v0.0.0-20260411144935-7fde50eebbd0 h1:xN8/qavx9tMwBpveU0CJEE9+dDKfJAipNfZv+Jm0fLE=
-dbut.dev/x v0.0.0-20260411144935-7fde50eebbd0/go.mod h1:e6tJgCQpl+P1hEvLwv4+e+uuUN9Rhic63PuIotBW2gQ=
-dbut.dev/x v0.0.0-20260419174621-74abf4de88e4 h1:JaSjCOID58rSKxcGt3I2u6TUjQMLjMoAILPAlu/BhU8=
-dbut.dev/x v0.0.0-20260419174621-74abf4de88e4/go.mod h1:gYAYjnup5VEb9iYY+BSQO63+AqeMHSRS1WDt8QfHRvg=
+dbut.dev/x v0.0.0-20260420050319-9f1b5542e873 h1:vxUMufJpSlTRaM0ZDowxKdwX5ew28z/yJCCPrL4dvPM=
+dbut.dev/x v0.0.0-20260420050319-9f1b5542e873/go.mod h1:gYAYjnup5VEb9iYY+BSQO63+AqeMHSRS1WDt8QfHRvg=
 github.com/mfg92/hugo-shortcode-gallery v1.4.0 h1:QS6L448HSnMSJwnH4HY+euTemuK1Dsq6lfYIRU8cLV4=
 github.com/mfg92/hugo-shortcode-gallery v1.4.0/go.mod h1:SEdbeBGSMX2lP+4nCqqy9AyTWWktUMWXYnR3r1l01Rw=
