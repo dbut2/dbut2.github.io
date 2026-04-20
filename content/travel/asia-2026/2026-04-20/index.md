@@ -25,7 +25,7 @@ postcard:
     kind: voice
     captured_at: 1776699116
     transcript: So for context, it's not really an engine, more so just a service that I span up on my self-hosted stuff that generates markdown for Hugo. All I do is upload all of the images, audio. I can either record on the website, use Safari shortcuts, or use Telegram. Telegram, I can send photos as well. I also have a shortcut for sharing photos directly to Postcard. or else I can just go to the postcard website and upload photos. I did it so that I could write blog posts for my friends without doing a lot of effort into writing posts. So previously when I traveled, I would keep a daily blog, but I'd have to every night upload all the photos, write a big post, and it took a lot of time, and I just don't want to do this time. So I built the tool. All I do is upload all of the content at the end of the day, and then that will generate the blog post, making it easier to share what I'm up to with my friends.
-    status: use
+    status: context
     mime_type: audio/webm; codecs=opus
 ---
 
