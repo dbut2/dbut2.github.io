@@ -35,8 +35,8 @@ postcard:
     mime_type: audio/webm; codecs=opus
 ---
 
-I was supposed to spend today packing. Instead I built a better engine for turning photos and voice notes into blog posts—the kind of thing that should've happened before a two-month trip, but here we are.
+Instead of packing, I spent the day building a tool to make posting from the road easier. The idea's simple: I can dump photos and voice notes throughout the day—upload them from my phone, record directly on the website, or send them via Telegram—and it spits out a finished blog post. No wrestling with uploads and formatting each night, no huge time sink after dinner trying to write everything up.
 
-Seven days until I fly out to Beijing. The itinerary's locked in: Melbourne to Hong Kong, then Beijing, down to Chongqing, over to Lijiang, through Kunming, down to Shenzhen, and finishing in Osaka. Six flights across six weeks. I know where I'm going. I just don't have my bag ready.
+I've done the daily blog thing before when traveling, and it burns out fast. You get back to the hotel, you're tired, and suddenly you're spending an hour just organizing photos and writing something decent. This time I wanted to actually enjoy the trip instead of treating the documentation like a second job. So I built this thing to let me just... post. Fire and forget.
 
-But the post-building tool works now, at least. Feed it timestamps, photos, audio clips, text notes—whatever comes in during a day—and it turns into something readable without too much fussing. That's the real win here. The packing can wait another few days.
+Seven days until I leave for Beijing. Packing can wait.
