@@ -1,0 +1,36 @@
+---
+date: 2025-11-08
+title: Leg Amputation
+---
+
+Today I finally after much effort completed my cycle trip. Today was probably the hardest of them all but that probably just makes it all the more worth it, right.
+
+![image](6cf4de62-0a86-4fa3-83a6-b43945abae42.jpg)
+
+I started today off with an early start having already decided to do parkrun in Otsu. I planned the route around doing this months ago so by this point I couldn't let old me down and had to go for the run, even if I knew I was going to pay for it later. The run was nice and the sun was out and shining, making the "Sunshine Beach" parkrun really work for its name.
+
+![image](11cb1536-a61e-4f8a-a759-dd9fc3d16518.jpg)
+
+After parkrun I headed back to the hotel which was across the road to pack the panniers for one last time. Today was going to be a long day and there was going to be some hills so I was not so excited.
+
+I hopped on the bike and started pedalling away. I stopped in at a konbini for some water and a sandwich, a daily classic, and one of the guys standing outside started admiring my bike and we had a quick chat. Unfortunately he could understand everything I was saying except for the fact that the bike was rented and not mine, so he thought I had a really nice bike, maybe that's not so bad.
+
+As I rode off I encountered my first hill pretty quickly. I tried my best to ride up it, I really did, but after a few hundred metres I decided to just walk the bike instead. I did this for all of the hills today. My legs weren't starting to get really tired and the run this morning didn't help.
+
+![image](048efb4e-f87b-4e97-87e4-b306c42d707f.jpg)
+
+The downhills were nice, and I got to catch up on some time I lost by walking and I soon found myself in Kyoto where it was just a gentle descent all the way back to Osaka. At this point I relaxed a little and just cruised back along the rivers, though I still had a couple points where I just needed to get off the bike.
+
+![image](7d0ca101-2f26-40e3-a26b-9151c6b76851.jpg)
+
+After some tremendous effort I made it back to Osaka, head straight for the bike rental store and stopped my watch for the last time. It was nice seeing the totals for the trip being added up for the last time and seeing how far I'd ridden.
+
+Once I dropped off the bike I was headed immediately for Fukuoka where the rest of the devhouse group would be, trying their absolute best to knock down the dylandrinks.devhou.se counter.
+
+![image](71259626-b033-49e1-ae93-53b36837490d.jpg)
+
+With the luck I have, I made it to the bar where the group was when they were only 2 drinks away from resetting the counter completely. I was honestly proud of how far they had moved the needle in just a few days but I wasn't going to let them have it.
+
+We went and had dinner at some sit down stalls along the river before heading to the Airbnb for the night.
+
+My whole body was tired and I was very keen to get some rest. I think even though the cycle absolutely killed me and there were a couple of stressful moments where I was trying to fix the flats I was getting, overall the cycle was fun and I would love to do it again sometime with some company. The sights were absolutely delightful and I really enjoyed riding through of the small villages, farms, mountains, and along the lake.
