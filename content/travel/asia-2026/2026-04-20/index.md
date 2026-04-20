@@ -35,8 +35,10 @@ postcard:
     mime_type: image/png
 ---
 
-Instead of packing, I spent the day building a tool to make posting from the road easier. The idea's simple: I can dump photos and voice notes throughout the day—upload them from my phone, record directly on the website, or send them via Telegram—and it spits out a finished blog post. No wrestling with uploads and formatting each night, no huge time sink after dinner trying to write everything up.
+I was supposed to be packing today. Instead, I built a tool to make writing about the trip easier.
 
-I've done the daily blog thing before when traveling, and it burns out fast. You get back to the hotel, you're tired, and suddenly you're spending an hour just organizing photos and writing something decent. This time I wanted to actually enjoy the trip instead of treating the documentation like a second job. So I built this thing to let me just... post. Fire and forget.
+The problem: when I traveled before, I'd keep a daily blog, but every night I'd have to upload photos, write a big post, organize everything. It took forever. This time I wanted something better.
 
-Seven days until I leave for Beijing. Packing can wait.
+So I made a system where I can just throw content at it throughout the day—photos, voice notes, whatever—and at the end of the day it spits out a formatted blog post. Record a voice note on the website, send a photo via Telegram or a quick shortcut, dump it all in one place. The tool handles the rest and generates the post automatically. Way less friction. I can actually share what I'm doing without spending an hour every night writing.
+
+The flights are booked. Seven days until I'm on a plane to Beijing.
