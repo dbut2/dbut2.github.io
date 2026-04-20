@@ -18,7 +18,7 @@ postcard:
     kind: photo
     captured_at: 1776689568
     description: A mobile phone screen displays a travel itinerary app showing "My Flights" with six upcoming flights listed chronologically from April 27 to June 1, including routes between Melbourne, Hong Kong, Beijing, Chongqing, Lijiang, Kunming, Shenzhen, and Osaka, with departure and arrival times and layover durations noted for each flight.
-    status: use
+    status: context
     mime_type: image/jpeg
 ---
 
