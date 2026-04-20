@@ -21,6 +21,12 @@ postcard:
     description: A stone or concrete tower structure stands vertically with a yellow flag or banner attached near its top, surrounded by green tree foliage on both sides. Clear blue sky with white clouds fills the background above the tower.
     status: use
     mime_type: image/jpeg
+  - file: 0708-photo-shortcut-dhy2wvd2aun5.jpg
+    kind: photo
+    captured_at: 1774940882
+    description: A tree-lined street runs alongside a paved road with green grass verges, where palm trees and other vegetation are planted at intervals. A street lamp stands on the left side, and residential buildings with terracotta roofs are visible in the background under clear blue sky.
+    status: use
+    mime_type: image/jpeg
   - file: 1511-voice-shortcut-dhy2u797aagd.m4a
     kind: voice
     captured_at: 1776697890
