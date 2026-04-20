@@ -7,7 +7,7 @@ postcard:
     kind: photo
     captured_at: 1774940882
     description: A tree-lined street runs alongside a paved road with green grass verges and palm trees planted along the curb. A street lamp stands on the left side, with clear blue sky above and white building facades visible in the background.
-    status: use
+    status: context
     mime_type: image/jpeg
 ---
 
