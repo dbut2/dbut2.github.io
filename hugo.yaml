@@ -6,6 +6,9 @@ timezone: Australia/Melbourne
 disableKinds:
   - taxonomy
   - term
+cascade:
+  - build:
+      publishResources: false
 params:
   name: Dylan Butler
   image: profile.png
