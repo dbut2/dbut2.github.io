@@ -1,7 +1,7 @@
 ---
 date: "2026-04-20"
 postcard:
-  ai_last_run_at: 1776686469
+  ai_last_run_at: 1776686708
   media:
   - file: 1145-text-1776685503.md
     kind: text
@@ -23,8 +23,10 @@ postcard:
     mime_type: image/jpeg
 ---
 
-A week out from Beijing. I've got the Asia leg mapped out—six flights strung together across the region. Melbourne to Hong Kong, then Beijing, down to Chongqing, over to Lijiang, back through Kunming, and eventually Shenzhen before wrapping in Osaka. 
+I should be packing right now. Instead, I spent the day building a better engine for turning photos and voice notes into daily posts—the kind of thing that feels productive until you realize you're a week out from flying to Beijing and your suitcase is still empty.
 
 ![Flight itinerary for Asia trip](./media/1200-photo-110.jpg)
 
-It's the kind of itinerary that looks chaotic until you're actually executing it. Each hop is deliberate, but the logistics are starting to feel real now that the departure date is close enough to see.
+Six flights across the map. Melbourne to Hong Kong, then Beijing, Chongqing, Lijiang, Kunming, Shenzhen, Osaka. The dates are locked in. Seven days to figure out what actually needs to go in a bag for six weeks of moving between cities with wildly different climates and altitudes.
+
+The engine works though. Feed it voice notes, photos, video, text—timestamps don't matter. It stitches them into something readable in maybe the cadence I'd actually use. No flowery language, no forced enthusiasm, just what happened and what I thought about it. That part felt worth doing before the trip starts, even if it meant putting off the packing another day.
