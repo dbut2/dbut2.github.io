@@ -19,7 +19,7 @@ postcard:
     kind: photo
     captured_at: 1776686411
     description: A mobile phone screen displays a flight itinerary app showing six upcoming flights across Asia, with each listing showing flight number, route, departure and arrival times, and days until travel. The interface has a dark background with white and gray text, including airline logos and airport codes for destinations in Melbourne, Hong Kong, Beijing, Chongqing, Lijiang, Kunming, Shenzhen, and Osaka.
-    status: kept
+    status: hidden
     mime_type: image/jpeg
 ---
 
