@@ -1,14 +1,14 @@
 ---
 title: Pre-trip stalling
-date: "2026-04-20T00:41:27Z"
+date: "2026-04-20T01:10:10Z"
 ---
 
-I was supposed to be packing today. Instead, I built a tool to make writing about the trip easier.
+Today I was supposed to be packing. I wasn't. Instead I spent the day building a tool to make blogging from the road actually enjoyable, because I've learned that writing a full post every night after a long day of travel is a recipe for either skipping days or burning out.
 
-The problem: when I traveled before, I'd keep a daily blog, but every night I'd have to upload photos, write a big post, organize everything. It took forever. This time I wanted something better.
+The idea is simple: throughout the day I can dump photos and voice notes wherever is easiest—straight from my phone, via Telegram, or just uploading them to a little website. At the end of the day I upload everything, and the tool stitches it all into markdown ready to publish. No manual uploading, no reformatting, no sitting down to write three thousand words when I'm exhausted. Just the raw material of the day turned into something shareable for friends and anyone following along.
 
-So I made a system where I can throw content at it throughout the day—photos, voice notes, whatever—and at the end of the day it spits out a formatted blog post. No uploading, no formatting, no hour-long nights at the keyboard. I can send stuff in a dozen ways: voice notes from the website, photos via Telegram, quick shortcuts. It just becomes a post.
+I've done the daily-blog thing before, and it always hits the same wall: the writing part takes forever, and it gets easier and easier to skip a day. This time I wanted something that gets out of my own way. So I built it.
 
-![Flight itinerary showing six upcoming legs across Asia](./media/1536-photo-1.png)
+![A phone screen during testing](./media/1200-photo-110.jpg)
 
-The flights are booked. Seven days until I'm on a plane to Beijing.
+Seven days until Beijing now. Packing will have to wait.
