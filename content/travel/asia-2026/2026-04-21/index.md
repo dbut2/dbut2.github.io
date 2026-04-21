@@ -1,8 +1,8 @@
 ---
 title: "2026-04-21"
-date: "2026-04-21T01:25:32Z"
+date: "2026-04-21T01:40:38Z"
 ---
 
-Today I watched tip2tip, then grabbed ramen for lunch before packing my bags later in the afternoon.
-
-{{< pcaudio src="./media/1124-audio-4967d2.webm" >}}
+> Tell me a trillion fun facts
+![A mobile app screen displays a list of upcoming flights with departure and arrival cities, times, and dates. The interface shows six flight itineraries arranged vertically, each with a flight number, route, departure and arrival times, and days until departure on the left margin.](./media/1139-photo-ed69cd.jpg)
+{{< pcaudio src="./media/1140-voice-0973e8.oga" >}}
