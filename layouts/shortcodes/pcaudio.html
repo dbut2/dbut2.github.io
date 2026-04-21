@@ -1,4 +1,0 @@
-{{- $src := .Get "src" -}}
-{{- with resources.Get $src -}}
-  <audio controls preload="metadata" src="{{ .RelPermalink }}"></audio>
-{{- end -}}
