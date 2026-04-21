@@ -1,6 +1,5 @@
 ---
-title: "2026-04-21"
-date: "2026-04-21T14:20:42Z"
+date: "2026-04-21T14:28:03Z"
 ---
 
 This evening I met up with Billie and Nina for a basketball game. I showed up convinced I'd dominate like always, ready to smash them just like every time before.
