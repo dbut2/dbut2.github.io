@@ -25,9 +25,11 @@
   lb.className = 'pg-lb';
   lb.hidden = true;
   lb.innerHTML =
-    '<div class="pg-lb__stage" data-stage><img class="pg-lb__img" data-img alt=""></div>' +
-    '<button class="pg-lb__nav pg-lb__nav--prev" data-prev aria-label="previous photo">‹</button>' +
-    '<button class="pg-lb__nav pg-lb__nav--next" data-next aria-label="next photo">›</button>' +
+    '<div class="pg-lb__stage" data-stage>' +
+      '<img class="pg-lb__img" data-img alt="">' +
+      '<button class="pg-lb__nav pg-lb__nav--prev" data-prev aria-label="previous photo">‹</button>' +
+      '<button class="pg-lb__nav pg-lb__nav--next" data-next aria-label="next photo">›</button>' +
+    '</div>' +
     '<div class="pg-lb__bar">' +
       '<span class="pg-lb__idx" data-idx></span>' +
       '<span class="pg-lb__name" data-name></span>' +
@@ -219,6 +221,7 @@
   }, { passive: false });
 
   stage.addEventListener('dblclick', function (e) {
+    if (e.target.closest('.pg-lb__nav')) return;
     if (view.scale > 1.01) resetView();
     else zoomTo(2.6, e.clientX, e.clientY);
   });
