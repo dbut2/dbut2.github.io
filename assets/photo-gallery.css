@@ -149,6 +149,25 @@ body{ overflow-x: clip; }
 .pg-lb__spacer{ flex: 1; }
 .pg-lb__zoom{ flex: none; color: var(--dbx-ink-3); font-variant-numeric: tabular-nums; }
 
+/* close button — also closeable with Esc or a backdrop click */
+.pg-lb__close{
+  flex: none;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--dbx-font-mono);
+  font-size: 17px;
+  color: var(--dbx-ink);
+  background: rgba(22, 22, 22, .82);
+  border: 1px solid var(--dbx-rule);
+  border-radius: 999px;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.pg-lb__close:active{ color: var(--dbx-accent); border-color: var(--dbx-accent); }
+
 /* fixed EXIF panel — always visible */
 .pg-lb__exif{
   position: absolute;

@@ -33,6 +33,7 @@
       '<span class="pg-lb__name" data-name></span>' +
       '<span class="pg-lb__spacer"></span>' +
       '<span class="pg-lb__zoom" data-zoom hidden></span>' +
+      '<button class="pg-lb__close" data-close aria-label="close">✕</button>' +
     '</div>' +
     '<aside class="pg-lb__exif" data-exif></aside>';
   document.body.appendChild(lb);
@@ -210,6 +211,7 @@
   });
   lb.querySelector('[data-prev]').addEventListener('click', function () { step(-1); });
   lb.querySelector('[data-next]').addEventListener('click', function () { step(1); });
+  lb.querySelector('[data-close]').addEventListener('click', close);
 
   stage.addEventListener('wheel', function (e) {
     e.preventDefault();
