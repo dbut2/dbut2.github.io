@@ -13,9 +13,20 @@
 
   {{- with .Params.cover }}
     {{- with .image }}
+      {{- $src := . -}}
+      {{- $img := or ($.Resources.GetMatch $src) (resources.Get $src) -}}
+      {{- if $img -}}
+        {{- if gt $img.Width 1560 -}}
+          {{- $img = $img.Resize "1560x q82" -}}
+        {{- end }}
   <figure class="dbx-article-cover">
-    <img src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy">
+    <img src="{{ $img.RelPermalink }}" alt="{{ $.Title }}" width="{{ $img.Width }}" height="{{ $img.Height }}" loading="lazy">
   </figure>
+      {{- else }}
+  <figure class="dbx-article-cover">
+    <img src="{{ $src | relURL }}" alt="{{ $.Title }}" loading="lazy">
+  </figure>
+      {{- end }}
     {{- end }}
   {{- end }}
 

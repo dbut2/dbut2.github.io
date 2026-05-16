@@ -1,0 +1,219 @@
+/* photo-gallery — uniform-scale grid + zoom lightbox with a fixed EXIF panel.
+   Landscape and portrait photos share one square cell and are scaled to
+   their long edge, so neither orientation is favoured and nothing is cropped.
+   Relies on the theme's --dbx-* design tokens. */
+
+/* gallery breaks out of the prose column to the full viewport width */
+body{ overflow-x: clip; }
+.pg{
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-top: var(--dbx-s-12);
+}
+
+.pg-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--dbx-s-3);
+}
+
+/* uniform-scale cell: identical square, image fits its long edge, no crop.
+   Explicit 1fr tracks give the cell a definite size, so the image's
+   percentage max-height resolves (portrait photos scale down, not crop). */
+.pg-cell{
+  aspect-ratio: 1 / 1;
+  display: grid;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  background: var(--dbx-surface);
+  border: 1px solid var(--dbx-rule-2);
+  cursor: zoom-in;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+.pg-cell img{
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+  transition: transform var(--dbx-speed-slow) var(--dbx-ease),
+              filter var(--dbx-speed-slow) var(--dbx-ease);
+}
+.pg-cell:hover{ border-color: var(--dbx-rule); }
+.pg-cell:hover img{ transform: scale(1.04); filter: brightness(1.07); }
+.pg-cell:focus-visible{ outline: 2px solid var(--dbx-accent); outline-offset: 2px; }
+
+@media (max-width: 640px){
+  .pg{ margin-top: var(--dbx-s-8); }
+  .pg-grid{ grid-template-columns: repeat(2, 1fr); gap: var(--dbx-s-2); }
+}
+
+/* ---------- lightbox ---------- */
+.pg-lb{
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(8, 8, 8, .986);
+  opacity: 0;
+  transition: opacity var(--dbx-speed-slow) var(--dbx-ease);
+  -webkit-tap-highlight-color: transparent;
+}
+.pg-lb[hidden]{ display: none; }
+.pg-lb.is-open{ opacity: 1; }
+
+/* viewing area — leaves room for the fixed EXIF panel on the right.
+   Explicit 1fr tracks give the cell a definite size, so the image's
+   percentage max-height resolves (portrait photos stay inside it). */
+.pg-lb__stage{
+  position: absolute;
+  inset: 0 300px 0 0;
+  display: grid;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  place-items: center;
+  overflow: hidden;
+  touch-action: none;
+  z-index: 1;
+}
+.pg-lb__stage.is-zoomed{ cursor: grab; }
+.pg-lb__stage.is-grabbing{ cursor: grabbing; }
+
+.pg-lb__img{
+  max-width: 92%;
+  max-height: 90%;
+  width: auto;
+  height: auto;
+  display: block;
+  opacity: 0;
+  user-select: none;
+  -webkit-user-drag: none;
+  will-change: transform;
+  transition: transform .18s var(--dbx-ease), opacity .26s var(--dbx-ease);
+}
+.pg-lb__img.is-panning{ transition: opacity .26s var(--dbx-ease); }
+
+/* side navigation — confined to the stage area */
+.pg-lb__nav{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 14vw;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--dbx-font-display);
+  font-size: 34px;
+  line-height: 1;
+  color: var(--dbx-ink-2);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  z-index: 2;
+  transition: color var(--dbx-speed-fast),
+              background var(--dbx-speed-fast),
+              opacity var(--dbx-speed);
+}
+.pg-lb__nav:hover{ color: var(--dbx-accent); background: rgba(0, 0, 0, .28); }
+.pg-lb__nav:focus-visible{ color: var(--dbx-accent); outline: none; }
+.pg-lb__nav--prev{ left: 0; }
+.pg-lb__nav--next{ right: 300px; }
+.pg-lb.is-zoomed .pg-lb__nav{ opacity: 0; pointer-events: none; }
+
+/* top bar — index, filename and zoom readout */
+.pg-lb__bar{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 300px;
+  display: flex;
+  align-items: center;
+  gap: var(--dbx-s-4);
+  padding: var(--dbx-s-4) var(--dbx-s-5);
+  font-family: var(--dbx-font-mono);
+  font-size: var(--dbx-text-sm);
+  background: linear-gradient(rgba(8, 8, 8, .9), rgba(8, 8, 8, 0));
+  pointer-events: none;
+  z-index: 3;
+}
+.pg-lb__idx{ flex: none; color: var(--dbx-ink-3); font-variant-numeric: tabular-nums; }
+.pg-lb__name{
+  min-width: 0;
+  color: var(--dbx-ink-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pg-lb__spacer{ flex: 1; }
+.pg-lb__zoom{ flex: none; color: var(--dbx-ink-3); font-variant-numeric: tabular-nums; }
+
+/* fixed EXIF panel — always visible */
+.pg-lb__exif{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  padding: var(--dbx-s-8) var(--dbx-s-6) var(--dbx-s-6);
+  background: var(--dbx-surface);
+  border-left: 1px solid var(--dbx-rule);
+  font-family: var(--dbx-font-mono);
+  overflow-y: auto;
+  z-index: 4;
+}
+.pg-lb__exif h3{
+  margin-bottom: var(--dbx-s-4);
+  font-size: var(--dbx-text-meta);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--dbx-tracking-meta);
+  color: var(--dbx-ink-3);
+  word-break: break-word;
+}
+.pg-lb__settings{
+  margin-bottom: var(--dbx-s-4);
+  padding-bottom: var(--dbx-s-4);
+  border-bottom: 1px solid var(--dbx-rule);
+  font-size: var(--dbx-text-body);
+  line-height: 1.7;
+  color: var(--dbx-ink);
+}
+.pg-lb__exif dl{
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--dbx-s-2) var(--dbx-s-4);
+  font-size: var(--dbx-text-xs);
+}
+.pg-lb__exif dt{ color: var(--dbx-ink-3); }
+.pg-lb__exif dd{ color: var(--dbx-ink); text-align: right; word-break: break-word; }
+.pg-lb__exif a{ color: var(--dbx-accent); }
+.pg-lb__empty{ color: var(--dbx-ink-3); font-size: var(--dbx-text-xs); }
+
+/* mobile — stage on top, EXIF panel docked below */
+@media (max-width: 640px){
+  .pg-lb__stage{ inset: 0 0 42vh 0; }
+  .pg-lb__bar{ right: 0; }
+  .pg-lb__img{ max-width: 94%; max-height: 90%; }
+  .pg-lb__nav{ width: 20vw; font-size: 28px; }
+  .pg-lb__nav--next{ right: 0; }
+  .pg-lb__name{ display: none; }
+  .pg-lb__exif{
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 42vh;
+    padding-top: var(--dbx-s-5);
+    border-left: 0;
+    border-top: 1px solid var(--dbx-rule);
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .pg-cell img,
+  .pg-lb,
+  .pg-lb__img{ transition: none; }
+}
