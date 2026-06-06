@@ -1,16 +1,91 @@
 {{ define "main" }}
-  {{- $images := .Resources.Match "images/*" -}}
+  {{- /* Every image dropped into the bundle's images/ folder is shown,
+         no shortcode needed. Sorted by filename. */ -}}
+  {{- $page := . -}}
+  {{- $images := sort (.Resources.Match "images/*") "Name" -}}
 
   <header class="dbx-article-head">
-    {{- if not .Date.IsZero }}
+    {{- if or (not .Date.IsZero) $images }}
     <div class="dbx-article-head__meta">
-      <span class="date">{{ .Date.Format "2006-01-02" }}</span>
+      {{- if not .Date.IsZero }}<span class="date">{{ .Date.Format "2006-01-02" }}</span>{{ end }}
+      {{- with $images }}{{ if not $.Date.IsZero }} <span class="sep">·</span> {{ end }}<span>{{ len . }} photos</span>{{ end }}
     </div>
     {{- end }}
     <h1 class="dbx-article-head__title">{{ .Title }}</h1>
+    {{- with .Description }}<p class="dbx-article-head__desc">{{ . }}</p>{{ end }}
   </header>
 
-  <div class="dbx-prose">
-    {{ .Content }}
-  </div>
+  {{- with .Content }}
+  <article class="dbx-prose">{{ . }}</article>
+  {{- end }}
+
+  {{- with $images }}
+    {{- with resources.Get "photo-gallery.css" }}
+      {{- $css := . | minify -}}
+      <style>{{ $css.Content | safeCSS }}</style>
+    {{- end }}
+
+    <div class="pg">
+      <div class="pg-grid">
+        {{- range . }}
+          {{- if eq .ResourceType "image" }}
+            {{- $name := path.Base .Name -}}
+
+            {{- /* Hugo's image processing doesn't apply EXIF orientation, so
+                   rotate the thumbnail to match how the camera was held. */ -}}
+            {{- $or := 1 -}}
+            {{- if reflect.IsImageResourceWithMeta . }}{{ $or = .Meta.Orientation }}{{ end -}}
+            {{- $rot := "" -}}
+            {{- if eq $or 8 }}{{ $rot = " r90" }}{{ else if eq $or 6 }}{{ $rot = " r270" }}{{ else if eq $or 3 }}{{ $rot = " r180" }}{{ end -}}
+            {{- $thumb := .Fit (printf "1000x1000%s webp q75" $rot) -}}
+
+            {{- /* display dimensions, swapped for a quarter-turn orientation */ -}}
+            {{- $w := .Width -}}
+            {{- $h := .Height -}}
+            {{- if or (eq $or 6) (eq $or 8) }}{{ $w = .Height }}{{ $h = .Width }}{{ end -}}
+            {{- /* page-level gear overrides EXIF — useful for film scans,
+                   whose embedded metadata is the scanner, not the camera. */ -}}
+            {{- $exif := dict
+                "gearCamera" $page.Params.camera
+                "gearFilm"   $page.Params.film
+                "gearLens"   $page.Params.lens
+            -}}
+            {{- if reflect.IsImageResourceWithMeta . -}}
+              {{- with .Meta -}}
+                {{- $t := .Exif -}}
+                {{- $exif = merge $exif (dict
+                    "make"     (index $t "Make")
+                    "model"    (index $t "Model")
+                    "lens"     (index $t "LensModel")
+                    "fnumber"  (index $t "FNumber")
+                    "exposure" (index $t "ExposureTime")
+                    "iso"      (or (index $t "ISO") (index $t "RecommendedExposureIndex"))
+                    "focal"    (index $t "FocalLength")
+                    "focal35"  (index $t "FocalLengthIn35mmFormat")
+                    "date"     (cond .Date.IsZero "" (.Date.Format "2006-01-02 15:04"))
+                    "lat"      .Lat
+                    "long"     .Long
+                ) -}}
+              {{- end -}}
+            {{- end -}}
+            {{- /* data-full is the original file, shown directly in the
+                   lightbox so right-click downloads the full-size image. */ -}}
+            <button type="button" class="pg-cell" data-pg-item
+              data-full="{{ .RelPermalink }}"
+              data-name="{{ $name }}"
+              data-w="{{ $w }}" data-h="{{ $h }}"
+              data-exif='{{ jsonify $exif }}'>
+              <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}"
+                   alt="{{ $name }}" loading="lazy" decoding="async">
+            </button>
+          {{- end }}
+        {{- end }}
+      </div>
+    </div>
+
+    {{- with resources.Get "photo-gallery.js" }}
+      {{- $js := . | minify -}}
+      <script>{{ $js.Content | safeJS }}</script>
+    {{- end }}
+  {{- end }}
 {{ end }}
