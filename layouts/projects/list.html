@@ -1,0 +1,18 @@
+{{ define "main" }}
+  <header class="dbx-article-head">
+    <h1 class="dbx-article-head__title">{{ .Title | lower }}</h1>
+    {{- with .Description }}
+    <p class="dbx-article-head__desc">{{ . }}</p>
+    {{- end }}
+  </header>
+
+  <section class="dbx-section">
+    {{- range .Pages.ByWeight }}
+      <a class="dbx-row" href="{{ .RelPermalink }}">
+        <span class="dbx-row__lead"></span>
+        <span class="dbx-row__title">{{ .Title | lower }}</span>
+        <span class="dbx-row__arrow">→</span>
+      </a>
+    {{- end }}
+  </section>
+{{ end }}

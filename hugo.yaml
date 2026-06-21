@@ -18,6 +18,8 @@ params:
       url: https://github.com/dbut2
     - name: linkedin
       url: https://linkedin.com/in/dbut2
+    - name: resume
+      url: https://media.dylanbutler.dev/resume.pdf
     - name: email
       url: mailto:dylan@but.la
 security:
