@@ -1,10 +1,11 @@
 {{ define "main" }}
   <header class="dbx-article-head">
-    {{- if not .Date.IsZero }}
     <div class="dbx-article-head__meta">
+      {{- if not .Date.IsZero }}
       <span class="date">{{ .Date.Format "2006-01-02" }}</span>
+      {{- end }}
+      <span class="reading-time">{{ .ReadingTime }} min read</span>
     </div>
-    {{- end }}
     <h1 class="dbx-article-head__title">{{ .Title }}</h1>
     {{- with .Description }}
     <p class="dbx-article-head__desc">{{ . }}</p>
