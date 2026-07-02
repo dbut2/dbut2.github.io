@@ -1,6 +1,6 @@
 ---
 title: web template - Opinionated base for Go/Postgres/HTML projects
-weight: 3
+weight: 4
 draft: false
 ---
 An opinionated template for any of my projects that have a database and a web UI.
