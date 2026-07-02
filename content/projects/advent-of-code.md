@@ -1,6 +1,6 @@
 ---
 title: advent of code - Go solutions + framework and library of helpers
-weight: 4
+weight: 5
 draft: false
 ---
 A few years of Advent of Code solutions written in Go, plus a library of helpers and a framework built on proven usage with the goal of minimising time-to-solve.

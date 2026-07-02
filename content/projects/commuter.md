@@ -1,6 +1,6 @@
 ---
 title: commuter - Strava activity automation
-weight: 2
+weight: 3
 draft: false
 ---
 Strava Automation.
