@@ -1,0 +1,7 @@
+# {{ .Title }}
+{{ with .Description }}
+{{ . }}
+{{ end }}
+{{ range .RegularPages -}}
+- [{{ .Title }}]({{ .RelPermalink }}){{ with .Date }} — {{ .Format "Jan 2006" }}{{ end }}
+{{ end }}

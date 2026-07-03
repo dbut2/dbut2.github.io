@@ -1,0 +1,27 @@
+```
+ ██████╗ ██████╗ ██████╗ ██╗   ██╗████████╗██████╗
+██╔═══██╗██╔══██╗██╔══██╗██║   ██║╚══██╔══╝╚════██╗
+██║██╗██║██║  ██║██████╔╝██║   ██║   ██║    █████╔╝
+██║██║██║██║  ██║██╔══██╗██║   ██║   ██║   ██╔═══╝
+╚█║████╔╝██████╔╝██████╔╝╚██████╔╝   ██║   ███████╗
+ ╚╝╚═══╝ ╚═════╝ ╚═════╝  ╚═════╝    ╚═╝   ╚══════╝
+```
+
+{{ site.Params.description }}
+
+# writing
+
+{{ range where site.RegularPages "Section" "blog" -}}
+- [{{ .Title }}]({{ .RelPermalink }}) — {{ .Date.Format "Jan 2006" }}
+{{ end }}
+# projects
+
+{{ range where site.RegularPages "Section" "projects" -}}
+- [{{ .Title }}]({{ .RelPermalink }})
+{{ end }}
+# links
+
+{{ range site.Params.socials -}}
+- [{{ .name }}]({{ .url }})
+{{ end }}
+this is the terminal version of [{{ site.Params.name }}]({{ site.BaseURL }})'s website. browse with `curl dbut.sh/blog/...` or `ssh dbut.sh`.
