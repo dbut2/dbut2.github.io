@@ -22,6 +22,28 @@ params:
       url: https://media.dylanbutler.dev/resume.pdf
     - name: email
       url: mailto:dylan@but.la
+outputFormats:
+  term:
+    mediaType: text/plain
+    baseName: index
+    isPlainText: true
+  manifest:
+    mediaType: application/json
+    baseName: manifest
+    isPlainText: true
+outputs:
+  home:
+    - html
+    - rss
+    - term
+    - manifest
+  section:
+    - html
+    - rss
+    - term
+  page:
+    - html
+    - term
 security:
   funcs:
     getenv:

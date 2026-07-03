@@ -1,0 +1,17 @@
+{{- $sections := slice -}}
+{{- range slice "blog" "projects" -}}
+{{- $section := site.GetPage (printf "/%s" .) -}}
+{{- $pages := slice -}}
+{{- range $section.RegularPages -}}
+{{- $page := dict "path" .RelPermalink "title" .Title -}}
+{{- if not .Date.IsZero -}}{{- $page = merge $page (dict "date" (.Date.Format "2006-01-02")) -}}{{- end -}}
+{{- with .Summary -}}{{- $page = merge $page (dict "summary" (. | plainify | htmlUnescape | chomp)) -}}{{- end -}}
+{{- $pages = $pages | append $page -}}
+{{- end -}}
+{{- $sections = $sections | append (dict "path" $section.RelPermalink "name" . "title" $section.Title "pages" $pages) -}}
+{{- end -}}
+{{- dict
+  "site" (dict "title" site.Title "url" site.BaseURL "description" site.Params.description "name" site.Params.name)
+  "socials" site.Params.socials
+  "sections" $sections
+| jsonify (dict "indent" "  ") -}}
