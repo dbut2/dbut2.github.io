@@ -1,5 +1,5 @@
 {{- $sections := slice -}}
-{{- range slice "blog" "projects" -}}
+{{- range slice "blog" -}}
 {{- $section := site.GetPage (printf "/%s" .) -}}
 {{- $pages := slice -}}
 {{- range $section.RegularPages -}}
