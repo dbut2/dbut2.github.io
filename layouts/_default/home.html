@@ -3,21 +3,6 @@
 
   <section class="dbx-section">
     <div class="dbx-section-head">
-      <a href="{{ "/projects" | relURL }}" class="dbx-section-head__name">projects</a>
-      <span class="dbx-section-head__line"></span>
-    </div>
-    {{- $projects := where .Site.RegularPages "Section" "projects" -}}
-    {{- range $projects.ByWeight }}
-      <a class="dbx-row" href="{{ .RelPermalink }}">
-        <span class="dbx-row__lead"></span>
-        <span class="dbx-row__title">{{ .Title | lower }}</span>
-        <span class="dbx-row__arrow">→</span>
-      </a>
-    {{- end }}
-  </section>
-
-  <section class="dbx-section">
-    <div class="dbx-section-head">
       <a href="{{ "/blog" | relURL }}" class="dbx-section-head__name">writing</a>
       <span class="dbx-section-head__line"></span>
     </div>
