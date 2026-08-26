@@ -1,11 +1,13 @@
 ---
-title: "24 Months On: Self-Hosting"
+title: Leaving Earth
 date: 2026-08-26
 draft: false
 ---
 Still on $0 GCP bill  
   
-Biggest learning was to utilise cloud infrastructure and shared services where it's still free, and reduces risk on my homelab.  
+Biggest learning was to utilise cloud infrastructure and shared services where it's still free, and reduces risk on my homelab.
+
+With an upcoming trip overseas for a month where I still wanted to make sure I had access   
   
 Migrated on to: github inc runners, tailscale (motivation), tf cloud  
   
