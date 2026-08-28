@@ -21,12 +21,12 @@ params:
         text: "Hello, I'm Dylan"
       - lang: fr
         text: "Bonjour, je suis Dylan"
-      - lang: mk
-        text: "Здраво, јас сум Дилан"
-      - lang: zh-Hans
+      - lang: zh
         text: "你好，我是迪伦"
       - lang: ja
         text: "こんにちは、ディランです"
+      - lang: mk
+        text: "Здраво, јас сум Дилан"
   socials:
     - name: github
       url: https://github.com/dbut2
