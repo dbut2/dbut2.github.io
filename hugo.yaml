@@ -13,6 +13,20 @@ params:
   name: Dylan Butler
   image: profile.png
   description: "software engineer in melbourne. i write some code, take some photos, and sometimes write about it too."
+  greeting:
+    interval: 4700
+    fade: 300
+    lines:
+      - lang: en
+        text: "Hello, I'm Dylan"
+      - lang: fr
+        text: "Bonjour, je suis Dylan"
+      - lang: zh
+        text: "你好，我是迪伦"
+      - lang: ja
+        text: "こんにちは、ディランです"
+      - lang: mk
+        text: "Здраво, јас сум Дилан"
   socials:
     - name: github
       url: https://github.com/dbut2
@@ -20,6 +34,17 @@ params:
       url: https://linkedin.com/in/dbut2
     - name: email
       url: mailto:dylan@but.la
+menu:
+  main:
+    - name: home
+      url: /
+      weight: 1
+    - name: writing
+      url: /blog/
+      weight: 2
+    - name: photos
+      url: /photography/
+      weight: 3
 outputFormats:
   term:
     mediaType: text/plain

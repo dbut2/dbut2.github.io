@@ -1,4 +1,0 @@
-{{- $src := .Get "src" -}}
-{{- with resources.Get $src -}}
-  <video controls preload="metadata" src="{{ .RelPermalink }}"></video>
-{{- end -}}
