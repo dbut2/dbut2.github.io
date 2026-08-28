@@ -20,6 +20,23 @@ params:
       url: https://linkedin.com/in/dbut2
     - name: email
       url: mailto:dylan@but.la
+menu:
+  main:
+    - name: home
+      url: /
+      weight: 1
+    - name: writing
+      url: /blog/
+      weight: 2
+    - name: photos
+      url: /photography/
+      weight: 3
+    - name: travel
+      url: /travel/
+      weight: 4
+    - name: projects
+      url: /projects/
+      weight: 5
 outputFormats:
   term:
     mediaType: text/plain
