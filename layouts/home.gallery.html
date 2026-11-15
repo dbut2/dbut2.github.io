@@ -1,0 +1,5 @@
+{{- with readFile "static/gallery/index.html" -}}
+  {{- . -}}
+{{- else -}}
+  {{- errorf "static/gallery/index.html is missing or empty" -}}
+{{- end -}}
