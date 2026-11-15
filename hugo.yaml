@@ -46,8 +46,7 @@ menu:
       url: /photography/
       weight: 3
     - name: gallery
-      # relative on purpose: Hugo strips the "?" from menu URLs that start with "/"
-      url: "gallery/?enter"
+      url: /gallery/
       weight: 4
 outputFormats:
   plain:
