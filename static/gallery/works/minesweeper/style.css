@@ -1,0 +1,18 @@
+td {
+	border: 1px solid black;
+	height: 10px;
+	overflow: hidden;
+	width: 10px;
+}
+
+.one {
+	color: blue;
+}
+
+.two {
+	color: green;
+}
+
+.three {
+	color: red;
+}
