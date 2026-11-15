@@ -37,7 +37,7 @@ params:
 menu:
   main:
     - name: home
-      url: /home/
+      url: /
       weight: 1
     - name: writing
       url: /blog/
@@ -47,19 +47,14 @@ menu:
       weight: 3
     - name: gallery
       # relative on purpose: Hugo strips the "?" from menu URLs that start with "/"
-      url: "?enter"
+      url: "gallery/?enter"
       weight: 4
 outputFormats:
-  gallery:
-    mediaType: text/html
-    baseName: index
-    isPlainText: true
   plain:
     mediaType: text/html
     baseName: index
     path: home
     isHTML: true
-    permalinkable: true
   term:
     mediaType: text/plain
     baseName: index
@@ -70,7 +65,7 @@ outputFormats:
     isPlainText: true
 outputs:
   home:
-    - gallery
+    - html
     - plain
     - rss
     - term
