@@ -1,0 +1,63 @@
+<html>
+<head>
+<script>
+setInterval(function countDown() {
+var current = new Date().getTime();
+var time = 1420030800000;
+var until = time - current;
+
+var seconds = Math.floor(((until / 60000) - Math.floor(until / 60000)) * 60);
+var minutes = Math.floor(((until / 3600000) - Math.floor(until / 3600000)) * 60);
+var hours = Math.floor(((until / 86400000) - Math.floor(until / 86400000)) * 24);
+var days = Math.floor(((until / 31536000000) - Math.floor(until / 31536000000)) * 365);
+
+document.getElementById("days").innerHTML = days;
+document.getElementById("hours").innerHTML = hours;
+document.getElementById("minutes").innerHTML = minutes;
+document.getElementById("seconds").innerHTML = seconds;
+}, 10);
+</script>
+<style>
+body {
+	background-image: URL("https://upload.wikimedia.org/wikipedia/commons/a/a7/ColorfulFireworks.png");
+	text-align: center;
+}
+
+table {
+	margin: auto;
+}
+
+.numbers {
+	background-color: rgba(255, 0, 0, 0.9);
+	border: solid 5px rgba(255, 255, 255, 1);
+	border-radius: 10px;
+	color: rgba(255, 255, 255, 1);
+	font-family: Helvetica;
+	font-size: 50pt;
+	height: 150px;
+	padding-top: 75px;
+	text-align: center;
+	width: 200px;
+}
+
+.text {
+	color: rgba(255, 255, 255, 1);
+	font-family: Helvetica;
+	font-size: 100pt;
+	margin-top: 100px;
+	text-shadow: 0 0 5px rgba(255, 0, 0, 1);
+}
+</style>
+</head>
+<body>
+<div class="text">New Years</div>
+<table>
+<tr>
+<td><div id="days" class="numbers"></div></td>
+<td><div id="hours" class="numbers"></div></td>
+<td><div id="minutes" class="numbers"></div></td>
+<td><div id="seconds" class="numbers"></div></td>
+</tr>
+</table>
+</body>
+</html>
