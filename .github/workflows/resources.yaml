@@ -2,12 +2,14 @@ name: Hugo /resources
 
 on:
   push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
 
     steps:
       - uses: actions/checkout@v6
@@ -33,16 +35,21 @@ jobs:
           rm -rf resources
           hugo
 
-      - id: git-check
-        run: |
-          git add resources
-          git status --porcelain
-          echo "changes=$(git status --porcelain | wc -l)" >> $GITHUB_OUTPUT
+      - name: Generate token
+        id: token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ secrets.GH_CLIENT_ID }}
+          private-key: ${{ secrets.GH_PRIVATE_KEY }}
 
-      - name: Commit and push if changes
-        if: steps.git-check.outputs.changes > 0
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git commit -m "Hugo /resources"
-          git push
+      - uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ steps.token.outputs.token }}
+          branch: hugo-resources
+          delete-branch: true
+          add-paths: resources
+          commit-message: Hugo /resources
+          title: Hugo /resources
+          body: beep boop beep boop, I've regenerated Hugo resources for you
+          author: dylan-botler[bot] <230545208+dylan-botler[bot]@users.noreply.github.com>
+          committer: dylan-botler[bot] <230545208+dylan-botler[bot]@users.noreply.github.com>
