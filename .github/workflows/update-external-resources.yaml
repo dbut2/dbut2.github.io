@@ -29,24 +29,32 @@ on:
         default: 'latest'
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 jobs:
   update:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6
+      - name: Generate token
+        id: token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ secrets.GH_CLIENT_ID }}
+          private-key: ${{ secrets.GH_PRIVATE_KEY }}
+
+      - uses: actions/checkout@v7
         with:
           path: site
+          token: ${{ steps.token.outputs.token }}
 
       - name: Parse config
         id: config
+        env:
+          RESOURCE: ${{ github.event.inputs.resource || github.event.client_payload.resource }}
+          TAG: ${{ github.event.inputs.tag || github.event.client_payload.tag }}
         run: |
-          RESOURCE="${{ github.event.inputs.resource || github.event.client_payload.resource }}"
-          TAG="${{ github.event.inputs.tag || github.event.client_payload.tag }}"
-          CONFIG=$(echo '${{ env.RESOURCES }}' | jq -r ".\"$RESOURCE\"")
+          CONFIG=$(echo "$RESOURCES" | jq -r --arg r "$RESOURCE" '.[$r]')
           REPO=$(echo "$CONFIG" | jq -r '.repo')
 
           [ "$TAG" = "latest" ] && TAG=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | jq -r .tag_name)
@@ -55,13 +63,13 @@ jobs:
           echo "repo=$REPO" >> $GITHUB_OUTPUT
           echo "tag=$TAG" >> $GITHUB_OUTPUT
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           repository: ${{ steps.config.outputs.repo }}
           ref: ${{ steps.config.outputs.tag }}
           path: resource
 
-      - uses: actions/setup-go@v6
+      - uses: actions/setup-go@v7
         with:
           go-version: 'stable'
 
@@ -73,11 +81,13 @@ jobs:
           echo "version=$GO_VERSION" >> $GITHUB_OUTPUT
 
       - name: Update resource files
+        env:
+          RESOURCE: ${{ steps.config.outputs.resource }}
+          REPO: ${{ steps.config.outputs.repo }}
+          TAG: ${{ steps.config.outputs.tag }}
+          GO_VERSION: ${{ steps.go-version.outputs.version }}
         run: |
-          CONFIG=$(echo '${{ env.RESOURCES }}' | jq -r ".${{ steps.config.outputs.resource }}")
-          REPO="${{ steps.config.outputs.repo }}"
-          TAG="${{ steps.config.outputs.tag }}"
-          GO_VERSION="${{ steps.go-version.outputs.version }}"
+          CONFIG=$(echo "$RESOURCES" | jq -r --arg r "$RESOURCE" '.[$r]')
 
           cd site
           for ASSET in $(echo "$CONFIG" | jq -r '.files | keys[]'); do
@@ -92,11 +102,15 @@ jobs:
             curl -sL -o "$DEST" "https://raw.githubusercontent.com/golang/go/go$GO_VERSION/$GO_FILE"
           done
 
-      - uses: peter-evans/create-pull-request@v7
+      - uses: peter-evans/create-pull-request@v8
         with:
+          token: ${{ steps.token.outputs.token }}
           path: site
+          labels: automerge
+          author: dylan-botler[bot] <230545208+dylan-botler[bot]@users.noreply.github.com>
+          committer: dylan-botler[bot] <230545208+dylan-botler[bot]@users.noreply.github.com>
           commit-message: 'Update ${{ steps.config.outputs.resource }} to ${{ steps.config.outputs.tag }}'
           title: 'Update ${{ steps.config.outputs.resource }} to ${{ steps.config.outputs.tag }}'
-          body: 'Release: https://github.com/${{ steps.config.outputs.repo }}/releases/tag/${{ steps.config.outputs.tag }}'
-          branch: update-${{ steps.config.outputs.resource }}-${{ steps.config.outputs.tag }}
+          body: "beep boop beep boop, I've updated ${{ steps.config.outputs.resource }} for you. Release: https://github.com/${{ steps.config.outputs.repo }}/releases/tag/${{ steps.config.outputs.tag }}"
+          branch: update-${{ steps.config.outputs.resource }}
           delete-branch: true

@@ -2,25 +2,33 @@ name: Hugo /resources
 
 on:
   push:
+    branches-ignore:
+      - hugo-resources
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
-      - uses: actions/checkout@v6
+      - name: Generate token
+        id: token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ secrets.GH_CLIENT_ID }}
+          private-key: ${{ secrets.GH_PRIVATE_KEY }}
+
+      - uses: actions/checkout@v7
         with:
           lfs: true
+          token: ${{ steps.token.outputs.token }}
 
       - uses: peaceiris/actions-hugo@v3
 
-      - uses: actions/setup-go@v6
+      - uses: actions/setup-go@v7
         with:
           go-version: 'stable'
 
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: |
             ~/.cache/hugo_cache
@@ -33,16 +41,29 @@ jobs:
           rm -rf resources
           hugo
 
-      - id: git-check
+      - name: Open pull request
+        if: github.ref_name == github.event.repository.default_branch
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ steps.token.outputs.token }}
+          add-paths: resources
+          branch: hugo-resources
+          delete-branch: true
+          labels: automerge
+          commit-message: Hugo /resources
+          title: Hugo /resources
+          body: beep boop beep boop, I've rebuilt /resources for you
+          author: dylan-botler[bot] <230545208+dylan-botler[bot]@users.noreply.github.com>
+          committer: dylan-botler[bot] <230545208+dylan-botler[bot]@users.noreply.github.com>
+
+      - name: Commit and push if changes
+        if: github.ref_name != github.event.repository.default_branch
         run: |
           git add resources
           git status --porcelain
-          echo "changes=$(git status --porcelain | wc -l)" >> $GITHUB_OUTPUT
-
-      - name: Commit and push if changes
-        if: steps.git-check.outputs.changes > 0
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git commit -m "Hugo /resources"
-          git push
+          if [ -n "$(git status --porcelain)" ]; then
+            git config --local user.email "230545208+dylan-botler[bot]@users.noreply.github.com"
+            git config --local user.name "dylan-botler[bot]"
+            git commit -m "Hugo /resources"
+            git push
+          fi
