@@ -45,7 +45,15 @@ menu:
     - name: photos
       url: /photography/
       weight: 3
+    - name: gallery
+      url: /gallery/
+      weight: 4
 outputFormats:
+  plain:
+    mediaType: text/html
+    baseName: index
+    path: home
+    isHTML: true
   term:
     mediaType: text/plain
     baseName: index
@@ -57,6 +65,7 @@ outputFormats:
 outputs:
   home:
     - html
+    - plain
     - rss
     - term
     - manifest
